@@ -17,16 +17,17 @@ public class TheMatrix {
     
     public static void main(String[] args) {
         int userChoice = getUserInput();
+        int[][] matrixArray = generateMatrix();
         switch (userChoice) {
             case 1:
-                int[][] matrixArray = generateMatrix();
                 displayArray(matrixArray);
                 break;
             case 2:
-
+                matrixArray = transposeMatrix(matrixArray);
+                displayArray(matrixArray);
                 break;
             case 3:
-
+                matrixArray = multiplyMatrixByConstant(matrixArray);
                 break;
             case 4:
 
@@ -77,4 +78,34 @@ public class TheMatrix {
             System.out.println("");
         }
      }
+     
+     public static int[][] transposeMatrix(int[][] data) {
+                     
+        int[][] matrixArray= new int[data[0].length][data.length];
+        
+        for (int row = 0; row < data.length; row++) {            
+            for (int col = 0; col < data[row].length; col++) {
+                matrixArray[col][row] = data[row][col];  
+            }
+        }
+        return matrixArray;
+     }
+     
+     public static int[][] multiplyMatrixByConstant(int[][] data) {
+        
+        int[][] matrixArray= new int[data.length][data[0].length];
+        
+        System.out.print("Enter a constant you wish your matrix to be multiplied by: ");
+        int constant = input.nextInt();
+        for (int row = 0; row < data.length; row++) {            
+            for (int col = 0; col < data[row].length; col++) {
+                matrixArray[row][col] = data[row][col] * constant;
+            }
+        }
+        return matrixArray;
+     }
+     
+     
+     
+     
 }
