@@ -27,10 +27,16 @@ public class TheMatrix {
                 displayArray(matrixArray);
                 break;
             case 3:
+                displayArray(matrixArray);
                 matrixArray = multiplyMatrixByConstant(matrixArray);
+                displayArray(matrixArray);
                 break;
             case 4:
-
+                int[][] matrixArray2 = generateMatrix();
+                int[][] multipliedMatrices = multiplyMatrices(matrixArray, matrixArray2);
+                displayArray(matrixArray);
+                displayArray(matrixArray2);
+                displayArray(multipliedMatrices);
                 break;
             }
        }
@@ -105,7 +111,28 @@ public class TheMatrix {
         return matrixArray;
      }
      
-     
+     public static int[][] multiplyMatrices(int[][] matrix1, int[][] matrix2) {
+         int sum;
+         int[][] matrix3 = new int[matrix1.length][matrix2[0].length];;
+         if (matrix1[0].length == matrix2.length) {
+            
+            for (int i = 0; i < matrix1.length; i++) {            
+                for (int j = 0; j < matrix2[0].length; j++) {
+                    sum = 0;
+                    for (int k = 0; k < matrix1[0].length; k++) {
+                        sum+= matrix1[i][k] * matrix2[k][j];
+                    }
+                    matrix3[i][j] = sum; 
+                    
+                }
+                        
+            } 
+         } else {
+         System.out.println("Error");
+             
+     }
+     return matrix3;
+     }
      
      
 }
