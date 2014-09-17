@@ -16,26 +16,29 @@ public class TheMatrix {
     public static Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) {
-
+        int[][] matrixArray;
         int keepGoing = 1;
-        while (keepGoing == 1) {
-            int userChoice = getUserInput();
-            int[][] matrixArray = generateMatrix();           
-            switch (userChoice) {
+        while (keepGoing == 1) { //keeps program going until user chooses not to
+            int userChoice = getUserInput(); // Gets user input               
+            switch (userChoice) { // Selects different option based on user choice
                 case 1:
-                    displayArray(matrixArray);
+                    matrixArray = generateMatrix(); // Calls method to generate random matrix
+                    displayArray(matrixArray); // Displays random matrix
                     break;
-                case 2:
-                    matrixArray = transposeMatrix(matrixArray);
-                    displayArray(matrixArray);
+                case 2: // Transposes matrix
+                    matrixArray = generateMatrix(); // Calls method to generate random matrix
+                    matrixArray = transposeMatrix(matrixArray); //calls method to transpose array
+                    displayArray(matrixArray);  //displays transposed array
                     break;
                 case 3:
-                    displayArray(matrixArray);
+                    matrixArray = generateMatrix(); // Calls method to generate random matrix
+                    displayArray(matrixArray); // Displays random matrix
                     matrixArray = multiplyMatrixByConstant(matrixArray);
                     displayArray(matrixArray);
                     break;
                 case 4:
-                    int[][] matrixArray2 = generateMatrix();
+                    matrixArray = generateMatrix(); // Genrates random matrix
+                    int[][] matrixArray2 = generateMatrix(); // Calls method to generate random matrix
                     int[][] multipliedMatrices = multiplyMatrices(matrixArray, matrixArray2);
                     displayArray(matrixArray);
                     displayArray(matrixArray2);
@@ -50,8 +53,6 @@ public class TheMatrix {
         }
         System.out.println("Thank you for using this program.");
     }
-        
-    
 
     public static int getUserInput() {
         System.out.print(
@@ -78,6 +79,8 @@ public class TheMatrix {
         numberOfRows = input.nextInt();
         System.out.print("State the number of columns: ");
         numberOfCols = input.nextInt();
+        numberOfRows = Math.abs(numberOfRows);
+        numberOfCols = Math.abs(numberOfCols);
         matrixArray = new int[numberOfRows][numberOfCols];
 
         for (int row = 0; row < numberOfRows; row++) {
