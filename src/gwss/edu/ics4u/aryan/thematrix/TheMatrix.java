@@ -8,8 +8,13 @@ package gwss.edu.ics4u.aryan.thematrix;
 import java.util.Scanner;
 
 /**
- *
- * @author 1GHAHREMANZA
+ * Name: Aryan Ghahremanzadeh 
+ * Date: September 17, 2014 
+ * Version: v0.1
+ * Teacher: Mr.Muir
+ * Description: This program allows you to do different commands with randomly 
+ * generated matrices. You can transpose and multiply matrices by a constant. 
+ * You may also multiply 2 randomly generated matrices together. 
  */
 public class TheMatrix {
 
@@ -33,17 +38,23 @@ public class TheMatrix {
             switch (userChoice) { // Selects different option based on user choice
                 case 1:
                     matrixArray = generateMatrix(); // Calls method to generate random matrix
+                    System.out.println("Your randomly generated matrix: "); 
                     displayArray(matrixArray); // Displays random matrix
                     break;
                 case 2: // Transposes matrix
                     matrixArray = generateMatrix(); // Calls method to generate random matrix
+                    System.out.println("The randomly generated matrix: ");
+                    displayArray(matrixArray);  //displays random matrix
                     matrixArray = generateTranspose(matrixArray); //calls method to transpose array
-                    displayArray(matrixArray);  //displays transposed array
+                    System.out.println("The transposed matrix: "); 
+                    displayArray(matrixArray);  //displays transposed matrix
                     break;
                 case 3:
                     matrixArray = generateMatrix(); // Calls method to generate random matrix
+                    System.out.println("The randomly generated matrix: ");
                     displayArray(matrixArray); // Displays random matrix
                     matrixArray = multiplyMatrixByConstant(matrixArray); // Calls method to multiply values of matrix by a constant and returns multiplied matrix
+                    System.out.println("The matrix multiplied by the constant: ");
                     displayArray(matrixArray); //Displays the matrix that was multiplied by constant
                     break;
                 case 4:
@@ -56,8 +67,8 @@ public class TheMatrix {
                     displayArray(matrixArray); // displays the first matrix
                     System.out.println("This is the second array: "); 
                     displayArray(matrixArray2); // displays the second Matrix 
-                    System.out.println("This is the product: "); 
-                    displayArray(multipliedMatrices); //displays the multiplied matrice
+                    System.out.println("This is the product of the two matrices: "); 
+                    displayArray(multipliedMatrices); //displays the multiplied matrix
                     break;
                 default: // if user does not pick a valid choice it shows an error message
                     System.out.println("That is not a valid choice");
@@ -177,7 +188,7 @@ public class TheMatrix {
                     for (int k = 0; k < matrix1[0].length; k++) { //calculates product of matrix 1 rows and matrix 2 columns
                         sum += matrix1[i][k] * matrix2[k][j];
                     }
-                    matrix3[i][j] = sum;
+                    matrix3[i][j] = sum; //inputs sum into matrix 3
                 }
             }
         } else { // if product is not defined it lets user know and returns null
