@@ -95,7 +95,7 @@ public class TheMatrix {
                 + "2: The Transpose Matrix\n"
                 + "3: Multiplying a Matrix by a Constant\n"
                 + "4: Multiplying Two Matrices\n"
-                + "Your choice is:");
+                + "Your choice is: ");
         userChoice = input.nextInt(); //gets userchoice
 
         return userChoice; // returns users choice
@@ -192,7 +192,7 @@ public class TheMatrix {
                 }
             }
         } else { // if product is not defined it lets user know and returns null
-            System.out.println("Product is not defined");
+            System.out.println("Matrices cannot be multiplied, product is not defined");
             return null;
         }
         return matrix3;// returns multiplied matrices
