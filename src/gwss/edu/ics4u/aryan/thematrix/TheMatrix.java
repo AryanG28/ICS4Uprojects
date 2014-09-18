@@ -13,7 +13,7 @@ import java.util.Scanner;
  * Version: v0.1
  * Teacher: Mr.Muir
  * Description: This program allows you to do different commands with randomly 
- * generated matrices. You can transpose and multiply matrices by a constant. 
+ * generated matrices. You can transpose and multiply a matrix by a constant. 
  * You may also multiply 2 randomly generated matrices together. 
  */
 public class TheMatrix {
@@ -188,7 +188,7 @@ public class TheMatrix {
                     for (int k = 0; k < matrix1[0].length; k++) { //calculates product of matrix 1 rows and matrix 2 columns
                         sum += matrix1[i][k] * matrix2[k][j];
                     }
-                    matrix3[i][j] = sum; //inputs sum into matrix 3
+                    matrix3[i][j] = sum; //sets the value in matrix 3
                 }
             }
         } else { // if product is not defined it lets user know and returns null
