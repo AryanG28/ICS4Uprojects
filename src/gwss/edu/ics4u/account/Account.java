@@ -10,6 +10,15 @@ package gwss.edu.ics4u.account;
  * @author 1GHAHREMANZA
  */
 public class Account {
+    
+    public static final int ACCOUNT_TYPE_UNKNOWN = 0;
+    public static final int ACCOUNT_TYPE_SAVINGS = 1;
+    public static final int ACCOUNT_TYPE_CHEQUING = 2;
+    
+    public static final String[] ACCOUNT_TYPE_NAMES = {
+        "Unknown", "Savings", "Chequing"
+    }
+    
     private int accountNumber;
     private int branchNumber;
     private String accountType;
@@ -73,8 +82,9 @@ public class Account {
         this.active = active;
     }
     
-    public void transfer(double transferAmount, double accountBalance) {
-            
+    public double transfer(double transferAmount, double accountBalance) {
+        
+        return this.accountBalance;
     }
     
     public double withdrawal(double withdrawal, double accountBalance) {
@@ -93,7 +103,6 @@ public class Account {
     
     public void active() {
     }
-    
     
     @Override
     public String toString() {
