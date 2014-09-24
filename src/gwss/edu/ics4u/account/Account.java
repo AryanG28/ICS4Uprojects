@@ -5,6 +5,8 @@
  */
 package gwss.edu.ics4u.account;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author 1GHAHREMANZA
@@ -17,16 +19,30 @@ public class Account {
     
     public static final String[] ACCOUNT_TYPE_NAMES = {
         "Unknown", "Savings", "Chequing"
-    }
+    };
     
+    private Client accountOwner;
     private int accountNumber;
     private int branchNumber;
     private String accountType;
     private int pin;
     private double accountBalance;
     private boolean active;
-
+    private ArrayList<Account> accounts;
+    
     public Account() {
+    }
+
+    public Account(Client accountOwner) {
+        this.accountOwner = accountOwner;
+    }
+
+    public Client getAccountOwner() {
+        return accountOwner;
+    }
+
+    public void setAccountOwner(Client accountOwner) {
+        this.accountOwner = accountOwner;
     }
 
     public Account(int accountNumber, int branchNumber, String accountType, int pin, double accountBalance, boolean active) {
@@ -101,6 +117,22 @@ public class Account {
     }      
     }
     
+    private Account getAccount(int accountNumber, int BranchNumber) { 
+            Account account = null;
+            boolean found = false;
+            for (int i= 0; i<this.accounts.size(); i++) {
+                account = this.accounts.get(i);
+                if ( account.getAccountNumber()== accountNumber && account.getBranchNumber()== branchNumber) {
+                    found = true;
+                    i = this.accounts.size();
+                }
+            }
+            
+    }
+    
+    public void addAccount (Account account) {
+       
+    }
     public void active() {
     }
     

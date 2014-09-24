@@ -13,78 +13,34 @@ import java.util.Objects;
  */
 public class AccountClient {
     
-    private String firstName;
-    private String lastName;
-    private int SIN;
-
-    public AccountClient(String firstName, String lastName, int SIN) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.SIN = SIN;
-    }
-
-    public AccountClient(int SIN) {
-        this.SIN = SIN;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public int getSIN() {
-        return SIN;
-    }
-
-    public void setSIN(int SIN) {
-        this.SIN = SIN;
-    }
-
-    @Override
-    public String toString() {
-        return "AccountClient{" + "firstName=" + firstName + ", lastName=" + lastName + ", SIN=" + SIN + '}';
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final AccountClient other = (AccountClient) obj;
-        if (!Objects.equals(this.firstName, other.firstName)) {
-            return false;
-        }
-        if (!Objects.equals(this.lastName, other.lastName)) {
-            return false;
-        }
-        if (this.SIN != other.SIN) {
-            return false;
-        }
-        return true;
-    }
-    
     public static void main(String[] args) {
-        System.out.println("");
+        Account account= new Account();
+        account.setAccountNumber(123);
+        account.setBranchNumber(123);
+        account.setAccountType(null);
+        account.setAccountBalance(300);
+        
+        Client muir = new Client("Will", "Muir", 123456789);
+        
+        account.setAccountOwner(muir);
+        account.getAccountOwner().getLastName();
+        
+        
+        
+       Account account2 = new Account();
+        account2.setAccountNumber(123);
+        account2.setBranchNumber(123);
+        account2.setAccountType(null);
+        account2.setAccountBalance(300);
+        
+        
+        
+        account.setAccountOwner(muir);
+        account2.setAccountOwner(muir);
+        muir.addAccount().add (account);
+        muir.setAccounts().add (account2);
+        
+        
     }
     
 }
