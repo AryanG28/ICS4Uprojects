@@ -37,8 +37,8 @@ public class AccountClient {
         
         account.setAccountOwner(muir);
         account2.setAccountOwner(muir);
-        muir.addAccount().add (account);
-        muir.setAccounts().add (account2);
+        //muir.addAccount().add (account);
+       // muir.setAccounts().add (account2);
         
         
     }

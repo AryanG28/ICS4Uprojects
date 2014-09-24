@@ -127,12 +127,18 @@ public class Account {
                     i = this.accounts.size();
                 }
             }
-            
+            if (found) {
+                return account;
+            }
+            else {                
+                return null;
+            }            
     }
     
-    public void addAccount (Account account) {
-       
+    
+    public void addAccount (Account account) { 
     }
+    
     public void active() {
     }
     
