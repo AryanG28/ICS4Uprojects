@@ -14,32 +14,45 @@ import java.util.Objects;
 public class AccountClient {
     
     public static void main(String[] args) {
-        Account account= new Account();
-        account.setAccountNumber(123);
-        account.setBranchNumber(123);
-        account.setAccountType(null);
-        account.setAccountBalance(300);
+        Account account = new Account();
+        account.setAccountNumber( 123 );
+        account.setBranchNumber( 1234 );
+        account.setAccountType( Account.ACCOUNT_TYPE_SAVINGS );
+        account.setAccountBalance(1000.00 );
         
-        Client muir = new Client("Will", "Muir", 123456789);
+        Account account2 = new Account();
+        account2.setAccountNumber( 124 );
+        account2.setBranchNumber( 1234 );
+        account2.setAccountType( Account.ACCOUNT_TYPE_CHEQUING );
+        account2.setAccountBalance( 1001.00 );
+
+         Account account3 = new Account();
+        account.setAccountNumber( 125 );
+        account.setBranchNumber( 1235 );
+        account.setAccountType( Account.ACCOUNT_TYPE_SAVINGS );
+        account.setAccountBalance(1000.00 );
         
-        account.setAccountOwner(muir);
-        account.getAccountOwner().getLastName();
+        Account account4 = new Account();
+        account2.setAccountNumber( 126 );
+        account2.setBranchNumber( 1236 );
+        account2.setAccountType( Account.ACCOUNT_TYPE_CHEQUING );
+        account2.setAccountBalance( 2.00 );
         
+        Client muir = new Client( "Will", "Muir", 123456789 );
+
+        account.setAccountOwner( muir );
+        account2.setAccountOwner( muir );
+        account3.setAccountOwner(muir);
+        account4.setAccountOwner(muir);
         
-        
-       Account account2 = new Account();
-        account2.setAccountNumber(123);
-        account2.setBranchNumber(123);
-        account2.setAccountType(null);
-        account2.setAccountBalance(300);
-        
-        
-        
-        account.setAccountOwner(muir);
-        account2.setAccountOwner(muir);
-        //muir.addAccount().add (account);
-       // muir.setAccounts().add (account2);
-        
+        muir.addAccount( account );
+        muir.addAccount( account2 );
+        muir.addAccount( account3 );
+        muir.addAccount( account4 );
+       
+        System.out.println( "Account: " + muir.getAccount( 124, 1234 ) );
+             
+
         
     }
     

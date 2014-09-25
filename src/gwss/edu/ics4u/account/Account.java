@@ -24,7 +24,7 @@ public class Account {
     private Client accountOwner;
     private int accountNumber;
     private int branchNumber;
-    private String accountType;
+    private int accountType;
     private int pin;
     private double accountBalance;
     private boolean active;
@@ -45,7 +45,7 @@ public class Account {
         this.accountOwner = accountOwner;
     }
 
-    public Account(int accountNumber, int branchNumber, String accountType, int pin, double accountBalance, boolean active) {
+    public Account(int accountNumber, int branchNumber, int accountType, int pin, double accountBalance, boolean active) {
         this.accountNumber = accountNumber;
         this.branchNumber = branchNumber;
         this.accountType = accountType;
@@ -70,14 +70,17 @@ public class Account {
         this.branchNumber = branchNumber;
     }
 
-    public String getAccountType() {
+    public int getAccountType() {
         return accountType;
     }
-
-    public void setAccountType(String accountType) {
-        this.accountType = accountType;
+    
+    public String getAccountTypeName() {
+        return ACCOUNT_TYPE_NAMES[getAccountType()];
     }
 
+    public void setAccountType( int accountType ) {
+        this.accountType = accountType;
+    }
     public void setPin(int pin) {
         this.pin = pin;
     }
