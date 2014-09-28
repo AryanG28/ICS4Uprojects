@@ -6,8 +6,6 @@
 package gwss.edu.ics4u.account;
 
 import java.util.ArrayList;
-import java.util.Objects;
-
 /**
  *
  * @author 1GHAHREMANZA

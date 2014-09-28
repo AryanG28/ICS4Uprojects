@@ -3,11 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gwss.edu.ics4u.account;
-
-import java.util.Objects;
-
-/**
+package gwss.edu.ics4u.account;/**
  *
  * @author 1GHAHREMANZA
  */
