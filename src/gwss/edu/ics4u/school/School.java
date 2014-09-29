@@ -11,6 +11,7 @@ package gwss.edu.ics4u.school;
  */
 public class School {
     
+    public static final int SCHOOL_TYPE_UNKOWN = -1;
     public static final int SCHOOL_TYPE_PRIVATE = 1;
     public static final int SCHOOL_TYPE_ELEMENTARY = 2;
     public static final int SCHOOL_TYPE_SECONDARY = 3;
@@ -24,7 +25,12 @@ public class School {
     private int schoolType;
     private int numberOfStudents;
     private double budgetBalance;
-
+    
+    public School() {
+        this.schoolType = SCHOOL_TYPE_UNKOWN;
+        this.hasSummerSchool = false;
+    }
+    
     public School(int schoolId, String schoolName, String address, boolean hasSummerSchool, int dateOpened, int schoolType, int numberOfStudents, double budgetBalance) {
         this.schoolId = schoolId;
         this.schoolName = schoolName;
@@ -36,14 +42,15 @@ public class School {
         this.budgetBalance = budgetBalance;
     }
 
-    public School() {
-    }
+
 
     public School(int schoolId) {
+        this();
         this.schoolId = schoolId;
     }
 
     public School(int schoolId, String schoolName, int schoolType) {
+        this();
         this.schoolId = schoolId;
         this.schoolName = schoolName;
         this.schoolType = schoolType;
@@ -54,8 +61,9 @@ public class School {
     }
 
     public void setSchoolId(int schoolId) {
-        if (schoolId > 0)
+        if (schoolId > 0) 
             this.schoolId = schoolId;
+            
         
     }
 
@@ -64,8 +72,10 @@ public class School {
     }
 
     public void setSchoolName(String schoolName) {
-        if (schoolName != null)
-        this.schoolName = schoolName;
+        if (schoolName != null&& schoolName.length()> 2 )
+            this.schoolName = schoolName;
+        else
+            System.out.println("Cannot set school Name");
     }
 
     public String getAddress() {
@@ -156,15 +166,25 @@ public class School {
     }
 
     public boolean isValid() {
-        if (schoolId == 0 || schoolName== null || schoolType ==  0) {
+        if (schoolId <=0 || schoolName== null || schoolName.length() < 3) {
             return false;
         }
         return true;
     }
 
+
     @Override
     public String toString() {
-        return "School{" + "schoolId=" + schoolId + ", schoolName=" + schoolName + ", address=" + address + ", hasSummerSchool=" + hasSummerSchool + ", yearOpened=" + yearOpened + ", schoolType=" + schoolType + ", numberOfStudents=" + numberOfStudents + ", budgetBalance=" + budgetBalance + '}';
+        return "---------------------------------" +
+                "\n\t School: " + 
+                "\n\t School Id=" + schoolId + 
+                "\n\t School Name=" + schoolName + 
+                "\n\t Address=" + address + 
+                "\n\t Summer School=" + hasSummerSchool + 
+                "\n\t Year Opened=" + yearOpened + 
+                "\n\t School Type=" + schoolType + 
+                "\n\t Number Of Students=" + numberOfStudents + 
+                "\n\t Budget Balance=" + budgetBalance + '}';
     }
     
 }
