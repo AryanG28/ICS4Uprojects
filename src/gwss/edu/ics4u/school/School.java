@@ -10,13 +10,12 @@ package gwss.edu.ics4u.school;
  * @author 1GHAHREMANZA
  */
 public class School {
-    
-    public static final int SCHOOL_TYPE_UNKOWN = -1;
+
+    public static final int SCHOOL_TYPE_UNKNOWN = -1;
     public static final int SCHOOL_TYPE_PRIVATE = 1;
     public static final int SCHOOL_TYPE_ELEMENTARY = 2;
     public static final int SCHOOL_TYPE_SECONDARY = 3;
-    
-    
+
     private int schoolId;
     private String schoolName;
     private String address;
@@ -25,28 +24,28 @@ public class School {
     private int schoolType;
     private int numberOfStudents;
     private double budgetBalance;
-    
+
     public School() {
-        this.schoolType = SCHOOL_TYPE_UNKOWN;
+        this.schoolType = SCHOOL_TYPE_UNKNOWN;
         this.hasSummerSchool = false;
     }
-    
+
     public School(int schoolId, String schoolName, String address, boolean hasSummerSchool, int dateOpened, int schoolType, int numberOfStudents, double budgetBalance) {
+        this.address = address;
         this.schoolId = schoolId;
         this.schoolName = schoolName;
-        this.address = address;
+        this.schoolType = schoolType;
         this.hasSummerSchool = hasSummerSchool;
         this.yearOpened = dateOpened;
-        this.schoolType = schoolType;
         this.numberOfStudents = numberOfStudents;
         this.budgetBalance = budgetBalance;
+        System.out.println(this.toString() + " Object Created.");
     }
-
-
 
     public School(int schoolId) {
         this();
         this.schoolId = schoolId;
+        System.out.println(this.toString() + " Object Created.");
     }
 
     public School(int schoolId, String schoolName, int schoolType) {
@@ -54,6 +53,7 @@ public class School {
         this.schoolId = schoolId;
         this.schoolName = schoolName;
         this.schoolType = schoolType;
+        System.out.println(this.toString() + " Object Created.");
     }
 
     public int getSchoolId() {
@@ -61,10 +61,12 @@ public class School {
     }
 
     public void setSchoolId(int schoolId) {
-        if (schoolId > 0) 
+        if (schoolId > 0) {
             this.schoolId = schoolId;
-            
-        
+        } else {
+            System.out.println("Invalid School ID");
+        }
+
     }
 
     public String getSchoolName() {
@@ -72,10 +74,11 @@ public class School {
     }
 
     public void setSchoolName(String schoolName) {
-        if (schoolName != null&& schoolName.length()> 2 )
+        if (schoolName != null && schoolName.length() > 2) {
             this.schoolName = schoolName;
-        else
+        } else {
             System.out.println("Cannot set school Name");
+        }
     }
 
     public String getAddress() {
@@ -83,10 +86,14 @@ public class School {
     }
 
     public void setAddress(String address) {
-        this.address = address;
+        if (address != null && address.length() > 5) {
+            this.address = address;
+        } else {
+            System.out.println("Invalid Address");
+        }
     }
 
-    public boolean isHasSummerSchool() {
+    public boolean getHasSummerSchool() {
         return hasSummerSchool;
     }
 
@@ -99,7 +106,11 @@ public class School {
     }
 
     public void setYearOpened(int yearOpened) {
-        this.yearOpened = yearOpened;
+        if (yearOpened > 1800 || yearOpened == 0) {
+            this.yearOpened = yearOpened;
+        } else {
+            System.out.println("Invalid year opened");
+        }
     }
 
     public int getSchoolType() {
@@ -107,20 +118,25 @@ public class School {
     }
 
     public void setSchoolType(int schoolType) {
-        if (schoolId > 0)
+        if (schoolType >= 0 && schoolType < 4) 
             this.schoolType = schoolType;
+        else
+            System.out.println("Invalid school type");
+        
     }
-    
+
     public String getSchoolTypeName() {
         switch (this.schoolType) {
-            case SCHOOL_TYPE_PRIVATE: 
+            case SCHOOL_TYPE_UNKNOWN:
+                return "Unknown";
+            case SCHOOL_TYPE_PRIVATE:
                 return "Private";
             case SCHOOL_TYPE_ELEMENTARY:
                 return "Elementary";
             case SCHOOL_TYPE_SECONDARY:
                 return "Secondary";
-            default: 
-                return "Invalid";                
+            default:
+                return "Invalid";
         }
     }
 
@@ -129,21 +145,24 @@ public class School {
     }
 
     public void setNumberOfStudents(int numberOfStudents) {
-        if (numberOfStudents >= 0)
+        if (numberOfStudents >= 0) {
             this.numberOfStudents = numberOfStudents;
+        } 
+        else 
+            System.out.println("Invalid number of students");
     }
 
-    public double getBudgetBalance() {
+    private double getBudgetBalance() {
         return budgetBalance;
     }
 
-    public void setBudgetBalance(double budgetBalance) {
-        if (budgetBalance >= 0)
+    private void setBudgetBalance(double budgetBalance) {
+        if (budgetBalance >= 0) {
             this.budgetBalance = budgetBalance;
+        } else
+            System.out.println("Invalid Budget Balance");
     }
 
-    
-    
     @Override
     public int hashCode() {
         int hash = 3;
@@ -166,25 +185,24 @@ public class School {
     }
 
     public boolean isValid() {
-        if (schoolId <=0 || schoolName== null || schoolName.length() < 3) {
+        if (schoolId <= 0 || schoolName == null || schoolName.length() < 3) {
             return false;
         }
         return true;
     }
 
-
     @Override
     public String toString() {
-        return "---------------------------------" +
-                "\n\t School: " + 
-                "\n\t School Id=" + schoolId + 
-                "\n\t School Name=" + schoolName + 
-                "\n\t Address=" + address + 
-                "\n\t Summer School=" + hasSummerSchool + 
-                "\n\t Year Opened=" + yearOpened + 
-                "\n\t School Type=" + schoolType + 
-                "\n\t Number Of Students=" + numberOfStudents + 
-                "\n\t Budget Balance=" + budgetBalance + '}';
+        return "---------------------------------"
+                + "\n\t School: "
+                + "\n\t School Id=" + schoolId
+                + "\n\t School Name=" + schoolName
+                + "\n\t Address=" + address
+                + "\n\t Summer School=" + hasSummerSchool
+                + "\n\t Year Opened=" + yearOpened
+                + "\n\t School Type=" + schoolType
+                + "\n\t Number Of Students=" + numberOfStudents
+                + "\n\t Budget Balance=" + budgetBalance + '}';
     }
-    
+
 }
