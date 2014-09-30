@@ -14,7 +14,6 @@ public class Student {
     public static final int GENDER_TYPE_UNKNOWN= 0;
     public static final int GENDER_TYPE_MALE = 1;
     public static final int GENDER_TYPE_FEMALE = 2;
-
     
     
     private int OEN;
@@ -26,21 +25,20 @@ public class Student {
     private int gender;
     private boolean IEP;
     private double average;
-
+    
+    
+    
     public Student() {
         this.IEP = false;
     }
     
     public Student(int OEN, String firstName, String lastName, School School, int studentId, int height, int gender, boolean IEP, double average) {
-        this.OEN = OEN;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.School = School;
-        this.studentId = studentId;
+        this( OEN,  firstName,  lastName,  School,  studentId);
         this.height = height;
         this.gender = gender;
         this.IEP = IEP;
         this.average = average;
+        System.out.println(this.toString() +" Object Created");
     }
 
     public Student(int OEN, String firstName, String lastName, School School, int studentId) {
@@ -50,6 +48,7 @@ public class Student {
         this.lastName = lastName;
         this.School = School;
         this.studentId = studentId;
+        System.out.println(this.toString() +" Object Created");
     }
 
     public int getOEN() {
@@ -99,11 +98,11 @@ public class Student {
         }
     }
 
-    public int getStudentId() {
+    private int getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(int studentId) {
+    private void setStudentId(int studentId) {
         if (studentId> 0)
             this.studentId = studentId;
         else
@@ -172,6 +171,19 @@ public class Student {
         return hash;
     }
 
+    public String getGenderName() {
+        switch (this.gender) {
+            case GENDER_TYPE_UNKNOWN:
+                return "Unknown";
+            case GENDER_TYPE_MALE:
+                return "Male";
+            case GENDER_TYPE_FEMALE:
+                return "Female";
+            default:
+                return "Invalid";
+        }
+    }
+    
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -182,9 +194,6 @@ public class Student {
         }
         final Student other = (Student) obj;
         if (this.OEN != other.OEN) {
-            return false;
-        }
-        if (this.studentId != other.studentId) {
             return false;
         }
         return true;

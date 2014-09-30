@@ -5,6 +5,9 @@
  */
 package gwss.edu.ics4u.school;
 
+import gwss.edu.ics4u.account.Account;
+import java.util.ArrayList;
+
 /**
  *
  * @author 1GHAHREMANZA
@@ -24,6 +27,7 @@ public class School {
     private int schoolType;
     private int numberOfStudents;
     private double budgetBalance;
+    private ArrayList<Student> students;
 
     public School() {
         this.schoolType = SCHOOL_TYPE_UNKNOWN;
@@ -152,6 +156,7 @@ public class School {
             System.out.println("Invalid number of students");
     }
 
+
     private double getBudgetBalance() {
         return budgetBalance;
     }
@@ -163,6 +168,22 @@ public class School {
             System.out.println("Invalid Budget Balance");
     }
 
+    public Student getStudent( int OEN ) {
+        Student student = null;
+        if( this.students.size() > 0 ) {
+            for( Student s : this.students ) {
+                if( OEN == s.getOEN() ) {
+                    student = s;
+                }
+            }
+        }
+        return student;
+    }
+
+    public void addStudent( Student student ) {
+        this.students.add( student );
+    }
+    
     @Override
     public int hashCode() {
         int hash = 3;
@@ -183,6 +204,7 @@ public class School {
         }
         return true;
     }
+    
 
     public boolean isValid() {
         if (schoolId <= 0 || schoolName == null || schoolName.length() < 3) {
