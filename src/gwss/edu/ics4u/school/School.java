@@ -32,9 +32,11 @@ public class School {
     public School() {
         this.schoolType = SCHOOL_TYPE_UNKNOWN;
         this.hasSummerSchool = false;
+        this.students = new ArrayList<>();
     }
 
     public School(int schoolId, String schoolName, String address, boolean hasSummerSchool, int dateOpened, int schoolType, int numberOfStudents, double budgetBalance) {
+         this();
         this.address = address;
         this.schoolId = schoolId;
         this.schoolName = schoolName;
@@ -156,12 +158,16 @@ public class School {
             System.out.println("Invalid number of students");
     }
 
-
+    public int numberOfStudents() {
+        return this.students.size();
+    }
+    
+    
     private double getBudgetBalance() {
         return budgetBalance;
     }
 
-    private void setBudgetBalance(double budgetBalance) {
+    public void setBudgetBalance(double budgetBalance) {
         if (budgetBalance >= 0) {
             this.budgetBalance = budgetBalance;
         } else
@@ -181,7 +187,12 @@ public class School {
     }
 
     public void addStudent( Student student ) {
-        this.students.add( student );
+        if( student == null ) {
+            System.out.println( "Can't add a NULL student to a school." );
+        }
+        else {
+            this.students.add( student );
+        }
     }
     
     @Override

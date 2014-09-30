@@ -102,7 +102,7 @@ public class Student {
         return studentId;
     }
 
-    private void setStudentId(int studentId) {
+    public void setStudentId(int studentId) {
         if (studentId> 0)
             this.studentId = studentId;
         else
@@ -157,6 +157,7 @@ public class Student {
         }
         return true;
     }
+    
     
     public boolean verifyOEN (int OEN) {
         if (Integer.toString(OEN).matches(Integer.toString(this.OEN))) {
