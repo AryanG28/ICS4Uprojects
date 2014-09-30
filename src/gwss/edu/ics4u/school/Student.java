@@ -159,6 +159,13 @@ public class Student {
         return true;
     }
     
+    public boolean verifyOEN (int OEN) {
+        if (Integer.toString(OEN).matches(Integer.toString(this.OEN))) {
+            return true;
+        } else 
+            return false;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 5;
