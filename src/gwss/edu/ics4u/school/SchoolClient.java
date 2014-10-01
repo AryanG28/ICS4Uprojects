@@ -20,13 +20,14 @@ public class SchoolClient {
         farjaad.setOEN(169432567);
         farjaad.setFirstName("Farjaad");
         farjaad.setLastName("Rawasia");
-        farjaad.setStudentId(123);      
+        farjaad.setStudentId(123);
         farjaad.toString();
         School garthWebb = new School();
-        System.out.println( "---------------------------" );
-        System.out.println( "# Students Before: " + garthWebb.numberOfStudents());
-        garthWebb.addStudent(null );
-        System.out.println( "# Students After: " + garthWebb.numberOfStudents() );
+        System.out.println("---------------------------");
+        System.out.println("# Students Before: " + garthWebb.numberOfStudents());
+        garthWebb.addStudent(farjaad);
+        garthWebb.addStudent(farjaad);
+        System.out.println("# Students After: " + garthWebb.numberOfStudents());
     }
-    
+
 }
