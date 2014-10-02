@@ -36,7 +36,7 @@ public class School {
     }
 
     public School(int schoolId, String schoolName, String address, boolean hasSummerSchool, int dateOpened, int schoolType, int numberOfStudents, double budgetBalance) {
-         this();
+        this();
         this.address = address;
         this.schoolId = schoolId;
         this.schoolName = schoolName;
@@ -124,11 +124,12 @@ public class School {
     }
 
     public void setSchoolType(int schoolType) {
-        if (schoolType >= 0 && schoolType < 4) 
+        if (schoolType >= 0 && schoolType < 4) {
             this.schoolType = schoolType;
-        else
+        } else {
             System.out.println("Invalid school type");
-        
+        }
+
     }
 
     public String getSchoolTypeName() {
@@ -153,16 +154,15 @@ public class School {
     public void setNumberOfStudents(int numberOfStudents) {
         if (numberOfStudents >= 0) {
             this.numberOfStudents = numberOfStudents;
-        } 
-        else 
+        } else {
             System.out.println("Invalid number of students");
+        }
     }
 
     public int numberOfStudents() {
         return this.students.size();
     }
-    
-    
+
     private double getBudgetBalance() {
         return budgetBalance;
     }
@@ -170,15 +170,16 @@ public class School {
     public void setBudgetBalance(double budgetBalance) {
         if (budgetBalance >= 0) {
             this.budgetBalance = budgetBalance;
-        } else
+        } else {
             System.out.println("Invalid Budget Balance");
+        }
     }
 
-    public Student getStudent( int OEN ) {
+    public Student getStudent(int OEN) {
         Student student = null;
-        if( this.students.size() > 0 ) {
-            for( Student s : this.students ) {
-                if( OEN == s.getOEN() ) {
+        if (this.students.size() > 0) {
+            for (Student s : this.students) {
+                if (OEN == s.getOEN()) {
                     student = s;
                 }
             }
@@ -186,13 +187,30 @@ public class School {
         return student;
     }
 
-    public void addStudent( Student student ) {
-        if( student == null ) {
-            System.out.println( "Can't add a NULL student to a school." );
+    public void addStudent(Student student) {
+        boolean addstudent = true;
+        if (student == null) {
+            System.out.println("Can't add a NULL student to a school.");
+        } else if (students.size() > 0) {
+            for (int i = 0; i < students.size(); i++) {
+                if (students.get(i).equals(student)) {
+                    System.out.println("Addition failed. Student already exists.");
+                    addstudent = false;
+                    break;
+                }
+            }
+        } else if (student.isValid() == false) {
+           System.out.println(" Student is not valid");
+           addstudent = false;
         }
-        else {
-            this.students.add( student );
+        if (addstudent == true) {
+            this.students.add(student);
         }
+
+    }
+
+    public void removeStudent(Student student) {
+        
     }
     
     @Override
@@ -215,7 +233,6 @@ public class School {
         }
         return true;
     }
-    
 
     public boolean isValid() {
         if (schoolId <= 0 || schoolName == null || schoolName.length() < 3) {

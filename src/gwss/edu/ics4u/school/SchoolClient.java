@@ -16,16 +16,19 @@ public class SchoolClient {
      */
     public static void main(String[] args) {
         Student farjaad = new Student();
+        School GarthWebb = new School();
         farjaad.setAverage(94);
         farjaad.setOEN(169432567);
         farjaad.setFirstName("Farjaad");
         farjaad.setLastName("Rawasia");
         farjaad.setStudentId(123);
+        farjaad.setSchool(GarthWebb);
         farjaad.toString();
         School garthWebb = new School();
         System.out.println("---------------------------");
         System.out.println("# Students Before: " + garthWebb.numberOfStudents());
         garthWebb.addStudent(farjaad);
+        System.out.println("# Students After: " + garthWebb.numberOfStudents());
         garthWebb.addStudent(farjaad);
         System.out.println("# Students After: " + garthWebb.numberOfStudents());
     }
