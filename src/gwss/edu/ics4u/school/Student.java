@@ -30,6 +30,7 @@ public class Student {
     
     public Student() {
         this.IEP = false;
+        System.out.println(" student Created");
     }
     
     public Student(int OEN, String firstName, String lastName, School School, int studentId, int height, int gender, boolean IEP, double average) {
@@ -38,7 +39,6 @@ public class Student {
         this.gender = gender;
         this.IEP = IEP;
         this.average = average;
-        System.out.println(this.toString() +" Object Created");
     }
 
     public Student(int OEN, String firstName, String lastName, School School, int studentId) {
@@ -48,7 +48,6 @@ public class Student {
         this.lastName = lastName;
         this.School = School;
         this.studentId = studentId;
-        System.out.println(this.toString() +" Object Created");
     }
 
     public int getOEN() {
@@ -211,7 +210,7 @@ public class Student {
                 "\n\t Height=" + height + 
                 "\n\t Gender=" + gender + 
                 "\n\t IEP=" + IEP + 
-                "\n\t Average=" + average + '}';
+                "\n\t Average=" + average;
     }
     
 

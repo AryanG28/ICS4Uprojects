@@ -15,22 +15,28 @@ public class SchoolClient {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+
+        
         Student farjaad = new Student();
-        School GarthWebb = new School();
+        School garthWebb = new School();
         farjaad.setAverage(94);
-        farjaad.setOEN(169432567);
+        farjaad.setOEN(1694354567);
         farjaad.setFirstName("Farjaad");
         farjaad.setLastName("Rawasia");
         farjaad.setStudentId(123);
-        farjaad.setSchool(GarthWebb);
+        farjaad.setSchool(garthWebb);
         farjaad.toString();
-        School garthWebb = new School();
+
         System.out.println("---------------------------");
         System.out.println("# Students Before: " + garthWebb.numberOfStudents());
         garthWebb.addStudent(farjaad);
         System.out.println("# Students After: " + garthWebb.numberOfStudents());
-        garthWebb.addStudent(farjaad);
         System.out.println("# Students After: " + garthWebb.numberOfStudents());
+       // garthWebb.removeStudent(farjaad);
+        //garthWebb.removeStudent(16832567);
+       // System.out.println("# Students After: " + garthWebb.numberOfStudents());
+       // garthWebb.getStudent(farjaad);
     }
 
 }
