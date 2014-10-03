@@ -1,16 +1,14 @@
+
+package gwss.edu.ics4u.school;
+
 /**
+ **
  * Name: Aryan Ghahremanzadeh 
  * Date: October 2, 2014 
  * Version: v0.1
  * Teacher: Mr.Muir
  * Description: This client allows you to set and add students to the student list
  * and create and set different properties for each. 
- */
-package gwss.edu.ics4u.school;
-
-/**
- *
- * @author 1GHAHREMANZA
  */
 public class StudentClient {
 
@@ -77,20 +75,20 @@ public class StudentClient {
         
         System.out.println("---------------------------");
         
-        //adds object to the array list
+        //Tests to see if objects can get added successfully to list
         System.out.println("Test Case #1: ");
         System.out.println("Tests to see if objects can get added successfully to list");
-        System.out.println("# Students Before: " + garthWebb.numberOfStudents());
+        System.out.println("# Students Before: " + garthWebb.numberOfStudents()); 
         garthWebb.addStudent(farjaad);
         garthWebb.addStudent(ryan);
         garthWebb.addStudent(scott);
-        System.out.println("# Students After: " + garthWebb.numberOfStudents());
+        System.out.println("# Students After: " + garthWebb.numberOfStudents()); 
         System.out.println("");
         
         //adding duplicate object to list
         System.out.println("Test Case #2: ");
         System.out.println("Tests to see if student thats added can be added again. ");
-        System.out.println("# Students Before: " + garthWebb.numberOfStudents());
+        System.out.println("# Students Before: " + garthWebb.numberOfStudents()); 
         garthWebb.addStudent(farjaad);
         System.out.println("# Students After: " + garthWebb.numberOfStudents());
         System.out.println("");
@@ -98,14 +96,17 @@ public class StudentClient {
         //adding invalid object to list
         System.out.println("Test Case #3: ");
         System.out.println("Tests to see if possible to add invalid student.");
+        System.out.println("# Students Before: " + garthWebb.numberOfStudents()); 
         garthWebb.addStudent(kael);
-        System.out.println("# Students After: " + garthWebb.numberOfStudents());
+        System.out.println("# Students After: " + garthWebb.numberOfStudents()); 
         System.out.println("");
         
         //adding null object to list
         System.out.println("Test Case #4: ");
         System.out.println("Tests to see if possible to add NULL students.");
+        System.out.println("# Students Before: " + garthWebb.numberOfStudents()); 
         garthWebb.addStudent(farzan);
+        System.out.println("# Students After: " + garthWebb.numberOfStudents()); 
         System.out.println("");
         
         //removing object from the list
@@ -143,34 +144,26 @@ public class StudentClient {
         //gets object from the list
         System.out.println("Test Case #9: ");
         System.out.println("Tests to get students from list.");
-        System.out.println("# Students Before: " + garthWebb.numberOfStudents());
         garthWebb.getStudent(ryan);
-        System.out.println("# Students After: " + garthWebb.numberOfStudents());
         System.out.println("");
         
         //gets object that does not exist in list
         System.out.println("Test Case #10: ");
         System.out.println("Tests to get students from list that do not exist.");
-        System.out.println("# Students Before: " + garthWebb.numberOfStudents());
         garthWebb.getStudent(farjaad); 
-        System.out.println("# Students After: " + garthWebb.numberOfStudents());
         System.out.println("");
         
         //gets object that is null
         System.out.println("Test Case #11: ");
         System.out.println("Tests to get students from list that is null.");
-        System.out.println("# Students Before: " + garthWebb.numberOfStudents());
         garthWebb.getStudent(farzan); 
-        System.out.println("# Students After: " + garthWebb.numberOfStudents());
         System.out.println("");
         
         //gets object from the list using OEN
         garthWebb.addStudent(scott);
         System.out.println("Test Case #12: ");
         System.out.println("Tests to get students from list using OEN.");
-        System.out.println("# Students Before: " + garthWebb.numberOfStudents());
         garthWebb.getStudent(139455467);
-        System.out.println("# Students After: " + garthWebb.numberOfStudents());
         System.out.println("");
         
         //Adding students with the same OEN
