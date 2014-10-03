@@ -1,15 +1,14 @@
+
+package gwss.edu.ics4u.school;
+
 /**
+ *
+ *
  * Name: Aryan Ghahremanzadeh 
  * Date: October 2, 2014 
  * Version: v0.1
  * Teacher: Mr.Muir
  * Description: This creates the student object and its properties.  
- */
-package gwss.edu.ics4u.school;
-
-/**
- *
- * @author 1GHAHREMANZA
  */
 public class Student {
     

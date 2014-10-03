@@ -1,10 +1,4 @@
-/**
- * Name: Aryan Ghahremanzadeh 
- * Date: October 2, 2014 
- * Version: v0.1
- * Teacher: Mr.Muir
- * Description: This creates the school object and its properties.  
- */
+
 package gwss.edu.ics4u.school;
 
 import gwss.edu.ics4u.account.Account;
@@ -12,7 +6,12 @@ import java.util.ArrayList;
 
 /**
  *
- * @author 1GHAHREMANZA
+ * /**
+ * Name: Aryan Ghahremanzadeh 
+ * Date: October 2, 2014 
+ * Version: v0.1
+ * Teacher: Mr.Muir
+ * Description: This creates the student object and its properties.  
  */
 public class School {
 

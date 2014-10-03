@@ -31,7 +31,7 @@ public class StudentClient {
         
         //Creates valid student
         Student farjaad = new Student();
-        
+        // sets valid values
         farjaad.setAverage(94);
         farjaad.setOEN(169435667);
         farjaad.setFirstName("Farjaad");
@@ -41,8 +41,8 @@ public class StudentClient {
 
         //Creates valid student
         Student ryan = new Student();
-
-        ryan.setAverage(94);
+        //sets valid values
+        ryan.setAverage(74);
         ryan.setOEN(163455667);
         ryan.setFirstName("Ryan");
         ryan.setLastName("Mcdonald");
@@ -51,7 +51,7 @@ public class StudentClient {
         
         //Creates valid student
         Student scott = new Student();
-
+        //Sets valid values
         scott.setAverage(64);
         scott.setOEN(139455467);
         scott.setFirstName("Scott");
@@ -59,9 +59,9 @@ public class StudentClient {
         scott.setSchool(garthWebb);
         scott.toString();
         
-        // Creates valid student with same OEN as Scott
+        // Creates valid student with the same OEN as Scott
         Student josh = new Student();
-
+        //sets valid values, same OEN as another student
         josh.setAverage(54);
         josh.setOEN(139455467);
         josh.setFirstName("Josh");
