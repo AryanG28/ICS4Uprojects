@@ -1,7 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Name: Aryan Ghahremanzadeh 
+ * Date: October 2, 2014 
+ * Version: v0.1
+ * Teacher: Mr.Muir
+ * Description: This creates the student object and its properties.  
  */
 package gwss.edu.ics4u.school;
 
@@ -20,7 +22,7 @@ public class Student {
     private String firstName;
     private String lastName;
     private School School;
-    private int studentId;
+    private String secretComment;
     private int height; //in cm
     private int gender;
     private boolean IEP;
@@ -33,21 +35,22 @@ public class Student {
         System.out.println(" Student Created");
     }
     
-    public Student(int OEN, String firstName, String lastName, School School, int studentId, int height, int gender, boolean IEP, double average) {
-        this( OEN,  firstName,  lastName,  School,  studentId);
+    public Student(int OEN, String firstName, String lastName, School School, int studentId, int height, int gender, boolean IEP, double average, String secretComment) {
+        this( OEN,  firstName,  lastName,  School);
         this.height = height;
         this.gender = gender;
         this.IEP = IEP;
         this.average = average;
+        this.secretComment = secretComment;
+        
     }
 
-    public Student(int OEN, String firstName, String lastName, School School, int studentId) {
+    public Student(int OEN, String firstName, String lastName, School School) {
         this();
         this.OEN = OEN;
         this.firstName = firstName;
         this.lastName = lastName;
         this.School = School;
-        this.studentId = studentId;
     }
 
     public int getOEN() {
@@ -71,7 +74,7 @@ public class Student {
         if (firstName!= null && firstName.length() > 1)
             this.firstName = firstName;
         else
-            System.out.println("Invalid first name"); 
+            System.out.println("Invalid first name. "); 
     }
 
     public String getLastName() {
@@ -82,7 +85,7 @@ public class Student {
         if (lastName!= null && lastName.length() > 1)
             this.lastName = lastName;
         else
-            System.out.println("Invalid last name"); 
+            System.out.println("Invalid last name. "); 
     }
 
     public School getSchool() {
@@ -93,19 +96,17 @@ public class Student {
         if (School != null) {
             this.School = School;
         } else {
-            System.out.println("Invalid School");
+            System.out.println("Invalid School. ");
         }
     }
 
-    private int getStudentId() {
-        return studentId;
+    private String getSecretComment() {
+        return secretComment;
     }
 
-    public void setStudentId(int studentId) {
-        if (studentId> 0)
-            this.studentId = studentId;
-        else
-            System.out.println("Invalid Id");
+    public void setSecretComment(String secretComment) {
+            this.secretComment = secretComment;
+
     }
 
     public int getHeight() {
@@ -117,7 +118,7 @@ public class Student {
             this.height = height;
         }
         else
-            System.out.print("Invalid Height");
+            System.out.println("Invalid Height. ");
     }
 
     public int getGender() {
@@ -151,7 +152,7 @@ public class Student {
     }
 
     public boolean isValid() {
-        if (OEN < 99999999 || OEN > 1000000000 || firstName == null || firstName.length() < 2 || lastName == null || lastName.length() < 2 || studentId <= 0 || School == null) {
+        if (OEN < 99999999 || OEN > 1000000000 || firstName == null || firstName.length() < 2 || lastName == null || lastName.length() < 2 ||  School == null) {
             return false;
         }
         return true;
@@ -202,15 +203,15 @@ public class Student {
     @Override
     public String toString() {
         return  "---------------------------------" + 
-                "\n\t OEN=" + OEN + 
-                "\n\t First Name=" + firstName + 
-                "\n\t Last Name=" + lastName +                 
-                "\n\t Student Id=" + studentId + 
-                "\n\t Height=" + height + 
-                "\n\t Gender=" + getGenderName() + 
-                "\n\t IEP=" + IEP + 
-                "\n\t Average=" + average +
-                "\n\t School=" + School  ;
+                "\n\t OEN= " + OEN + 
+                "\n\t First Name= " + firstName + 
+                "\n\t Last Name= " + lastName +                 
+                "\n\t External comments= " + secretComment + 
+                "\n\t Height= " + height + 
+                "\n\t Gender= "  + getGenderName() + 
+                "\n\t IEP= " + IEP + 
+                "\n\t Average= " + average +
+                "\n\t School= " + School  ;
     }
     
 

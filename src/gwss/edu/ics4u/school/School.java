@@ -1,7 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Name: Aryan Ghahremanzadeh 
+ * Date: October 2, 2014 
+ * Version: v0.1
+ * Teacher: Mr.Muir
+ * Description: This creates the school object and its properties.  
  */
 package gwss.edu.ics4u.school;
 
@@ -32,7 +34,7 @@ public class School {
         this.schoolType = SCHOOL_TYPE_UNKNOWN;
         this.hasSummerSchool = false;
         this.students = new ArrayList<>();
-        System.out.println(" Object Created.");
+        System.out.println("School Created.");
     }
 
     public School(int schoolId, String schoolName, String address, boolean hasSummerSchool, int dateOpened, int schoolType, double budgetBalance) {
@@ -160,17 +162,6 @@ public class School {
         }
     }
 
-//    public Student getStudent(int OEN) {
-//        Student student = null;
-//        if (this.students.size() > 0) {
-//            for (Student s : this.students) {
-//                if (OEN == s.getOEN()) {
-//                    student = s;
-//                }
-//            }
-//        }
-//        return student;
-//    }
     public void addStudent(Student student) {
         boolean addstudent = true;
         if (student == null) {
@@ -181,8 +172,8 @@ public class School {
             addstudent = false;
         } else if (students.size() > 0) {
             for (int i = 0; i < students.size(); i++) {
-                if (students.get(i).equals(student)) {
-                    System.out.println("Addition failed. Student already exists.");
+                if (students.get(i).getOEN() == (student.getOEN())) {
+                    System.out.println("Addition failed. OEN duplicated.");
                     addstudent = false;
                     break;
                 }
@@ -252,6 +243,7 @@ public class School {
             if (students.contains(student)) {
                 System.out.println("Student found.");
                 System.out.println(student.toString());
+                return;
             }
             System.out.println("Student cannot be found.");
         } else {
