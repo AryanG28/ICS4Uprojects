@@ -30,7 +30,7 @@ public class Student {
     
     public Student() {
         this.IEP = false;
-        System.out.println(" student Created");
+        System.out.println(" Student Created");
     }
     
     public Student(int OEN, String firstName, String lastName, School School, int studentId, int height, int gender, boolean IEP, double average) {
@@ -204,13 +204,13 @@ public class Student {
         return  "---------------------------------" + 
                 "\n\t OEN=" + OEN + 
                 "\n\t First Name=" + firstName + 
-                "\n\t Last Name=" + lastName + 
-                "\n\t School=" + School + 
+                "\n\t Last Name=" + lastName +                 
                 "\n\t Student Id=" + studentId + 
                 "\n\t Height=" + height + 
-                "\n\t Gender=" + gender + 
+                "\n\t Gender=" + getGenderName() + 
                 "\n\t IEP=" + IEP + 
-                "\n\t Average=" + average;
+                "\n\t Average=" + average +
+                "\n\t School=" + School  ;
     }
     
 

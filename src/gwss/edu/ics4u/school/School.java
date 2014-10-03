@@ -25,7 +25,6 @@ public class School {
     private boolean hasSummerSchool;
     private int yearOpened;
     private int schoolType;
-    private int numberOfStudents;
     private double budgetBalance;
     private ArrayList<Student> students;
 
@@ -36,7 +35,7 @@ public class School {
         System.out.println(" Object Created.");
     }
 
-    public School(int schoolId, String schoolName, String address, boolean hasSummerSchool, int dateOpened, int schoolType, int numberOfStudents, double budgetBalance) {
+    public School(int schoolId, String schoolName, String address, boolean hasSummerSchool, int dateOpened, int schoolType, double budgetBalance) {
         this();
         this.address = address;
         this.schoolId = schoolId;
@@ -44,9 +43,8 @@ public class School {
         this.schoolType = schoolType;
         this.hasSummerSchool = hasSummerSchool;
         this.yearOpened = dateOpened;
-        this.numberOfStudents = numberOfStudents;
         this.budgetBalance = budgetBalance;
-        
+
     }
 
     public School(int schoolId) {
@@ -59,7 +57,6 @@ public class School {
         this.schoolId = schoolId;
         this.schoolName = schoolName;
         this.schoolType = schoolType;
-        System.out.println(this.toString() + " Object Created.");
     }
 
     public int getSchoolId() {
@@ -147,18 +144,6 @@ public class School {
         }
     }
 
-    public int getNumberOfStudents() {
-        return numberOfStudents;
-    }
-
-    public void setNumberOfStudents(int numberOfStudents) {
-        if (numberOfStudents >= 0) {
-            this.numberOfStudents = numberOfStudents;
-        } else {
-            System.out.println("Invalid number of students");
-        }
-    }
-
     public int numberOfStudents() {
         return this.students.size();
     }
@@ -186,11 +171,14 @@ public class School {
 //        }
 //        return student;
 //    }
-
     public void addStudent(Student student) {
         boolean addstudent = true;
         if (student == null) {
             System.out.println("Can't add a NULL student to a school.");
+            addstudent = false;
+        } else if (student.isValid() == false) {
+            System.out.println("Student is not valid.");
+            addstudent = false;
         } else if (students.size() > 0) {
             for (int i = 0; i < students.size(); i++) {
                 if (students.get(i).equals(student)) {
@@ -199,76 +187,79 @@ public class School {
                     break;
                 }
             }
-        } else if (student.isValid() == false) {
-            System.out.println(" Student is not valid");
-            addstudent = false;
         }
         if (addstudent == true) {
             this.students.add(student);
+            System.out.println("Student added");
         }
 
     }
 
     public void removeStudent(int OEN) {
         if (this.students.size() > 0) {
-            for (Student student: this.students) {
+            for (Student student : this.students) {
                 int s = student.getOEN();
-                if ( OEN == s) {
+                if (OEN == s) {
                     System.out.println("Student removed");
                     students.remove(student);
-                    break;
+                    return;
                 }
-                
+
             }
             System.out.println("Student cannot be found");
-        }
-        else {
-            System.out.println("Object already exists, cannot be removed");           
+        } else {
+            System.out.println("Student does not exist, cannot be removed.");
         }
     }
-    
+
     public void removeStudent(Student student) {
-        if (this.students.size() > 0) {
+        if (student == null) {
+            System.out.println("Student is null, cannot be removed.");
+        } else if (this.students.size() > 0) {
             if (students.contains(student)) {
                 students.remove(student);
-                System.out.println("Object removed");
+                System.out.println("Student removed");
+
+            } else {
+                System.out.println("Student does not exist, cannot be removed.");
             }
         } else {
-            System.out.println("Object already exists, cannot be removed");
+            System.out.println("Student does not exist, cannot be removed.");
         }
 
     }
 
-        public void getStudent(int OEN) {
+    public void getStudent(int OEN) {
         if (this.students.size() > 0) {
-            for (Student student: this.students) {
+            for (Student student : this.students) {
                 int s = student.getOEN();
-                if ( OEN == s) {
-                    System.out.println("Object found");
+                if (OEN == s) {
+                    System.out.println("Student found");
                     System.out.println(student.toString());
-                    break;
+                    return;
                 }
-                
             }
-        }
-        else {
-            System.out.println("Object cannot be found");        
+            System.out.println("Student cannot be found.");
+        } else {
+            System.out.println("Student cannot be found");
         }
     }
-    
+
     public void getStudent(Student student) {
-        if (this.students.size() > 0) {
-            if (students.contains(student)) {              
-                System.out.println("Object found");
+        if (student == null) {
+            System.out.println("Student is null, cannot be found");
+        } else if (this.students.size() > 0) {
+            if (students.contains(student)) {
+                System.out.println("Student found.");
                 System.out.println(student.toString());
             }
+            System.out.println("Student cannot be found.");
         } else {
-            System.out.println("Object cannot be found");
+            System.out.println("Student cannot be found.");
         }
 
     }
 
-    
     @Override
     public int hashCode() {
         int hash = 3;
@@ -276,7 +267,8 @@ public class School {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(Object obj
+    ) {
         if (obj == null) {
             return false;
         }
@@ -299,16 +291,14 @@ public class School {
 
     @Override
     public String toString() {
-        return "---------------------------------"
-                + "\n\t School: "
-                + "\n\t School Id=" + schoolId
-                + "\n\t School Name=" + schoolName
-                + "\n\t Address=" + address
-                + "\n\t Summer School=" + hasSummerSchool
-                + "\n\t Year Opened=" + yearOpened
-                + "\n\t School Type=" + schoolType
-                + "\n\t Number Of Students=" + numberOfStudents
-                + "\n\t Budget Balance=" + budgetBalance;
+        return ""
+                + "\n\t School Id= " + schoolId
+                + "\n\t School Name= " + schoolName
+                + "\n\t Address= " + address
+                + "\n\t Summer School= " + hasSummerSchool
+                + "\n\t Year Opened= " + yearOpened
+                + "\n\t School Type= " + getSchoolTypeName()
+                + "\n\t Budget Balance= " + budgetBalance;
     }
 
 }

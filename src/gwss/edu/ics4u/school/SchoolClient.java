@@ -17,10 +17,10 @@ public class SchoolClient {
     public static void main(String[] args) {
         Student kael = new Student();
         School garthWebb = new School();
-        kael.setAverage(94);
-        kael.setOEN(169435457);
-        kael.setFirstName("Farjaad");
-        kael.setLastName("Rawasia");
+        kael.setAverage(4);
+        kael.setOEN(1694357);
+        kael.setFirstName("Kael");
+        kael.setLastName("Bosland");
         kael.setStudentId(124);
         kael.setSchool(garthWebb);
         kael.toString();
@@ -28,24 +28,87 @@ public class SchoolClient {
         Student farjaad = new Student();
 
         farjaad.setAverage(94);
-        farjaad.setOEN(1694354567);
+        farjaad.setOEN(169435667);
         farjaad.setFirstName("Farjaad");
         farjaad.setLastName("Rawasia");
         farjaad.setStudentId(123);
         farjaad.setSchool(garthWebb);
         farjaad.toString();
 
+        Student ryan = new Student();
+
+        ryan.setAverage(94);
+        ryan.setOEN(169455667);
+        ryan.setFirstName("Ryan");
+        ryan.setLastName("Mcdonald");
+        ryan.setStudentId(125);
+        ryan.setSchool(garthWebb);
+        ryan.toString();
+
+        
+        Student farzan = null;
+        
         System.out.println("---------------------------");
+        
+        //adds object to the list
+        System.out.println("Test Case #1: ");
+        System.out.println("# Students Before: " + garthWebb.numberOfStudents());
+        garthWebb.addStudent(farjaad);
+        garthWebb.addStudent(ryan);
+        System.out.println("# Students After: " + garthWebb.numberOfStudents());
+        
+        //adding duplicate object to list
+        System.out.println("Test Case #2: ");
         System.out.println("# Students Before: " + garthWebb.numberOfStudents());
         garthWebb.addStudent(farjaad);
         System.out.println("# Students After: " + garthWebb.numberOfStudents());
+        
+        //adding invalid student to list
+        System.out.println("Test Case #3: ");
         garthWebb.addStudent(kael);
         System.out.println("# Students After: " + garthWebb.numberOfStudents());
         
-       // garthWebb.removeStudent(farjaad);
-        //garthWebb.removeStudent(16832567);
-       // System.out.println("# Students After: " + garthWebb.numberOfStudents());
-         garthWebb.getStudent(kael);
+        //adding null object to list**********
+        System.out.println("Test Case #4: ");
+        garthWebb.addStudent(farzan);
+        
+        //removing object from the list
+        System.out.println("Test Case #5: ");
+        System.out.println("# Students Before: " + garthWebb.numberOfStudents());
+        garthWebb.removeStudent(farjaad);
+        System.out.println("# Students After: " + garthWebb.numberOfStudents());
+        
+        //removing object that does not exist in list
+        System.out.println("Test Case #6: ");
+        System.out.println("# Students Before: " + garthWebb.numberOfStudents());
+        garthWebb.removeStudent(farjaad); // need message
+        System.out.println("# Students After: " + garthWebb.numberOfStudents());
+        
+        //removing null object
+        System.out.println("Test Case #7: ");
+        System.out.println("# Students Before: " + garthWebb.numberOfStudents());
+        garthWebb.removeStudent(farzan); // need message
+        System.out.println("# Students After: " + garthWebb.numberOfStudents());
+        
+        //gets object from the list
+        System.out.println("Test Case #8: ");
+        System.out.println("# Students Before: " + garthWebb.numberOfStudents());
+        garthWebb.getStudent(ryan);
+        System.out.println("# Students After: " + garthWebb.numberOfStudents());
+        
+        
+        //gets object that does not exist in list
+        System.out.println("Test Case #9: ");
+        System.out.println("# Students Before: " + garthWebb.numberOfStudents());
+        garthWebb.getStudent(farjaad); // need message
+        System.out.println("# Students After: " + garthWebb.numberOfStudents());
+        
+        //gets object that does not exist in list
+        System.out.println("Test Case #10: ");
+        System.out.println("# Students Before: " + garthWebb.numberOfStudents());
+        garthWebb.getStudent(farzan); // need message
+        System.out.println("# Students After: " + garthWebb.numberOfStudents());
+        
     }
 
 }
