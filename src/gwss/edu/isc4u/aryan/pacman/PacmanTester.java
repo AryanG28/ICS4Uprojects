@@ -5,7 +5,7 @@
  */
 package gwss.edu.isc4u.aryan.pacman;
 
-import hsa.Console;;
+import hsa.Console;
 
 /**
  */
@@ -17,7 +17,7 @@ public class PacmanTester {
     public static void main(String[] args) {
 
         Console c = new Console();
-        //PacmanCharacter.setConsole( c );
+        PacmanCharacter.setConsole( c );
         
         // New Pacman
         PacmanCharacter pacman = new PacmanCharacter();

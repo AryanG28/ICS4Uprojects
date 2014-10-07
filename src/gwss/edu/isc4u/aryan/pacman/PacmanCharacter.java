@@ -5,15 +5,28 @@
  */
 package gwss.edu.isc4u.aryan.pacman;
 
+
 import hsa.Console;
+import java.awt.Color;
 
 /**
  *
  * @author Aryan
  */
 public class PacmanCharacter {
+    
+    protected static final int STEP_SIZE = 10; 
+    protected static final int WIDTH = 150; 
+    protected static final int HEIGHT = 150; 
+    protected static final int DIRECTION_LEFT = 1;
+    protected static final int DIRECTION_RIGHT = 2;
+    protected static final int DIRECTION_DOWN = 3;
+    protected static final int DIRECTION_UP = 4;
+    
+    
+    
     // CLASS VARIABLES
-    private static Console c;
+    protected static Console c;
     
     // OBJECT VARIABLES
     private boolean alive;
@@ -61,29 +74,40 @@ public class PacmanCharacter {
     }
 
     public void setyLoc( int yLoc ) {
-        this.yLoc = yLoc;
+        this.yLoc+= yLoc;
     }
     
     public void moveLeft( ) {
+        this.erase();
+        this.xLoc-= STEP_SIZE;
+        this.draw();
         
     }
-    
+ 
     public void moveRight( ) {
+        this.erase();
+        this.xLoc+= STEP_SIZE;
+        this.draw();
         
     }
     
     public void moveUp( ) {
-        
+        this.erase();
+        this.yLoc+= STEP_SIZE;
+        this.draw();
     }
     
     public void moveDown( ) {
-        
+        this.erase();
+        this.yLoc-= STEP_SIZE;
+        this.draw();
     }
     
     private void draw( ) {
         
     }
     
+       
     private void erase( ) {
         
     }
