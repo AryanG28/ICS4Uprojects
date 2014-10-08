@@ -12,17 +12,14 @@ import java.awt.Color;
  *
  * @author Aryan
  */
-public class PacmanCharacter implements Movement{
+public abstract class  PacmanCharacter implements Movement{
     
     protected static final int STEP_SIZE = 10; 
-    protected static final int WIDTH = 70; 
-    protected static final int HEIGHT = 70; 
-    protected static final int DIRECTION_LEFT = 1;
-    protected static final int DIRECTION_RIGHT = 2;
-    protected static final int DIRECTION_DOWN = 3;
-    protected static final int DIRECTION_UP = 4;
-    
-    
+    protected static final int DIRECTION_RIGHT = 1;
+    protected static final int DIRECTION_LEFT= 2;
+    protected static final int DIRECTION_UP = 3;
+    protected static final int DIRECTION_DOWN = 4;
+
     
     // CLASS VARIABLES
     protected static Console c;
@@ -31,6 +28,7 @@ public class PacmanCharacter implements Movement{
     private boolean alive;
     protected int xLoc;
     protected int yLoc;
+    protected int direction;
 
     public PacmanCharacter() {
         if( c == null ) {
@@ -46,10 +44,11 @@ public class PacmanCharacter implements Movement{
         }
     }
 
-    public PacmanCharacter( boolean alive, int xLoc, int yLoc ) {
+    public PacmanCharacter( boolean alive, int xLoc, int yLoc, int direction ) {
         this.alive = alive;
         this.xLoc = xLoc;
         this.yLoc = yLoc;
+        this.direction = direction;
     }        
     
     public boolean isIsAlive() {
@@ -101,6 +100,23 @@ public class PacmanCharacter implements Movement{
         this.yLoc-= STEP_SIZE;
         this.draw();
     }
+    public void move() {
+        switch (this.direction) {
+            case 1:
+                moveUp();
+                break;
+            case 2:
+                moveDown();
+                break;
+            case 3:
+                moveLeft();
+                break;
+            case 4:
+                moveRight();
+                break;
+        }
+    }
+    
     
     public void draw( ) {
         

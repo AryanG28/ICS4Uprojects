@@ -8,14 +8,21 @@ package gwss.edu.isc4u.aryan.pacman;
 import java.awt.Color;
 
 /**
- *
+ *    private boolean isAlive;
+    private int pacmanLives; 
+    
  * @author 1GHAHREMANZA
  */
 public class Pacman extends PacmanCharacter {
     
-    private boolean isAlive;
-    private int pacmanLives; 
     
+    protected static final int WIDTH = 70; 
+    protected static final int HEIGHT = 70; 
+
+    public Pacman() {
+        draw( );
+    }
+
     
     
     public void draw( ) {

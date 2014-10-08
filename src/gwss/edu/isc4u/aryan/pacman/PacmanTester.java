@@ -6,6 +6,7 @@
 package gwss.edu.isc4u.aryan.pacman;
 
 import hsa.Console;
+import java.awt.Color;
 
 /**
  */
@@ -21,9 +22,24 @@ public class PacmanTester  {
         
         // New Pacman
         Pacman pacman = new Pacman();
-        pacman.draw();
+        Ghost ghost1 = new Ghost( true, 100, 200, PacmanCharacter.DIRECTION_DOWN, Color.CYAN);
+        Ghost ghost2 = new Ghost( true, 300, 200, PacmanCharacter.DIRECTION_RIGHT,Color.MAGENTA );
+        Ghost ghost3 = new Ghost( true, 400, 200, PacmanCharacter.DIRECTION_LEFT,Color.PINK );
+        Ghost ghost4 = new Ghost( true, 100, 400, PacmanCharacter.DIRECTION_UP,Color.RED );
+
+        for( int i = 0; i< 100; i++) {
+            ghost1.move();
+            
+        try {
+            Thread.sleep(100);
+        } catch (Exception e) {
+            
+        }
+        }
+        
         //delay();
         
+               
         
         
     }
