@@ -12,11 +12,11 @@ import java.awt.Color;
  *
  * @author Aryan
  */
-public class PacmanCharacter {
+public class PacmanCharacter implements Movement{
     
     protected static final int STEP_SIZE = 10; 
-    protected static final int WIDTH = 150; 
-    protected static final int HEIGHT = 150; 
+    protected static final int WIDTH = 70; 
+    protected static final int HEIGHT = 70; 
     protected static final int DIRECTION_LEFT = 1;
     protected static final int DIRECTION_RIGHT = 2;
     protected static final int DIRECTION_DOWN = 3;
@@ -29,8 +29,8 @@ public class PacmanCharacter {
     
     // OBJECT VARIABLES
     private boolean alive;
-    private int xLoc;
-    private int yLoc;
+    protected int xLoc;
+    protected int yLoc;
 
     public PacmanCharacter() {
         if( c == null ) {
@@ -102,12 +102,12 @@ public class PacmanCharacter {
         this.draw();
     }
     
-    private void draw( ) {
+    public void draw( ) {
         
     }
     
        
-    private void erase( ) {
+    public void erase( ) {
         
     }
    

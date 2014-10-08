@@ -11,16 +11,22 @@ import java.awt.Color;
  *
  * @author 1GHAHREMANZA
  */
-public class Pacman {
+public class Pacman extends PacmanCharacter {
     
-    private void draw( ) {
-     //   c.setColor(Color.yellow);
-      //  c.fillArc(xLoc,yLoc, WIDTH, HEIGHT ,30,300);
+    private boolean isAlive;
+    private int pacmanLives; 
+    
+    
+    
+    public void draw( ) {
+       c.setColor(Color.yellow);
+       c.fillArc(xLoc,yLoc, WIDTH, HEIGHT ,30,300);
     }
     
        
-    private void erase( ) {
-        
+    public void erase( ) {
+       c.setColor(Color.white);
+       c.fillArc(xLoc,yLoc, WIDTH, HEIGHT ,30,300); 
     }
 
 }

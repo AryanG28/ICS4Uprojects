@@ -9,7 +9,7 @@ import hsa.Console;
 
 /**
  */
-public class PacmanTester {
+public class PacmanTester  {
 
     /**
      * @param args the command line arguments
@@ -20,7 +20,10 @@ public class PacmanTester {
         PacmanCharacter.setConsole( c );
         
         // New Pacman
-        PacmanCharacter pacman = new PacmanCharacter();
+        Pacman pacman = new Pacman();
+        pacman.draw();
+        //delay();
+        
         
         
     }

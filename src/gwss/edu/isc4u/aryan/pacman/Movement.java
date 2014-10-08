@@ -5,10 +5,20 @@
  */
 package gwss.edu.isc4u.aryan.pacman;
 
+import static gwss.edu.isc4u.aryan.pacman.PacmanCharacter.STEP_SIZE;
+
 /**
  *
  * @author 1GHAHREMANZA
  */
-public class Movement {
+public interface Movement {
+    
+    void moveLeft( );
+ 
+    void moveRight();
+    
+    void moveUp( );
+    
+    void moveDown( ); 
     
 }
