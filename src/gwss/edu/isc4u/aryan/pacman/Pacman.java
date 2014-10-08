@@ -14,8 +14,8 @@ import java.awt.Color;
 public class Pacman {
     
     private void draw( ) {
-        c.setColor(Color.yellow);
-        c.fillArc(xLoc,yLoc, WIDTH, HEIGHT ,30,300);
+     //   c.setColor(Color.yellow);
+      //  c.fillArc(xLoc,yLoc, WIDTH, HEIGHT ,30,300);
     }
     
        

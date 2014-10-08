@@ -5,7 +5,6 @@
  */
 package gwss.edu.isc4u.aryan.pacman;
 
-
 import hsa.Console;
 import java.awt.Color;
 
