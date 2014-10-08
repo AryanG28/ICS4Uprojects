@@ -29,6 +29,9 @@ public class PacmanTester  {
 
         for( int i = 0; i< 100; i++) {
             ghost1.move();
+            ghost2.move();
+            ghost3.move();
+            ghost4.move();
             
         try {
             Thread.sleep(100);
