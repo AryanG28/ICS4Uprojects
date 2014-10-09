@@ -35,13 +35,12 @@ public class PacmanTester  {
             pacman.moveRandomly();
             
         try {
-            Thread.sleep(10);
+            Thread.sleep(100);
         } catch (Exception e) {
             
         }
         }
-       
-        //delay();
+
         
                
         
