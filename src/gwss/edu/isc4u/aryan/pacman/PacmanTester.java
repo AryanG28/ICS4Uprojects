@@ -22,30 +22,31 @@ public class PacmanTester  {
         
         // New Pacman
         Pacman pacman = new Pacman();
-        Ghost ghost1 = new Ghost( true, 100, 200, PacmanCharacter.DIRECTION_DOWN, Color.CYAN);
-        Ghost ghost2 = new Ghost( true, 300, 200, PacmanCharacter.DIRECTION_RIGHT,Color.MAGENTA );
-        Ghost ghost3 = new Ghost( true, 400, 200, PacmanCharacter.DIRECTION_LEFT,Color.PINK );
-        Ghost ghost4 = new Ghost( true, 100, 400, PacmanCharacter.DIRECTION_UP,Color.RED );
+        Ghost ghost1 = new Ghost( true, 100, 200,  Color.CYAN);
+        Ghost ghost2 = new Ghost( true, 300, 200, Color.MAGENTA );
+        Ghost ghost3 = new Ghost( true, 400, 200,Color.PINK );
+        Ghost ghost4 = new Ghost( true, c.getWidth() - 55, c.getHeight() - 55, Color.RED );
 
-        for( int i = 0; i< 100; i++) {
-            ghost1.move();
-            ghost2.move();
-            ghost3.move();
-            ghost4.move();
+        for( int i = 0; i< 1000; i++) {
+            ghost1.moveRandomly();
+            ghost2.moveRandomly();
+            ghost3.moveRandomly();
+            ghost4.moveRandomly();
+            pacman.moveRandomly();
             
         try {
-            Thread.sleep(100);
+            Thread.sleep(10);
         } catch (Exception e) {
             
         }
         }
-        
+       
         //delay();
         
                
         
-        
     }
+    
 
 }
     

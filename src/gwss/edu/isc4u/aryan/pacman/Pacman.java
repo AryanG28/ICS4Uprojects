@@ -18,12 +18,27 @@ public class Pacman extends PacmanCharacter {
     
     protected static final int WIDTH = 70; 
     protected static final int HEIGHT = 70; 
+    
+    public int numberOfLives;
 
     public Pacman() {
-        draw( );
+        this.draw( );
+    }
+    
+    public Pacman(boolean alive, int xLoc, int yLoc, int direction) {
+        super(alive, xLoc, yLoc);
+        this.direction = direction;
+        this.draw();
     }
 
-    
+    public int getNumberOfLives() {
+        return numberOfLives;
+    }
+
+    public void setNumberOfLives(int numberOfLives) {
+        this.numberOfLives = numberOfLives;
+    }
+
     
     public void draw( ) {
        c.setColor(Color.yellow);

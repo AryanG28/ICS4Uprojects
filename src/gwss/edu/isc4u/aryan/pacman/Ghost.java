@@ -19,13 +19,32 @@ public class Ghost extends PacmanCharacter {
 
     // 
     public boolean eatable;
-    public boolean isAlive;
     public Color color;
 
-    public Ghost(boolean alive, int xLoc, int yLoc, int direction, Color color) {
-        super(alive, xLoc, yLoc, direction);
+    public Ghost(Color color) {
+        this.color = color;
+    }
+
+    public Ghost(boolean alive, int xLoc, int yLoc, Color color) {
+        super(alive, xLoc, yLoc);
         this.color = color;
         this.draw();
+    }
+
+    public boolean isEatable() {
+        return eatable;
+    }
+
+    public void setEatable(boolean eatable) {
+        this.eatable = eatable;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
    
     public void draw( ) {
@@ -37,6 +56,10 @@ public class Ghost extends PacmanCharacter {
     public void erase( ) {
        c.setColor(Color.white);
        c.fillArc(xLoc,yLoc, WIDTH, HEIGHT ,0,180);
+    }
+    
+    public void eaten () {
+        this.erase();
     }
 
 }
