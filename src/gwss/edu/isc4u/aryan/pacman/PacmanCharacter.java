@@ -15,10 +15,10 @@ import java.awt.Color;
 public abstract class PacmanCharacter implements Movement {
 
     protected static final int STEP_SIZE = 10;
-    protected static final int DIRECTION_RIGHT = 1;
-    protected static final int DIRECTION_LEFT = 2;
-    protected static final int DIRECTION_UP = 3;
-    protected static final int DIRECTION_DOWN = 4;
+    protected static final int DIRECTION_RIGHT = 0;
+    protected static final int DIRECTION_LEFT = 1;
+    protected static final int DIRECTION_UP = 2;
+    protected static final int DIRECTION_DOWN = 3;
 
     // CLASS VARIABLES  
     protected static Console c;
@@ -26,13 +26,12 @@ public abstract class PacmanCharacter implements Movement {
     protected static int maxY;
     protected static int minX;
     protected static int minY;
-    
+
     // OBJECT VARIABLES
-    private boolean alive;
+    protected boolean isAlive;
     protected int xLoc;
     protected int yLoc;
     protected int direction;
-
 
     public PacmanCharacter() {
         if (c == null) {
@@ -48,8 +47,8 @@ public abstract class PacmanCharacter implements Movement {
         }
     }
 
-    public PacmanCharacter(boolean alive, int xLoc, int yLoc) {
-        this.alive = alive;
+    public PacmanCharacter(boolean isAlive, int xLoc, int yLoc) {
+        this.isAlive = isAlive;
         this.xLoc = xLoc;
         this.yLoc = yLoc;
     }
@@ -63,15 +62,15 @@ public abstract class PacmanCharacter implements Movement {
             System.out.println("Invalid direction");
         } else {
             this.direction = direction;
-        }       
+        }
     }
 
     public boolean isAlive() {
-        return alive;
+        return isAlive;
     }
 
     public void setIsAlive(boolean isAlive) {
-        this.alive = isAlive;
+        this.isAlive = isAlive;
     }
 
     public int getxLoc() {
@@ -105,6 +104,7 @@ public abstract class PacmanCharacter implements Movement {
 
     public void moveLeft() {
         this.erase();
+        this.direction = DIRECTION_LEFT;
         this.xLoc -= STEP_SIZE;
         this.draw();
 
@@ -112,6 +112,7 @@ public abstract class PacmanCharacter implements Movement {
 
     public void moveRight() {
         this.erase();
+        this.direction = DIRECTION_RIGHT;
         this.xLoc += STEP_SIZE;
         this.draw();
 
@@ -119,12 +120,14 @@ public abstract class PacmanCharacter implements Movement {
 
     public void moveUp() {
         this.erase();
+        this.direction = DIRECTION_UP;
         this.yLoc -= STEP_SIZE;
         this.draw();
     }
 
     public void moveDown() {
         this.erase();
+        this.direction = DIRECTION_DOWN;
         this.yLoc += STEP_SIZE;
         this.draw();
     }
@@ -158,14 +161,13 @@ public abstract class PacmanCharacter implements Movement {
 
     public void moveRandomly() {
         this.direction = (int) (Math.random() * 4) + 1;
-        System.out.print(this.direction);
         move();
     }
 
     public abstract void draw();
-    public abstract void erase(); 
-
-    
+    public abstract void erase();
+    public abstract void kill();
+    public abstract void respawn();
 
     /**
      * The parent class, PacmanCharacter, must have reference to the HSA
