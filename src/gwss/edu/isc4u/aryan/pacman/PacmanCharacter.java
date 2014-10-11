@@ -14,7 +14,6 @@ import java.awt.Color;
  */
 public abstract class PacmanCharacter implements Movement {
 
-    protected static final int STEP_SIZE = 10;
     protected static final int DIRECTION_RIGHT = 0;
     protected static final int DIRECTION_LEFT = 1;
     protected static final int DIRECTION_UP = 2;
@@ -32,6 +31,7 @@ public abstract class PacmanCharacter implements Movement {
     protected int xLoc;
     protected int yLoc;
     protected int direction;
+    protected int stepSize = 10;
 
     public PacmanCharacter() {
         if (c == null) {
@@ -58,7 +58,7 @@ public abstract class PacmanCharacter implements Movement {
     }
 
     public void setDirection(int direction) {
-        if (direction < 1 || direction > 4) {
+        if (direction < 0 || direction > 3) {
             System.out.println("Invalid direction");
         } else {
             this.direction = direction;
@@ -103,70 +103,73 @@ public abstract class PacmanCharacter implements Movement {
     }
 
     public void moveLeft() {
-        this.erase();
-        this.direction = DIRECTION_LEFT;
-        this.xLoc -= STEP_SIZE;
-        this.draw();
+        if (minX < xLoc) {
+            this.erase();
+            this.direction = DIRECTION_LEFT;
+            this.xLoc -= stepSize;
+            this.draw();
+        }
 
     }
 
     public void moveRight() {
-        this.erase();
-        this.direction = DIRECTION_RIGHT;
-        this.xLoc += STEP_SIZE;
-        this.draw();
+        if (maxX > xLoc) {
+            this.erase();
+            this.direction = DIRECTION_RIGHT;
+            this.xLoc += stepSize;
+            this.draw();
+        }
 
     }
 
     public void moveUp() {
-        this.erase();
-        this.direction = DIRECTION_UP;
-        this.yLoc -= STEP_SIZE;
-        this.draw();
+        if (minY < yLoc) {
+            this.erase();
+            this.direction = DIRECTION_UP;
+            this.yLoc -= stepSize;
+            this.draw();
+        }
     }
 
     public void moveDown() {
-        this.erase();
-        this.direction = DIRECTION_DOWN;
-        this.yLoc += STEP_SIZE;
-        this.draw();
+        if (maxY > yLoc) {
+            this.erase();
+            this.direction = DIRECTION_DOWN;
+            this.yLoc += stepSize;
+            this.draw();
+        }
     }
 
     public void move() {
         switch (this.direction) {
             case DIRECTION_RIGHT:
-                if (maxX > xLoc) {
-                    moveRight();
-                }
+                moveRight();
                 break;
             case DIRECTION_LEFT:
-                if (minX < xLoc) {
-                    moveLeft();
-                }
+                moveLeft();
 
                 break;
             case DIRECTION_UP:
-                if (minY < yLoc) {
-                    moveUp();
-                }
+                moveUp();
                 break;
             case DIRECTION_DOWN:
-                if (maxY > yLoc) {
-                    moveDown();
-                    break;
-                }
+                moveDown();
+                break;
         }
 
     }
 
     public void moveRandomly() {
-        this.direction = (int) (Math.random() * 4) + 1;
+        this.direction = (int) (Math.random() * 4);
         move();
     }
 
     public abstract void draw();
+
     public abstract void erase();
+
     public abstract void kill();
+
     public abstract void respawn();
 
     /**

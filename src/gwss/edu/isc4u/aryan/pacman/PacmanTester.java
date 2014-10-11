@@ -32,10 +32,10 @@ public class PacmanTester {
             Thread.sleep(100);
         }
         System.out.println("Current Y Location : " + pacman.yLoc);
-        System.out.println("________________________________________");
+        System.out.println("_____________________________________");
 
         //Testing pacman moving right
-        System.out.println("Test Case#3: Pacman moving right");
+        System.out.println("Test Case#2: Pacman moving right");
         Thread.sleep(1000);
         System.out.println("Previous X Location: " + pacman.xLoc);
         for (int i = 0; i < 10; i++) {
@@ -43,10 +43,10 @@ public class PacmanTester {
             Thread.sleep(100);
         }
         System.out.println("Previous X Location: " + pacman.xLoc);
-        System.out.println("________________________________________");
+        System.out.println("_____________________________________");
 
         //Testing pacman moving left
-        System.out.println("Test Case#2: Pacman moving left");
+        System.out.println("Test Case#3: Pacman moving left");
         Thread.sleep(1000);
         System.out.println("Previous X Location: " + pacman.xLoc);
         for (int i = 0; i < 10; i++) {
@@ -54,7 +54,7 @@ public class PacmanTester {
             Thread.sleep(100);
         }
         System.out.println("Previous X Location: " + pacman.xLoc);
-        System.out.println("________________________________________");
+        System.out.println("_____________________________________");
 
         //Testing pacman moving down
         System.out.println("Test Case#4: Pacman moving down");
@@ -66,11 +66,14 @@ public class PacmanTester {
         }
         System.out.println("Current Y Location : " + pacman.yLoc);
         Thread.sleep(1000);
-        System.out.println("________________________________________");
+        System.out.println("____________________________________");
 
         //Testing to see if pacman can be erased
         System.out.println("Test Case#5: Pacman being erased");
+        Thread.sleep(1000);
         pacman.erase();
+        Thread.sleep(1000);
+        System.out.println("____________________________________");
 
         //Creates 4 valid Ghosts
         Ghost ghost1 = new Ghost(true, 100, 200, Color.CYAN);
@@ -82,146 +85,200 @@ public class PacmanTester {
         System.out.println("Test Case#6: Ghost moving down");
         Thread.sleep(1000);
         System.out.println("Previous Y Location: " + ghost1.yLoc);
-         for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             ghost1.moveDown();
             Thread.sleep(100);
         }
         System.out.println("Current Y Location: " + ghost1.yLoc);
-        System.out.println("________________________________________");
-        
+        Thread.sleep(1000);
+        System.out.println("_____________________________________");
+
         //Testing ghost moving right
-        System.out.println("Test Case#6: Ghost moving right");
+        System.out.println("Test Case#7: Ghost moving right");
         Thread.sleep(1000);
         System.out.println("Previous X Location: " + ghost2.xLoc);
-         for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             ghost2.moveRight();
             Thread.sleep(100);
         }
         System.out.println("Current X Location: " + ghost2.xLoc);
-        System.out.println("________________________________________");
-        
+        Thread.sleep(1000);
+        System.out.println("_____________________________________");
+
         //Testing ghost moving up
-        System.out.println("Test Case#7: Ghost moving up");
+        System.out.println("Test Case#8: Ghost moving up");
         Thread.sleep(1000);
         System.out.println("Previous Y Location: " + ghost3.yLoc);
-         for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             ghost3.moveUp();
             Thread.sleep(100);
         }
         System.out.println("Current Y Location: " + ghost3.yLoc);
-        System.out.println("________________________________________");
-        
+        Thread.sleep(1000);
+        System.out.println("_____________________________________");
+
         //Testing ghost moving left
-        System.out.println("Test Case#8: Ghost moving left");
+        System.out.println("Test Case#9: Ghost moving left");
         Thread.sleep(1000);
         System.out.println("Previous X Location: " + ghost4.xLoc);
-         for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             ghost4.moveLeft();
             Thread.sleep(100);
         }
         System.out.println("Current X Location: " + ghost4.xLoc);
-        System.out.println("________________________________________");
-        
-        //Testing move randomly and making sure it doesn't exit the console
-        System.out.println("Test Case#7: Ghost moving right");
         Thread.sleep(1000);
-        System.out.println("Previous Y Location: " + ghost2.xLoc);
-         for (int i = 0; i < 10; i++) {
-            ghost2.moveRight();
+        System.out.println("_____________________________________");
+
+        //Testing move randomly and making sure it doesn't exit the console
+        System.out.println("Test Case#10: Ghost and pacman moving randomly, pacman and ghost cannot exit the console");
+        Thread.sleep(1000);
+        for (int i = 0; i < 100; i++) {
+            ghost1.moveRandomly();
+            ghost2.moveRandomly();
+            ghost3.moveRandomly();
+            ghost4.moveRandomly();
+            pacman.moveRandomly();
             Thread.sleep(100);
         }
-        System.out.println("Current Y Location: " + ghost2.xLoc);
-        System.out.println("________________________________________");
+        Thread.sleep(1000);
+        System.out.println("_____________________________________");
 
+        System.out.println("Test Case#11: Killing pacman");
+        Thread.sleep(1000);
+        pacman.kill();
+        Thread.sleep(1000);
+        System.out.println("_____________________________________");
 
+        //Testing if ghost can be killed when not edible
+        System.out.println("Test Case#12: Killing ghost when not edible");
+        Thread.sleep(1000);
+        ghost1.kill();
+        Thread.sleep(1000);
+        System.out.println("_____________________________________");
 
-//        //Testing if a ghost can properly move left
-//        System.out.println("TEST CASE 6 - MOVING GHOST LEFT");
-//        Thread.sleep(1000);
-//        System.out.println("Previous X Location: " + ghost.xLoc);
-//        ghost.moveLeft();
-//        System.out.println("Current X Location: " + ghost.xLoc);
-//        System.out.println("________________________________________");
-//
-//        //Testing if a ghost can properly move right
-//        System.out.println("TEST CASE 7 - MOVING GHOST RIGHT");
-//        Thread.sleep(1000);
-//        System.out.println("Previous X Location: " + ghost.xLoc);
-//        ghost.moveRight();
-//        System.out.println("Current X Location: " + ghost.xLoc);
-//        System.out.println("________________________________________");
-//
-//        //Testing if a ghost can properly move up
-//        System.out.println("TEST CASE 8 - MOVING GHOST UP");
-//        Thread.sleep(1000);
-//        System.out.println("Previous Y Location: " + ghost.yLoc);
-//        ghost.moveUp();
-//        System.out.println("Current Y Location: " + ghost.yLoc);
-//        ghost.erase();
-//        System.out.println("________________________________________");
+        //Testing if ghost changes colour when edible
+        System.out.println("Test Case#13: Ghost changing colour when edible");
+        Thread.sleep(1000);
+        ghost1.setEdible(true);
+        Thread.sleep(1000);
+        System.out.println("_____________________________________");
+
+        //Testing if ghost can be killed when edible
+        System.out.println("Test Case#14: Killing ghost when edible");
+        Thread.sleep(1000);
+        ghost1.kill();
+        Thread.sleep(1000);
+        System.out.println("_____________________________________");
+
+        //Testing if pacman can be drawn when killed
+        System.out.println("Test Case#15: Checking if pacman can be drawn when killed");
+        Thread.sleep(1000);
+        pacman.draw();
+        Thread.sleep(1000);
+        System.out.println("_____________________________________");
+
+        //Testing if ghost can be drawn when killed
+        System.out.println("Test Case#16: Checking if ghost can be drawn when killed");
+        Thread.sleep(1000);
+        ghost1.draw();
+        Thread.sleep(1000);
+        System.out.println("_____________________________________");
+
+        //Testing if pacman can be respawned
+        System.out.println("Test Case#17: Checking if pacman can be respawned");
+        Thread.sleep(1000);
+        pacman.respawn();
+        Thread.sleep(1000);
+        System.out.println("_____________________________________");
+
+        //Testing if ghost can be respawned
+        System.out.println("Test Case#18: Checking if ghost can be respawned");
+        Thread.sleep(1000);
+        ghost1.respawn();
+        Thread.sleep(1000);
+        System.out.println("_____________________________________");
+
+        //Testing if ghost can be respawned when already alive
+        System.out.println("Test Case#19: Checking if ghost can be respawned when already alive");
+        Thread.sleep(1000);
+        ghost1.respawn();
+        Thread.sleep(1000);
+        System.out.println("_____________________________________");
+
+        //Testing if pacman can be respawned when already alive
+        System.out.println("Test Case#20: Checking if pacman can be respawned when already alive");
+        Thread.sleep(1000);
+        pacman.respawn();
+        Thread.sleep(1000);
+        System.out.println("_____________________________________");
+
         
-        // Testing changing ghost from edible to none edible and back to edible
-//        System.out.println("Test Case#1- Changes ghost from edible to none edible");
-//        for (int i = 0; i < 10; i++) {
-//            ghost1.moveRandomly();
-//            ghost2.moveRandomly();
-//            ghost3.moveRandomly();
-//            ghost4.moveRandomly();
-//            pacman.moveRandomly();
-//
-//            try {
-//                Thread.sleep(100);
-//            } catch (Exception e) {
-//
-//            }
-//
-//        }
-//        ghost1.setEdible(true);
-//        ghost2.setEdible(true);
-//        ghost3.setEdible(true);
-//        ghost4.setEdible(true);
-//
-//        for (int i = 0; i < 10; i++) {
-//            ghost1.moveRandomly();
-//            ghost2.moveRandomly();
-//            ghost3.moveRandomly();
-//            ghost4.moveRandomly();
-//            pacman.moveRandomly();
-//
-//            Thread.sleep(100);
-//
-//        }
-//        ghost1.setEdible(false);
-//        ghost2.setEdible(false);
-//        ghost3.setEdible(false);
-//        ghost4.setEdible(false);
-//
-//        for (int i = 0; i < 10; i++) {
-//            ghost1.moveRandomly();
-//            ghost2.moveRandomly();
-//            ghost3.moveRandomly();
-//            ghost4.moveRandomly();
-//            pacman.moveRandomly();
-//
-//            Thread.sleep(100);
-//
-//        }
-//        for (int i = 0; i < 4; i++) {
-//            ghost1.moveRandomly();
-//            ghost2.moveRandomly();
-//            ghost3.moveRandomly();
-//            ghost4.moveRandomly();
-//            pacman.moveRandomly();
-//
-//            try {
-//                Thread.sleep(100);
-//            } catch (Exception e) {
-//
-//            }
-//
-//        }
-        //Test case 2:        
+        //Testing speed increase
+        System.out.println("Test Case#21: Testing pacman speed increase");
+        Thread.sleep(1000);
+        for (int i = 0; i < 10; i++) {
+            pacman.moveRight();
+            Thread.sleep(100);
+        }
+        Thread.sleep(1000);
+        pacman.increaseSpeed();
+        for (int i = 0; i < 5; i++) {
+            pacman.moveLeft();
+            Thread.sleep(100);
+        }
+        Thread.sleep(1000);
+        System.out.println("_____________________________________");
+        
+        //Testing speed increase when it cannot get faster
+        System.out.println("Test Case#22: Testing pacman speed increase when cannot get faster");
+        Thread.sleep(1000);
+        for (int i = 0; i < 5; i++) {
+            pacman.moveRight();
+            Thread.sleep(100);
+        }
+        Thread.sleep(1000);
+        pacman.increaseSpeed();
+        for (int i = 0; i < 5; i++) {
+            pacman.moveLeft();
+            Thread.sleep(100);
+        }
+        
+        //Testing speed decrease
+        System.out.println("Test Case#22: Testing pacman speed decrease");
+        Thread.sleep(1000);
+        for (int i = 0; i < 5; i++) {
+            pacman.moveRight();
+            Thread.sleep(100);
+        }
+        Thread.sleep(1000);
+        pacman.decreaseSpeed();
+        for (int i = 0; i < 5; i++) {
+            pacman.moveLeft();
+            Thread.sleep(100);
+        }
+        Thread.sleep(1000);
+        System.out.println("_____________________________________");
+        
+        //Testing speed decrease when it cannot get slower
+        System.out.println("Test Case#23: Testing pacman speed decrease when it cannot get slower");
+        Thread.sleep(1000);
+        for (int i = 0; i < 5; i++) {
+            pacman.moveRight();
+            Thread.sleep(100);
+        }
+        Thread.sleep(1000);
+        pacman.decreaseSpeed();
+        for (int i = 0; i < 5; i++) {
+            pacman.moveLeft();
+            Thread.sleep(100);
+        }
+        Thread.sleep(1000);
+        System.out.println("_____________________________________");
 
+        
+        System.out.println("Test Case#24: Testing pacman and ghost move given a direction");
     }
+    
+    
 
 }

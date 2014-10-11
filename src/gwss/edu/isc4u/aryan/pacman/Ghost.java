@@ -19,7 +19,6 @@ public class Ghost extends PacmanCharacter {
     protected static final Color EDIBLE = Color.BLUE;
     protected static final int ANGLE_1 = 0;
     protected static final int ANGLE_2 = 180;
-    
 
     // 
     private boolean isEdible;
@@ -71,7 +70,8 @@ public class Ghost extends PacmanCharacter {
         if (isEdible == true) {
             System.out.println("Ghost is now edible");
             originalColor = this.color;
-            this.color = EDIBLE; 
+            this.color = EDIBLE;
+            this.draw();
         } else if (isEdible == false) {
             //sets to default colour 
             this.color = originalColor;
@@ -82,17 +82,26 @@ public class Ghost extends PacmanCharacter {
 
     public void kill() {
         if (isEdible == true) {
-           isAlive = false;
-        System.out.println("Ghost has been killed.");
+            isAlive = false;
+            erase();
+            System.out.println("Ghost has been killed.");
         } else {
-                System.out.println("Ghost is not edible cannot be killed.");
+            System.out.println("Ghost is not edible cannot be killed.");
         }
 
     }
-    
+
     public void respawn() {
-        isAlive = true;
-        System.out.println("Ghost is now alive.");
+        if (isAlive == true) {
+            System.out.println("Ghost is already alive");
+        } else {
+            System.out.println("Ghost is now alive.");
+            isAlive = true;
+            this.xLoc = c.getWidth() / 2;
+            this.yLoc = c.getWidth() / 2;
+            this.isEdible = false;
+            this.draw();
+        }
     }
 
 }

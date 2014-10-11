@@ -8,7 +8,7 @@ package gwss.edu.isc4u.aryan.pacman;
 import java.awt.Color;
 
 /**
- * 
+ *
  *
  *
  * @author 1GHAHREMANZA
@@ -25,7 +25,6 @@ public class Pacman extends PacmanCharacter {
 
     private int numberOfLives;
     private int pacmanSpeed;
-    protected boolean poweredUp;
 
     public Pacman() {
         this.isAlive = true;
@@ -44,14 +43,6 @@ public class Pacman extends PacmanCharacter {
 
     private int getNumberOfLives() {
         return numberOfLives;
-    }
-
-    public boolean isPoweredUp() {
-        return poweredUp;
-    }
-
-    public void setPoweredUp(boolean poweredUp) {
-        this.poweredUp = poweredUp;
     }
 
     public void draw() {
@@ -87,6 +78,9 @@ public class Pacman extends PacmanCharacter {
         } else {
             if (numberOfLives > 0) {
                 isAlive = true;
+                this.xLoc = 0;
+                this.yLoc = 0;
+                draw();
                 System.out.println("Pacman is now alive");
             } else {
                 System.out.println("Cannot respawn. out of lives. ");
@@ -96,22 +90,33 @@ public class Pacman extends PacmanCharacter {
     }
 
     public void kill() {
-        if (poweredUp == true) {
-            System.out.println("Pacman cannot be killed. He is powered up. ");
+        if (numberOfLives > 0) {
+            numberOfLives--;
+            System.out.print("Pacman is dead. ");
         } else {
-            if (numberOfLives > 0) {
-                numberOfLives--;
-                System.out.print("Pacman is dead ");
-            } else {
-                System.out.print("Game over! ");
-            }
-            System.out.println("Number of lives = " + numberOfLives);
-            isAlive = false;
+            System.out.print("Game over! ");
         }
+        System.out.println("Number of lives = " + numberOfLives);
+        isAlive = false;
+        erase();
     }
 
     public void increaseSpeed() {
-        pacmanSpeed = STEP_SIZE + 10;
+        if (stepSize > 29) {
+            System.out.println("Speed cannot be increased more.");
+        } else {
+            System.out.println("Speed Increased.");
+            stepSize = stepSize + 20;
+        }
+    }
+
+    public void decreaseSpeed() {
+        if (stepSize > 10) {
+            System.out.println("Speed Decreased.");
+            stepSize = stepSize - 20;
+        } else {
+            System.out.println("Speed cannot get slower.");
+        }
     }
 
 }
