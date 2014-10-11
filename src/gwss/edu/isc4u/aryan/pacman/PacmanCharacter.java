@@ -13,7 +13,7 @@ import java.awt.Color;
  * @author Aryan
  */
 public abstract class PacmanCharacter implements Movement {
-
+    //Object constants
     protected static final int DIRECTION_RIGHT = 0;
     protected static final int DIRECTION_LEFT = 1;
     protected static final int DIRECTION_UP = 2;
@@ -46,13 +46,13 @@ public abstract class PacmanCharacter implements Movement {
             System.out.println("INFO: HSA Console set.");
         }
     }
-
+    //Constructs pacman Character
     public PacmanCharacter(boolean isAlive, int xLoc, int yLoc) {
         this.isAlive = isAlive;
         this.xLoc = xLoc;
         this.yLoc = yLoc;
     }
-
+    
     public int getDirection() {
         return direction;
     }
@@ -76,7 +76,7 @@ public abstract class PacmanCharacter implements Movement {
     public int getxLoc() {
         return xLoc;
     }
-
+    //sets the x location, if it is not in the dimensions it sets it as the max
     public void setxLoc(int xLoc) {
         if (xLoc > maxX) {
             this.xLoc = maxX;
@@ -91,7 +91,7 @@ public abstract class PacmanCharacter implements Movement {
     public int getyLoc() {
         return yLoc;
     }
-
+    //sets the y location, if it is not in the dimensions it sets it as the max
     public void setyLoc(int yLoc) {
         if (yLoc > maxY) {
             this.yLoc = maxY;
@@ -101,7 +101,7 @@ public abstract class PacmanCharacter implements Movement {
             this.yLoc = yLoc;
         }
     }
-
+    //moves left until it reaches the side of the console
     public void moveLeft() {
         if (minX < xLoc) {
             this.erase();
@@ -111,7 +111,7 @@ public abstract class PacmanCharacter implements Movement {
         }
 
     }
-
+    //moves right until it reaches the side of the console
     public void moveRight() {
         if (maxX > xLoc) {
             this.erase();
@@ -121,7 +121,7 @@ public abstract class PacmanCharacter implements Movement {
         }
 
     }
-
+    //moves up until it reaches the side of the console
     public void moveUp() {
         if (minY < yLoc) {
             this.erase();
@@ -130,7 +130,7 @@ public abstract class PacmanCharacter implements Movement {
             this.draw();
         }
     }
-
+    //moves down until it reaches the side of the console
     public void moveDown() {
         if (maxY > yLoc) {
             this.erase();
@@ -139,7 +139,7 @@ public abstract class PacmanCharacter implements Movement {
             this.draw();
         }
     }
-
+    //calls the right method depending on the direction
     public void move() {
         switch (this.direction) {
             case DIRECTION_RIGHT:
@@ -158,7 +158,7 @@ public abstract class PacmanCharacter implements Movement {
 
     }
 
-    
+    //sets a random direction then calls move
     public void moveRandomly() {
         this.direction = (int) (Math.random() * 4);
         move();

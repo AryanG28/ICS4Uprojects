@@ -13,21 +13,22 @@ import java.awt.Color;
  * @author 1GHAHREMANZA
  */
 public class Ghost extends PacmanCharacter {
-
+    //object constants
     private static final int WIDTH = 50;
     private static final int HEIGHT = 110;
     private static final Color EDIBLE = Color.BLUE;
     private static final int ANGLE_1 = 0;
     private static final int ANGLE_2 = 180;
- 
+    
+    //object variables
     private boolean isEdible;
     private Color color;
     private Color originalColor;
-
+    //constructs ghost
     public Ghost(Color color) {
         this.color = color;
     }
-
+    //constructs ghost and calls super
     public Ghost(boolean alive, int xLoc, int yLoc, Color color) {
         super(alive, xLoc, yLoc);
         this.color = color;
@@ -37,7 +38,7 @@ public class Ghost extends PacmanCharacter {
     public boolean isEdible() {
         return isEdible;
     }
-
+    //sets edible and calls the method
     public void setEdible(boolean isEdible) {
         this.isEdible = isEdible;
         edible();
@@ -46,11 +47,11 @@ public class Ghost extends PacmanCharacter {
     public Color getColor() {
         return color;
     }
-
+    //sets the color
     public void setColor(Color color) {
         this.color = color;
     }
-
+    //draws the ghost
     public void draw() {
         if (isAlive == true) {
             c.setColor(this.color);
@@ -59,12 +60,13 @@ public class Ghost extends PacmanCharacter {
             System.out.println("Ghost is dead. Cannot draw. ");
         }
     }
-
+    //erases the ghost
     public void erase() {
         c.setColor(Color.white);
         c.fillArc(xLoc, yLoc, WIDTH, HEIGHT, ANGLE_1, ANGLE_2);
     }
-
+    
+    //changes colour if ghost is edible
     public void edible() {
         if (isEdible == true) {
             System.out.println("Ghost is now edible");
@@ -78,7 +80,7 @@ public class Ghost extends PacmanCharacter {
         }
 
     }
-
+    //kills the ghost
     public void kill() {
         if (isEdible == true) {
             isAlive = false;
@@ -89,7 +91,7 @@ public class Ghost extends PacmanCharacter {
         }
 
     }
-
+    //respawns the ghost(brings it back to life) 
     public void respawn() {
         if (isAlive == true) {
             System.out.println("Ghost is already alive");

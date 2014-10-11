@@ -14,7 +14,7 @@ import java.awt.Color;
  * @author 1GHAHREMANZA
  */
 public class Pacman extends PacmanCharacter {
-
+    //object constants
     private static final int WIDTH = 70;
     private static final int HEIGHT = 70;
     private static final int ORIENTATION_RIGHT = 30;
@@ -24,16 +24,17 @@ public class Pacman extends PacmanCharacter {
     private static final int ANGLE_2 = 300;
     private static final int START_CIRCLE_DEGREES = 0;
     private static final int END_CIRCLE_DEGREES = 360;
-
+    
+    //Object variables
     private int numberOfLives;
-
+    //constructor with no parameters
     public Pacman() {
         this.isAlive = true;
         this.numberOfLives = 3;
         this.draw();
         System.out.println("Number Of lives = " + numberOfLives);
     }
-
+    //constructor with 4 parameters
     public Pacman(boolean alive, int xLoc, int yLoc, int direction) {
         super(alive, xLoc, yLoc);
         this.direction = direction;
@@ -45,7 +46,7 @@ public class Pacman extends PacmanCharacter {
     private int getNumberOfLives() {
         return numberOfLives;
     }
-
+    //draws pacman according to the direction it moves
     public void draw() {
         if (isAlive == false) {
             System.out.println("Pacman is dead. Cannot draw");
@@ -67,12 +68,12 @@ public class Pacman extends PacmanCharacter {
         }
 
     }
-
+    //erases pacman
     public void erase() {
         c.setColor(Color.white);
         c.fillArc(xLoc, yLoc, WIDTH, HEIGHT, START_CIRCLE_DEGREES, END_CIRCLE_DEGREES);
     }
-
+    //respawns pacman if he has lives left
     public void respawn() {
         if (isAlive == true) {
             System.out.println("Pacman is already alive");
@@ -89,7 +90,7 @@ public class Pacman extends PacmanCharacter {
         }
 
     }
-
+    //kills pacman so number of lives go down and cannot be drawn
     public void kill() {
         if (isAlive == false) {
             System.out.println("Pacman is already dead");
@@ -105,7 +106,7 @@ public class Pacman extends PacmanCharacter {
             erase();
         }
     }
-
+    //specific method for pacman which increases step size so it moves faster
     public void increaseSpeed() {
         if (stepSize > 29) {
             System.out.println("Speed cannot be increased more.");
@@ -114,7 +115,7 @@ public class Pacman extends PacmanCharacter {
             stepSize = stepSize + 20;
         }
     }
-
+    //specific method for pacman which decreases step size so it moves slower
     public void decreaseSpeed() {
         if (stepSize > 10) {
             System.out.println("Speed Decreased.");
