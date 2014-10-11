@@ -147,7 +147,6 @@ public abstract class PacmanCharacter implements Movement {
                 break;
             case DIRECTION_LEFT:
                 moveLeft();
-
                 break;
             case DIRECTION_UP:
                 moveUp();
@@ -159,6 +158,7 @@ public abstract class PacmanCharacter implements Movement {
 
     }
 
+    
     public void moveRandomly() {
         this.direction = (int) (Math.random() * 4);
         move();

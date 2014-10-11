@@ -22,9 +22,10 @@ public class Pacman extends PacmanCharacter {
     protected static final int ORIENTATION_LEFT = 210;
     protected static final int ORIENTATION_DOWN = 300;
     protected static final int ANGLE_2 = 300;
+    protected static final int START_CIRCLE_DEGREES = 0;
+    protected static final int END_CIRCLE_DEGREES = 360;
 
     private int numberOfLives;
-    private int pacmanSpeed;
 
     public Pacman() {
         this.isAlive = true;
@@ -69,7 +70,7 @@ public class Pacman extends PacmanCharacter {
 
     public void erase() {
         c.setColor(Color.white);
-        c.fillArc(xLoc, yLoc, WIDTH, HEIGHT, 0, 360);
+        c.fillArc(xLoc, yLoc, WIDTH, HEIGHT, START_CIRCLE_DEGREES, END_CIRCLE_DEGREES);
     }
 
     public void respawn() {
@@ -90,15 +91,19 @@ public class Pacman extends PacmanCharacter {
     }
 
     public void kill() {
-        if (numberOfLives > 0) {
-            numberOfLives--;
-            System.out.print("Pacman is dead. ");
+        if (isAlive == false) {
+            System.out.println("Pacman is already dead");
         } else {
-            System.out.print("Game over! ");
+            if (numberOfLives > 0) {
+                numberOfLives--;
+                System.out.print("Pacman is dead. ");
+            } else {
+                System.out.print("Game over! ");
+            }
+            System.out.println("Number of lives = " + numberOfLives);
+            isAlive = false;
+            erase();
         }
-        System.out.println("Number of lives = " + numberOfLives);
-        isAlive = false;
-        erase();
     }
 
     public void increaseSpeed() {
@@ -117,6 +122,16 @@ public class Pacman extends PacmanCharacter {
         } else {
             System.out.println("Speed cannot get slower.");
         }
+    }
+
+    @Override
+    public String toString() {
+        return "\n\t Is alive= " + isAlive
+                + "\n\t X Location= " + xLoc
+                + "\n\t Y Location=  " + yLoc
+                + "\n\t Step size= " + stepSize
+                + "\n\t Number of lives= " + numberOfLives;
+
     }
 
 }

@@ -100,8 +100,22 @@ public class Ghost extends PacmanCharacter {
             this.xLoc = c.getWidth() / 2;
             this.yLoc = c.getWidth() / 2;
             this.isEdible = false;
+            this.color = originalColor;
             this.draw();
         }
+
+    }
+
+    @Override
+    public String toString() {
+        return    "\n\t Is alive= " + isAlive
+                + "\n\t X Location= " + xLoc
+                + "\n\t Y Location=  " + yLoc
+                + "\n\t Step size= " + stepSize
+                + "\n\t Is edible= " + isEdible 
+                + "\n\t Current color= " + color 
+                + "\n\t Original color= " + originalColor ;
+
     }
 
 }
