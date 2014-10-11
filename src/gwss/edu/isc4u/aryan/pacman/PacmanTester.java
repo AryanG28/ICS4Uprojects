@@ -334,8 +334,8 @@ public class PacmanTester {
          Thread.sleep(1000);
          System.out.println("_____________________________________");
          
-        //Testing if pacman does not move out of the consoles dimensions
-        System.out.println("Test Case#29: Checking to see if pacman does not move out of the consoles dimensions");
+        //Testing if pacman and ghost does not move out of the consoles dimensions
+        System.out.println("Test Case#29: Checking to see if ghost and pacman does not move out of the consoles dimensions");
         Thread.sleep(1000);
         ghost1.setxLoc(50);
         ghost1.setyLoc(200);
