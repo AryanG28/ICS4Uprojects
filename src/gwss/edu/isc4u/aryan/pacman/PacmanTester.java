@@ -212,7 +212,6 @@ public class PacmanTester {
         Thread.sleep(1000);
         System.out.println("_____________________________________");
 
-        
         //Testing speed increase
         System.out.println("Test Case#21: Testing pacman speed increase");
         Thread.sleep(1000);
@@ -228,7 +227,7 @@ public class PacmanTester {
         }
         Thread.sleep(1000);
         System.out.println("_____________________________________");
-        
+
         //Testing speed increase when it cannot get faster
         System.out.println("Test Case#22: Testing pacman speed increase when cannot get faster");
         Thread.sleep(1000);
@@ -242,25 +241,11 @@ public class PacmanTester {
             pacman.moveLeft();
             Thread.sleep(100);
         }
-        
-        //Testing speed decrease
-        System.out.println("Test Case#22: Testing pacman speed decrease");
-        Thread.sleep(1000);
-        for (int i = 0; i < 5; i++) {
-            pacman.moveRight();
-            Thread.sleep(100);
-        }
-        Thread.sleep(1000);
-        pacman.decreaseSpeed();
-        for (int i = 0; i < 5; i++) {
-            pacman.moveLeft();
-            Thread.sleep(100);
-        }
         Thread.sleep(1000);
         System.out.println("_____________________________________");
-        
-        //Testing speed decrease when it cannot get slower
-        System.out.println("Test Case#23: Testing pacman speed decrease when it cannot get slower");
+
+        //Testing speed decrease
+        System.out.println("Test Case#23: Testing pacman speed decrease");
         Thread.sleep(1000);
         for (int i = 0; i < 5; i++) {
             pacman.moveRight();
@@ -268,17 +253,45 @@ public class PacmanTester {
         }
         Thread.sleep(1000);
         pacman.decreaseSpeed();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             pacman.moveLeft();
             Thread.sleep(100);
         }
         Thread.sleep(1000);
         System.out.println("_____________________________________");
 
-        
-        System.out.println("Test Case#24: Testing pacman and ghost move given a direction");
+        //Testing speed decrease when it cannot get slower
+        System.out.println("Test Case#24: Testing pacman speed decrease when it cannot get slower");
+        Thread.sleep(1000);
+        for (int i = 0; i < 10; i++) {
+            pacman.moveRight();
+            Thread.sleep(100);
+        }
+        Thread.sleep(1000);
+        pacman.decreaseSpeed();
+        for (int i = 0; i < 10; i++) {
+            pacman.moveLeft();
+            Thread.sleep(100);
+        }
+        Thread.sleep(1000);
+        System.out.println("_____________________________________");
+
+        System.out.println("Test Case#25: Testing pacman and ghost move given a direction");
+        Thread.sleep(1000);
+        pacman.setDirection(0);
+        ghost1.setDirection(1);
+        ghost2.setDirection(2);
+        ghost3.setDirection(3);
+        ghost4.setDirection(2);
+        for (int i = 0; i < 10; i++) {
+            ghost1.move();
+            ghost2.move();
+            ghost3.move();
+            ghost4.move();
+            Thread.sleep(100);
+        }
+        Thread.sleep(1000);
+        System.out.println("_____________________________________");
     }
-    
-    
 
 }
