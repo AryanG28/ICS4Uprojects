@@ -14,7 +14,7 @@ import java.awt.Color;
  * @author 1GHAHREMANZA
  */
 public class Pacman extends PacmanCharacter {
-    //object constants
+    //Object constants
     private static final int WIDTH = 70;
     private static final int HEIGHT = 70;
     private static final int ORIENTATION_RIGHT = 30;
