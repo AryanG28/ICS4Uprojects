@@ -14,13 +14,12 @@ import java.awt.Color;
  */
 public class Ghost extends PacmanCharacter {
 
-    protected static final int WIDTH = 50;
-    protected static final int HEIGHT = 110;
-    protected static final Color EDIBLE = Color.BLUE;
-    protected static final int ANGLE_1 = 0;
-    protected static final int ANGLE_2 = 180;
-
-    // 
+    private static final int WIDTH = 50;
+    private static final int HEIGHT = 110;
+    private static final Color EDIBLE = Color.BLUE;
+    private static final int ANGLE_1 = 0;
+    private static final int ANGLE_2 = 180;
+ 
     private boolean isEdible;
     private Color color;
     private Color originalColor;

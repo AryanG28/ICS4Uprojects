@@ -21,10 +21,10 @@ public abstract class PacmanCharacter implements Movement {
 
     // CLASS VARIABLES  
     protected static Console c;
-    protected static int maxX;
-    protected static int maxY;
-    protected static int minX;
-    protected static int minY;
+    private static int maxX;
+    private static int maxY;
+    private static int minX;
+    private static int minY;
 
     // OBJECT VARIABLES
     protected boolean isAlive;

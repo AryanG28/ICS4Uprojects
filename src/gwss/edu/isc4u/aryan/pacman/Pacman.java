@@ -15,15 +15,15 @@ import java.awt.Color;
  */
 public class Pacman extends PacmanCharacter {
 
-    protected static final int WIDTH = 70;
-    protected static final int HEIGHT = 70;
-    protected static final int ORIENTATION_RIGHT = 30;
-    protected static final int ORIENTATION_UP = 120;
-    protected static final int ORIENTATION_LEFT = 210;
-    protected static final int ORIENTATION_DOWN = 300;
-    protected static final int ANGLE_2 = 300;
-    protected static final int START_CIRCLE_DEGREES = 0;
-    protected static final int END_CIRCLE_DEGREES = 360;
+    private static final int WIDTH = 70;
+    private static final int HEIGHT = 70;
+    private static final int ORIENTATION_RIGHT = 30;
+    private static final int ORIENTATION_UP = 120;
+    private static final int ORIENTATION_LEFT = 210;
+    private static final int ORIENTATION_DOWN = 300;
+    private static final int ANGLE_2 = 300;
+    private static final int START_CIRCLE_DEGREES = 0;
+    private static final int END_CIRCLE_DEGREES = 360;
 
     private int numberOfLives;
 
