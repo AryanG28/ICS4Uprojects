@@ -28,7 +28,6 @@ public class MasterLock extends AndroidLock {
         super(digit01, digit02, digit03);
     }
 
-
     public boolean unlock(int digit01, int digit02, int digit03) {
         if (this.open) {
             System.out.println("Lock is already open!");
@@ -42,7 +41,9 @@ public class MasterLock extends AndroidLock {
         }
 
     }
-    
 
-    
+    public void setCombo(int digit01, int digit02, int digit03) {
+        System.out.println("Cannot set combo for this lock");
+    }
+
 }
