@@ -186,4 +186,9 @@ public abstract class PacmanCharacter implements Movement {
         PacmanCharacter.minY = 0;
     }
 
+    @Override
+    public String toString() {
+        return "PacmanCharacter{" + "isAlive=" + isAlive + ", xLoc=" + xLoc + ", yLoc=" + yLoc + ", direction=" + direction + ", stepSize=" + stepSize + '}';
+    }
+
 }

@@ -29,7 +29,7 @@ public class PacmanTester {
         Ghost ghost2 = new Ghost(true, 400, 200, Color.PINK);
         Ghost ghost3 = new Ghost(true, 300, 200, Color.MAGENTA);
         Ghost ghost4 = new Ghost(true, c.getWidth() - 55, c.getHeight() - 55, Color.RED);
-
+/*
         //Testing pacman moving down
         System.out.println("Test Case#1: Pacman moving down");
         Thread.sleep(1000);
@@ -376,7 +376,7 @@ public class PacmanTester {
         pacman.kill();
         Thread.sleep(1000);
         System.out.println("_____________________________________");
-
+*/
         //Testing toString method for pacman
         System.out.println("Test Case#32: Checking toString method for pacman ");
         Thread.sleep(1000);
