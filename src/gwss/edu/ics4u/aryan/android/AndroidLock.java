@@ -146,8 +146,12 @@ public class AndroidLock {
      *      - nobody should see the combo; except when the lock is created.
      */
     private String getCombo() {
-        // TODO
-        return this.digit01 + "-" + this.digit02 + "-" + this.digit03;
+        if (this.digit01Revealed && this.digit02Revealed && this.digit03Revealed) {
+            return this.digit01 + "-" + this.digit02 + "-" + this.digit03;
+        } else {
+            System.out.println("Cannot get combo, combo is not created yet!");
+            return null;
+        }
     }
 
     public boolean isOpen() {
@@ -158,7 +162,7 @@ public class AndroidLock {
      * Lock
      */
     public boolean lock() {
-        this.open = false; 
+        this.open = false;
         return true;
     }
 
