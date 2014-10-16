@@ -12,24 +12,25 @@ public class AndroidLock {
 
     // CLASS CONSTANTS
     public static final String LOCK_MANUFACTURER = "ANDROID";
-    public static final int MIN_COMBO_VALUE = 0;
-    public static final int MAX_COMBO_VALUE = 9;
-    public static final int NUMBER_OF_DIGITS = 3;
+    public final int MIN_COMBO_VALUE = 0;
+    public final int MAX_COMBO_VALUE = 9;
+    public final int NUMBER_OF_DIGITS = 3;
 
-    // CLASS VARIABLES
-    private static int numberOfLocksCreated;
+// CLASS VARIABLES
+    protected static int numberOfLocksCreated;
 
     // OBJECT VARIABLE
     private boolean configurableCombo;
-    private boolean open;
+    protected boolean open;
     private boolean digit01Revealed;
     private boolean digit02Revealed;
     private boolean digit03Revealed;
     private int serialNumber;
     private int invalidAttempts;
-    private int digit01;
-    private int digit02;
-    private int digit03;
+    protected int digit01;
+    protected int digit02;
+    protected int digit03;
+    protected int maxCombo;
 
     /*
      * Android Lock
@@ -64,7 +65,6 @@ public class AndroidLock {
         this.digit02Revealed = false;
         this.digit03Revealed = false;
         this.setCombo(digit01, digit02, digit03);
-        System.out.println("\tYour Combo: " + this.getCombo() + " | SN: " + this.serialNumber);
     }
 
     public int getSerialNumber() {
@@ -162,6 +162,7 @@ public class AndroidLock {
      */
     public boolean lock() {
         this.open = false;
+        System.out.println("Lock has been locked!");
         return true;
     }
 
@@ -182,6 +183,7 @@ public class AndroidLock {
             invalidAttempts++;
             return false;
         } else {
+            System.out.println("Lock has been unlocked!");
             this.open = true;
             return true;
         }
@@ -189,7 +191,7 @@ public class AndroidLock {
 
     @Override
     public String toString() {
-        return "AndroidLock{" + "serialNumber=" + serialNumber + '}';
+        return LOCK_MANUFACTURER + " lock " + "\n\tserialNumber= " + serialNumber + '}';
     }
 
     /**
