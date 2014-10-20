@@ -28,6 +28,10 @@ public class DubdlyLock extends MasterLock {
         super(digit01, digit02, digit03);
         this.maxCombo = MAX_COMBO_VALUE;
     }
+    
+    public void setCombo(int digit01, int digit02, int digit03) {
+        System.out.println("Cannot set combo for this lock");
+    }
        
 
     
