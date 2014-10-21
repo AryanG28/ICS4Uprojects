@@ -28,14 +28,27 @@ public class Die extends JPanel {
 
 //object Variables
     private Color colour;
+    private Color dotColour;
     private int sizeFactor;
     private int topLeftX;
     private int topLeftY;
     private int value;
-    private Color dotColour;
     private int circleDiameter;
     private int pixel;
 
+    public Die() {
+    }
+
+    public Die(Color colour, Color dotColour, int sizeFactor, int value) {
+        this.colour = colour;
+        this.dotColour = dotColour;
+        this.sizeFactor = sizeFactor * SIZE_FACTOR_CONSTANT;
+        this.value = value;
+    }
+
+
+
+    
     public void setValue(int value) {
         if (value >= MIN_VALUE && value <= MAX_VALUE) {
             this.value = value;
@@ -105,14 +118,6 @@ public class Die extends JPanel {
         this.dotColour = dotColour;
     }
 
-    public int getCircleDiameter() {
-        return circleDiameter;
-    }
-
-    public void setCircleDiameter(int circleDiameter) {
-        this.circleDiameter = circleDiameter;
-    }
-
     public int getPixel() {
         return pixel;
     }
@@ -120,6 +125,7 @@ public class Die extends JPanel {
     public void setPixel(int pixel) {
         this.pixel = pixel;
     }
+    
 
     @Override
     public void paintComponent(Graphics g) {
@@ -129,37 +135,37 @@ public class Die extends JPanel {
 
     private void drawDie(Graphics g) {
         g.setColor(this.getColour());//BOX
-        g.fillRect(this.topLeftX, this.topLeftY, this.sizeFactor * SIZE_FACTOR_CONSTANT, this.sizeFactor * SIZE_FACTOR_CONSTANT);
+        g.fillRect(this.topLeftX, this.topLeftY, this.sizeFactor, this.sizeFactor );
 
-//        drawValue(g);
+        drawDot(g);
     }
 
-//    private void dot(Graphics g, int row, int col) {
-//        this.pixel = SIZE_FACTOR_CONSTANT / 10 * this.sizeFactor;
-//        this.circleDiameter = 2 * pixel;
-//        g.setColor(this.dotColour);
-//        int x = this.topLeftX + (row * 3 * this.pixel) - 2 * this.pixel;
-//        int y = this.topLeftY + (col * 3 * this.pixel) - 2 * this.pixel;
-//        g.fillOval(x, y, this.circleDiameter, this.circleDiameter);
-//    }
+    private void dot(Graphics g, int row, int col) {
+        this.pixel = this.sizeFactor / 10;
+        this.circleDiameter = 2 * pixel;
+        g.setColor(this.dotColour);
+        int x = this.topLeftX + (row * 3 * this.pixel) - 2 * this.pixel;
+        int y = this.topLeftY + (col * 3 * this.pixel) - 2 * this.pixel;
+        g.fillOval(x, y, this.circleDiameter, this.circleDiameter);
+    }
 
-//    private void drawValue(Graphics g) {
-//        if (this.getValue() != 1) { // 2 3 4 5 6
-//            dot(g, 1, 1); //top Left
-//            dot(g, 3, 3); // bottom right
-//        }
-//        if (this.getValue() % 2 == 1) {//odd number // 1 3 5
-//            dot(g, 2, 2); // middle
-//        }
-//        if (this.getValue() > 3) { // 4 5 6
-//            dot(g, 1, 3);//top right
-//            dot(g, 3, 1);//bottom left
-//        }
-//        if (this.getValue() == 6) { // 6
-//            dot(g, 2, 1);//middle left
-//            dot(g, 2, 3);//middle right
-//        }
-//
-//    }
+    private void drawDot(Graphics g) {
+        if (this.getValue() != 1) { // 2 3 4 5 6
+            dot(g, 1, 1); //top Left
+            dot(g, 3, 3); // bottom right
+        }
+        if (this.getValue() % 2 == 1) {//odd number // 1 3 5
+            dot(g, 2, 2); // middle
+        }
+        if (this.getValue() > 3) { // 4 5 6
+            dot(g, 1, 3);//top right
+            dot(g, 3, 1);//bottom left
+        }
+        if (this.getValue() == 6) { // 6
+            dot(g, 1, 2);//middle left
+            dot(g, 3, 2);//middle right
+        }
+
+    }
 
 }
