@@ -7,10 +7,9 @@ package gwss.edu.ics4u.aryan.dice;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -44,7 +43,7 @@ public class DieGame extends JFrame implements ActionListener {
         die2 = new Die(Color.ORANGE, Color.WHITE, 1, 3);
         roll = new JButton("ROLL");
         
-        panel1 = new JPanel();
+        panel1 = new JPanel(new FlowLayout(FlowLayout.LEFT));
         // MESSAGE
         numberOfRollsLabel = new JLabel("Number of Games = 0");
         numberOfWinsLabel = new JLabel("Number of Wins = 0");
@@ -108,12 +107,29 @@ public class DieGame extends JFrame implements ActionListener {
 
     }
 
+    /*
+    numberOfWins
+    numberOfLoses
+    */
+    public void diceRoll() {
+        if (die1.getValue() + die2.getValue() == 7) {
+            actionLabel.setText("You lose, you rolled a 7!");
+            numberOfLoses++;
+        } else if (die1.getValue() == die2.getValue()) {                       
+            actionLabel.setText("You win, you rolled doubles!");
+            numberOfWins++;
+        } else {
+            actionLabel.setText("It's a draw!                  ");
+        }
+        repaint();
+    }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == roll) {
             this.die1.roll();//Change die
             this.die2.roll();
+            diceRoll();
             numberOfRolls++;
             numberOfRollsLabel.setText("Number of Games = " + String.valueOf(numberOfRolls));
             numberOfWinsLabel.setText("Number of wins: "+ numberOfWins);
@@ -121,6 +137,8 @@ public class DieGame extends JFrame implements ActionListener {
         }
         // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    
 
     
     public static void main(String[] args) {
