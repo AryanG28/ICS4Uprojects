@@ -19,6 +19,7 @@ public class DieClient extends JFrame { //implements actionListener
 
     public static void main(String[] args) {
         DieGame dieGame = new DieGame();
+        dieGame.setResizable(false);
         dieGame.setVisible(true);
         dieGame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }

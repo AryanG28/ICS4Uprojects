@@ -6,6 +6,7 @@
 package gwss.edu.ics4u.aryan.dice;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 
@@ -45,8 +46,9 @@ public class Die extends JPanel {
         this.dotColour = dotColour;
         this.sizeFactor = sizeFactor * SIZE_FACTOR_CONSTANT;
         this.value = value;
-        
-        this.setSize(this.sizeFactor, this.sizeFactor);
+        Dimension d = new Dimension( this.sizeFactor, this.sizeFactor );
+        this.setPreferredSize(d);
+        this.setSize(d);
         
     }
 
