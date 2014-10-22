@@ -43,16 +43,19 @@ public class DieGame extends JFrame implements ActionListener {
         die1 = new Die(Color.CYAN, Color.WHITE, 1, 5);
         die2 = new Die(Color.ORANGE, Color.WHITE, 1, 3);
         roll = new JButton("ROLL");
+        
         panel1 = new JPanel();
         // MESSAGE
         numberOfRollsLabel = new JLabel("Number of Games = 0");
         numberOfWinsLabel = new JLabel("Number of Wins = 0");
         numberOfLosesLabel = new JLabel("Number of Loses = 0");
+        actionLabel = new JLabel("");
         panel1.setSize( 200, 100);
         panel1.setPreferredSize( new Dimension(200, 100 ) );
         panel1.add(numberOfRollsLabel);
         panel1.add(numberOfWinsLabel);
         panel1.add(numberOfLosesLabel);
+        panel1.add(actionLabel);
         
         
         this.setLayout( new GridBagLayout() );
