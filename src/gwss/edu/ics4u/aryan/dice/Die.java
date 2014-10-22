@@ -25,6 +25,7 @@ public class Die extends JPanel {
     public static final Color INITIAL_COLOUR = Color.CYAN;
     public static final int MAX_X = JPanel.WIDTH;
     public static final int MAX_Y = JPanel.HEIGHT;
+    private static final int CIRCLE_DIAMETER = 20;
 
 //object Variables
     private Color colour;
@@ -33,7 +34,7 @@ public class Die extends JPanel {
     private int topLeftX;
     private int topLeftY;
     private int value;
-    private int circleDiameter;
+
     private int pixel;
 
     public Die() {
@@ -44,6 +45,9 @@ public class Die extends JPanel {
         this.dotColour = dotColour;
         this.sizeFactor = sizeFactor * SIZE_FACTOR_CONSTANT;
         this.value = value;
+        
+        this.setSize(this.sizeFactor, this.sizeFactor);
+        
     }
 
 
@@ -117,16 +121,15 @@ public class Die extends JPanel {
     public void setDotColour(Color dotColour) {
         this.dotColour = dotColour;
     }
-
-    public int getPixel() {
-        return pixel;
-    }
-
-    public void setPixel(int pixel) {
-        this.pixel = pixel;
-    }
     
+    
+    public void roll() {
+        this.value = (int) (Math.random() * 6) + 1;
+        repaint();   
+        
+    }
 
+    
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -136,17 +139,15 @@ public class Die extends JPanel {
     private void drawDie(Graphics g) {
         g.setColor(this.getColour());//BOX
         g.fillRect(this.topLeftX, this.topLeftY, this.sizeFactor, this.sizeFactor );
-
         drawDot(g);
     }
 
     private void dot(Graphics g, int row, int col) {
-        this.pixel = this.sizeFactor / 10;
-        this.circleDiameter = 2 * pixel;
+        this.pixel = 10;
         g.setColor(this.dotColour);
         int x = this.topLeftX + (row * 3 * this.pixel) - 2 * this.pixel;
         int y = this.topLeftY + (col * 3 * this.pixel) - 2 * this.pixel;
-        g.fillOval(x, y, this.circleDiameter, this.circleDiameter);
+        g.fillOval(x, y, CIRCLE_DIAMETER, CIRCLE_DIAMETER);
     }
 
     private void drawDot(Graphics g) {
@@ -154,7 +155,7 @@ public class Die extends JPanel {
             dot(g, 1, 1); //top Left
             dot(g, 3, 3); // bottom right
         }
-        if (this.getValue() % 2 == 1) {//odd number // 1 3 5
+        if (this.getValue() % 2 == 1) { // Draws middle dot for numbers 1 3 5
             dot(g, 2, 2); // middle
         }
         if (this.getValue() > 3) { // 4 5 6

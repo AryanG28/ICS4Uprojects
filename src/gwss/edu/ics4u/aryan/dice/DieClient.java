@@ -18,13 +18,9 @@ import javax.swing.JPanel;
 public class DieClient extends JFrame { //implements actionListener
 
     public static void main(String[] args) {
-        JFrame window = new JFrame("Dice Game");
-        window.add(new Die());
-        window.setSize(300, 300);
-        Die die = new Die(Color.CYAN, Color.WHITE, 1, 3);
-        window.add(die);
-        window.setVisible(true);
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        DieGame dieGame = new DieGame();
+        dieGame.setVisible(true);
+        dieGame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
 }
