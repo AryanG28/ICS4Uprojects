@@ -148,6 +148,7 @@ public class Die extends JPanel {
         g.setColor(this.getColour());
         g.fillRect(this.topLeftX, this.topLeftY, this.size, this.size);
         drawDot(g);
+        
     }
 
     private void dot(Graphics g, int row, int col) {
