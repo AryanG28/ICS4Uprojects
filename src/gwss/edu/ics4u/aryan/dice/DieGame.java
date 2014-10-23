@@ -130,8 +130,7 @@ public class DieGame extends JFrame implements ActionListener {
             diceRoll();
             numberOfRolls++;
             setText();
-        }
-        if (ae.getSource() == restart) {
+        } else if (ae.getSource() == restart) {
             numberOfRolls = 0;
             numberOfWins = 0;
             numberOfLosses = 0;
