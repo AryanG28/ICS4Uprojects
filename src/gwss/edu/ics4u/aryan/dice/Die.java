@@ -10,6 +10,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 
+
 /**
  *
  * @author Aryan
@@ -22,39 +23,39 @@ public class Die extends JPanel {
     public static final int SIZE_FACTOR_CONSTANT = 100;
     public static final int MIN_VALUE = 1;
     public static final int MAX_VALUE = 6;
-    public static final int INITIAL_XY = 0;
-    public static final Color INITIAL_COLOUR = Color.CYAN;
+    public static final Color INITIAL_COLOUR = Color.BLACK;
+    public static final Color INITIAL_DOT_COLOUR = Color.GREEN;
     public static final int MAX_X = JPanel.WIDTH;
     public static final int MAX_Y = JPanel.HEIGHT;
     private static final int CIRCLE_DIAMETER = 20;
+    private static final int PIXEL_SIZE = 10;
 
 //object Variables
     private Color colour;
     private Color dotColour;
     private int sizeFactor;
+    private int size;
     private int topLeftX;
     private int topLeftY;
     private int value;
-
     private int pixel;
 
     public Die() {
+        this(INITIAL_COLOUR, INITIAL_DOT_COLOUR, 1, 1);
     }
 
     public Die(Color colour, Color dotColour, int sizeFactor, int value) {
         this.colour = colour;
         this.dotColour = dotColour;
-        this.sizeFactor = sizeFactor * SIZE_FACTOR_CONSTANT;
+        this.sizeFactor = sizeFactor;
+        this.size = sizeFactor * SIZE_FACTOR_CONSTANT;
         this.value = value;
-        Dimension d = new Dimension( this.sizeFactor, this.sizeFactor );
+        Dimension d = new Dimension(this.size, this.size);
         this.setPreferredSize(d);
         this.setSize(d);
-        
+
     }
 
-
-
-    
     public void setValue(int value) {
         if (value >= MIN_VALUE && value <= MAX_VALUE) {
             this.value = value;
@@ -69,13 +70,18 @@ public class Die extends JPanel {
         if (sizeFactor > 0) {
             this.sizeFactor = sizeFactor;
             System.out.println("Size factor set to: " + this.sizeFactor);
+            this.size = sizeFactor * SIZE_FACTOR_CONSTANT;
+            Dimension d = new Dimension(this.size, this.size);
+            this.setPreferredSize(d);
+            this.setSize(d);
+            repaint();
         } else {
             System.out.println("Size Factor is not valid!");
         }
     }
 
     public void setTopLeftX(int topLeftX) {
-        if (topLeftX >= 0) {
+        if (topLeftX >= 0 && topLeftX < MAX_X - sizeFactor) {
             this.topLeftX = topLeftX;
             System.out.println("X value set to: " + this.topLeftX);
         } else {
@@ -84,7 +90,7 @@ public class Die extends JPanel {
     }
 
     public void setTopLeftY(int topLeftY) {
-        if (topLeftY >= 0) { // && topLeftY < MAX_Y - (SIZE_CONSTANT * sizeFactor
+        if (topLeftY >= 0 && topLeftY < MAX_Y - sizeFactor) { // 
             this.topLeftY = topLeftY;
             System.out.println("Y value set to: " + this.topLeftY);
         } else {
@@ -123,15 +129,18 @@ public class Die extends JPanel {
     public void setDotColour(Color dotColour) {
         this.dotColour = dotColour;
     }
-    
-    
+
     public void roll() {
         this.value = (int) (Math.random() * 6) + 1;
-        repaint();   
-        
+        repaint();
+
     }
 
-    
+    public void setPosition(int topLeftX, int topLeftY) {
+        setTopLeftX(topLeftX);
+        setTopLeftY(topLeftY);
+    }
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -139,13 +148,13 @@ public class Die extends JPanel {
     }
 
     private void drawDie(Graphics g) {
-        g.setColor(this.getColour());//BOX
-        g.fillRect(this.topLeftX, this.topLeftY, this.sizeFactor, this.sizeFactor );
+        g.setColor(this.getColour());
+        g.fillRect(this.topLeftX, this.topLeftY, this.size, this.size);
         drawDot(g);
     }
 
     private void dot(Graphics g, int row, int col) {
-        this.pixel = 10;
+        this.pixel = this.size / PIXEL_SIZE;
         g.setColor(this.dotColour);
         int x = this.topLeftX + (row * 3 * this.pixel) - 2 * this.pixel;
         int y = this.topLeftY + (col * 3 * this.pixel) - 2 * this.pixel;
@@ -153,20 +162,20 @@ public class Die extends JPanel {
     }
 
     private void drawDot(Graphics g) {
-        if (this.getValue() != 1) { // 2 3 4 5 6
-            dot(g, 1, 1); //top Left
-            dot(g, 3, 3); // bottom right
+        if (this.getValue() % 2 == 1) { // Draws middle dot for the numbers 1 3 5
+            dot(g, 2, 2);
         }
-        if (this.getValue() % 2 == 1) { // Draws middle dot for numbers 1 3 5
-            dot(g, 2, 2); // middle
+        if (this.getValue() != 1) { // Draws top left and bottom right for numbers 2 3 4 5 6
+            dot(g, 1, 1);
+            dot(g, 3, 3);
         }
-        if (this.getValue() > 3) { // 4 5 6
-            dot(g, 1, 3);//top right
-            dot(g, 3, 1);//bottom left
+        if (this.getValue() > 3) { // Draws top left and top right for numbers 4 5 6
+            dot(g, 1, 3);
+            dot(g, 3, 1);
         }
-        if (this.getValue() == 6) { // 6
-            dot(g, 1, 2);//middle left
-            dot(g, 3, 2);//middle right
+        if (this.getValue() == 6) { // Draws middle left and middle right for number 6
+            dot(g, 1, 2);
+            dot(g, 3, 2);
         }
 
     }

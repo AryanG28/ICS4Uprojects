@@ -1,9 +1,13 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Name: Aryan Ghahremanzadeh 
+ * Date: October 22, 2014 
+ * Version: v0.1
+ * Teacher: Mr.Muir
+ * Description: This class is for the dieGame. It sets the properties and layout.
+ of it
  */
 package gwss.edu.ics4u.aryan.dice;
+
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -17,6 +21,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+
 /**
  *
  * @author Aryan
@@ -25,11 +30,12 @@ public class DieGame extends JFrame implements ActionListener {
 
     public int numberOfRolls;
     public int numberOfWins;
-    public int numberOfLoses;
+    public int numberOfLosses;
 
     Die die1;
     Die die2;
     JButton roll;
+    JButton restart;
     JLabel numberOfRollsLabel;
     JLabel numberOfWinsLabel;
     JLabel numberOfLosesLabel;
@@ -37,44 +43,44 @@ public class DieGame extends JFrame implements ActionListener {
     JPanel panel1;
 
     public DieGame() {
-        
-        this.numberOfRolls = 0;
-        die1 = new Die(Color.CYAN, Color.WHITE, 1, 5);
-        die2 = new Die(Color.ORANGE, Color.WHITE, 1, 3);
+
+        die1 = new Die(Color.CYAN, Color.WHITE, 1, 1);
+        die2 = new Die(Color.ORANGE, Color.WHITE, 1, 1);
         roll = new JButton("ROLL");
-        
-        panel1 = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        // MESSAGE
-        numberOfRollsLabel = new JLabel("Number of Games = 0");
-        numberOfWinsLabel = new JLabel("Number of Wins = 0");
-        numberOfLosesLabel = new JLabel("Number of Loses = 0");
+        restart = new JButton("RESTART");
+        numberOfRollsLabel = new JLabel("Number of Games: 0");
+        numberOfWinsLabel = new JLabel("Number of Wins: 0");
+        numberOfLosesLabel = new JLabel("Number of Losses: 0");
         actionLabel = new JLabel("");
-        panel1.setSize( 200, 100);
-        panel1.setPreferredSize( new Dimension(200, 100 ) );
+        
+        createScorePanel();
+        createGridBagLayout();
+        
+        roll.addActionListener(this);
+        restart.addActionListener(this);
+        
+        this.pack();
+        this.setResizable(false);
+
+    }
+
+    public void createScorePanel() {
+        panel1 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        this.numberOfRolls = 0;
+        panel1.setSize(200, 100);
+        panel1.setPreferredSize(new Dimension(200, 100));
         panel1.add(numberOfRollsLabel);
         panel1.add(numberOfWinsLabel);
         panel1.add(numberOfLosesLabel);
         panel1.add(actionLabel);
-        
-        
-        this.setLayout( new GridBagLayout() );
-        //JPanel pane = new JPanel(new GridBagLayout());
+    }
+
+    public void createGridBagLayout() {
+
+        this.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-        
-       // JButton button;
-       // this.setLayout(new GridBagLayout());
-     //   if (shouldFill) {
-            //natural height, maximum width
-            c.fill = GridBagConstraints.BOTH;
-     //   }
 
-        //button = new JButton("Button 1");
-      //  if (shouldWeightX) {
-       // }
         c.fill = GridBagConstraints.BOTH;
-      //  c.ipady = 100;
-      //  c.ipadx = 100;
-
         c.gridx = 0;
         c.gridy = 0;
         this.add(die1, c);
@@ -87,7 +93,7 @@ public class DieGame extends JFrame implements ActionListener {
         c.fill = GridBagConstraints.BOTH;
         c.gridx = 2;
         c.gridy = 0;
-        
+
         this.add(panel1, c);
 
         c.fill = GridBagConstraints.BOTH;
@@ -96,26 +102,18 @@ public class DieGame extends JFrame implements ActionListener {
         c.gridy = 1;
         this.add(roll, c);
 
-//        this.add(die1);
-//        this.add(die2);
-//        this.add(numberOfRollsLabel);
-//        this.add(roll);
-        roll.addActionListener(this);
-        this.pack();
-      //  this.setSize(400, 400);
- 
-
+        c.fill = GridBagConstraints.BOTH;
+        c.gridwidth = 3;
+        c.gridx = 0;
+        c.gridy = 2;
+        this.add(restart, c);
     }
 
-    /*
-    numberOfWins
-    numberOfLoses
-    */
     public void diceRoll() {
         if (die1.getValue() + die2.getValue() == 7) {
             actionLabel.setText("You lose, you rolled a 7!");
-            numberOfLoses++;
-        } else if (die1.getValue() == die2.getValue()) {                       
+            numberOfLosses++;
+        } else if (die1.getValue() == die2.getValue()) {
             actionLabel.setText("You win, you rolled doubles!");
             numberOfWins++;
         } else {
@@ -131,20 +129,22 @@ public class DieGame extends JFrame implements ActionListener {
             this.die2.roll();
             diceRoll();
             numberOfRolls++;
-            numberOfRollsLabel.setText("Number of Games = " + String.valueOf(numberOfRolls));
-            numberOfWinsLabel.setText("Number of wins: "+ numberOfWins);
-            numberOfLosesLabel.setText("Number of losses: "+ numberOfLoses);
+            setText();
         }
-        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (ae.getSource() == restart) {
+            numberOfRolls = 0;
+            numberOfWins = 0;
+            numberOfLosses = 0;
+            setText();
+            actionLabel.setText("");
+        }
     }
-    
-    
 
-    
-    public static void main(String[] args) {
-        DieGame dieGame = new DieGame();
-        dieGame.setVisible(true);
-        dieGame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public void setText() {
+        numberOfRollsLabel.setText("Number of Games: " + String.valueOf(numberOfRolls));
+        numberOfWinsLabel.setText("Number of Wins: " + numberOfWins);
+        numberOfLosesLabel.setText("Number of Losses: " + numberOfLosses);
     }
-    
+
+
 }
