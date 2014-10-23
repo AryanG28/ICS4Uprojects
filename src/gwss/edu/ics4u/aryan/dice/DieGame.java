@@ -40,7 +40,7 @@ public class DieGame extends JFrame implements ActionListener {
     JLabel numberOfWinsLabel;
     JLabel numberOfLosesLabel;
     JLabel actionLabel;
-    JPanel panel1;
+    JPanel labelPanel;
 
     public DieGame() {
 
@@ -65,14 +65,14 @@ public class DieGame extends JFrame implements ActionListener {
     }
 
     public void createScorePanel() {
-        panel1 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        labelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         this.numberOfRolls = 0;
-        panel1.setSize(200, 100);
-        panel1.setPreferredSize(new Dimension(200, 100));
-        panel1.add(numberOfRollsLabel);
-        panel1.add(numberOfWinsLabel);
-        panel1.add(numberOfLosesLabel);
-        panel1.add(actionLabel);
+        labelPanel.setSize(200, 100);
+        labelPanel.setPreferredSize(new Dimension(200, 100));
+        labelPanel.add(numberOfRollsLabel);
+        labelPanel.add(numberOfWinsLabel);
+        labelPanel.add(numberOfLosesLabel);
+        labelPanel.add(actionLabel);
     }
 
     public void createGridBagLayout() {
@@ -94,7 +94,7 @@ public class DieGame extends JFrame implements ActionListener {
         c.gridx = 2;
         c.gridy = 0;
 
-        this.add(panel1, c);
+        this.add(labelPanel, c);
 
         c.fill = GridBagConstraints.BOTH;
         c.gridwidth = 3;

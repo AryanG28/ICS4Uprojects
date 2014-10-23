@@ -17,9 +17,6 @@ import javax.swing.JPanel;
  */
 public class Die extends JPanel {
 
-    /**
-     * +
-     */
     public static final int SIZE_FACTOR_CONSTANT = 100;
     public static final int MIN_VALUE = 1;
     public static final int MAX_VALUE = 6;
