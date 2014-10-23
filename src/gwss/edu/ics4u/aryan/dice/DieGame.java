@@ -3,8 +3,8 @@
  * Date: October 22, 2014 
  * Version: v0.1
  * Teacher: Mr.Muir
- * Description: This class is for the dieGame. It sets the properties and layout.
- of it
+ * Description: This class is for the dieGame. It sets the properties and layout
+ of it.
  */
 package gwss.edu.ics4u.aryan.dice;
 
@@ -55,7 +55,6 @@ public class DieGame extends JFrame implements ActionListener {
         
         createScorePanel();
         createGridBagLayout();
-        
         roll.addActionListener(this);
         restart.addActionListener(this);
         
