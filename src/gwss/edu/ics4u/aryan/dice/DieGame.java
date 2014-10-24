@@ -44,8 +44,8 @@ public class DieGame extends JFrame implements ActionListener {
 
     public DieGame() {
 
-        die1 = new Die(Color.CYAN, Color.WHITE, 1, -1);
-        die2 = new Die(Color.ORANGE, Color.WHITE, 1, -1);
+        die1 = new Die(Color.CYAN, Color.WHITE, 2, -1);
+        die2 = new Die(Color.ORANGE, Color.WHITE, 2, -1);
         roll = new JButton("ROLL");
         restart = new JButton("RESTART");
         numberOfRollsLabel = new JLabel("Number of Games: 0");
