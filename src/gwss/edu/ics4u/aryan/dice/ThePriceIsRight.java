@@ -30,7 +30,8 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
     private JFrame[][] diceFrame; 
     private JButton roll;
     private int row;
-    private int col; 
+    private int col;
+    private int digit1;
 
     
 
@@ -135,7 +136,19 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
 
     @Override
     public void mouseClicked( MouseEvent e ) {
-        System.out.println( "Mouse Clicked on " + e.getComponent().getName() );  
+        System.out.println( "Mouse Clicked on " + e.getComponent().getName() );
+        String name= e.getComponent().getName();
+        int dieRow = Integer.parseInt(name.substring(0,1));
+        int dieCol = Integer.parseInt(name.substring(2,3));
+        if (dieCol == (col-1) && dieRow!= 1) {
+            dice[dieRow][dieCol].setIsSelected(true);
+            if (dieRow == 0) {
+                dice[2][dieCol].setIsSelected(false);
+            } else {
+                dice[0][dieCol].setIsSelected(false);
+            }
+        } else 
+            System.out.println("Invalid Click");
     }
 
     @Override

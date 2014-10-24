@@ -10,7 +10,6 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 
-
 /**
  *
  * @author Aryan
@@ -36,9 +35,10 @@ public class Die extends JPanel {
     private int topLeftY;
     private int value;
     private int pixel;
+    public boolean isSelected;
 
     public Die() {
-        this(INITIAL_COLOUR, INITIAL_DOT_COLOUR, 1, 1);
+        this(INITIAL_COLOUR, INITIAL_DOT_COLOUR, 1, -1);
     }
 
     public Die(Color colour, Color dotColour, int sizeFactor, int value) {
@@ -50,6 +50,7 @@ public class Die extends JPanel {
         Dimension d = new Dimension(this.size, this.size);
         this.setPreferredSize(d);
         this.setSize(d);
+        this.isSelected = false;
 
     }
 
@@ -93,6 +94,20 @@ public class Die extends JPanel {
         } else {
             System.out.println("Y value is not valid!");
         }
+    }
+
+    public boolean isIsSelected() {
+        return isSelected;
+    }
+
+    public void setIsSelected(boolean isSelected) {
+        this.isSelected = isSelected;
+        if (isSelected) {
+            this.setColour(Color.RED);
+        } else {
+            this.setColour(INITIAL_COLOUR);
+        }
+        repaint();
     }
 
     public Color getColour() {
@@ -147,8 +162,10 @@ public class Die extends JPanel {
     private void drawDie(Graphics g) {
         g.setColor(this.getColour());
         g.fillRect(this.topLeftX, this.topLeftY, this.size, this.size);
-        drawDot(g);
-        
+        if (this.value > 0) {
+            drawDot(g);
+        }
+
     }
 
     private void dot(Graphics g, int row, int col) {
