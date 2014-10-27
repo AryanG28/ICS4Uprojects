@@ -34,7 +34,6 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
     private int turn;
     private int[] digit;
     private JLabel firstDigit;
-    
 
     public ThePriceIsRight() {
         init();
@@ -61,7 +60,7 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
 
         // BOT DICE; ROLLed
         Font font1 = new Font("Arial", Font.BOLD, 45);
-        
+
         this.midDicePanel = new JPanel();
         this.firstDigit = new JLabel();
         firstDigit.setText(Integer.toString(digit[0]));
@@ -91,8 +90,6 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
         this.add(new JLabel("PAGE_END"), BorderLayout.PAGE_END);
         //this.pack();
         roll.addActionListener(this);
-        
-
 
     }
 
@@ -127,24 +124,30 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
             }
         }
     }
-    
+
     public void generateCarPrice() {
         this.digit = new int[5];
         for (int index = 0; index < 5; index++) {
             this.digit[index] = (int) (Math.random() * 6) + 1;
-        }        
-        
+        }
+
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         int row = 1;
-        if ( turn -1 < 0 || dice[0][turn- 1].isSelected || dice[2][turn- 1].isSelected ) {
+        if (turn - 1 < 0 || dice[0][turn - 1].isSelected || dice[2][turn - 1].isSelected) {
             if (e.getSource() == roll) {
                 if (turn < 4) {
                     dice[row][turn].roll();
                     turn++;
                     roll.setEnabled(false);
+                } else {
+                    if (roll.getText() == "DONE") {
+                        roll.setEnabled(false);
+                        showAnswer.setEnabled(true);
+                    }
+
                 }
             }
         } else {
@@ -169,6 +172,9 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
             roll.setEnabled(true);
         } else {
             System.out.println("Invalid Click");
+        }
+        if (dieCol == 3) {
+            roll.setText("DONE");
         }
     }
 
