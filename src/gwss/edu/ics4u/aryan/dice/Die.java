@@ -36,6 +36,7 @@ public class Die extends JPanel {
     private int value;
     private int pixel;
     public boolean isSelected;
+    public boolean isAnswerShowed;
 
     public Die() {
         this(INITIAL_COLOUR, INITIAL_DOT_COLOUR, 1, -1);
@@ -51,6 +52,7 @@ public class Die extends JPanel {
         this.setPreferredSize(d);
         this.setSize(d);
         this.isSelected = false;
+        this.isAnswerShowed = false; 
 
     }
 
@@ -96,7 +98,7 @@ public class Die extends JPanel {
         }
     }
 
-    public boolean isIsSelected() {
+    public boolean isSelected() {
         return isSelected;
     }
 
@@ -108,6 +110,14 @@ public class Die extends JPanel {
             this.setColour(INITIAL_COLOUR);
         }
         repaint();
+    }
+
+    public boolean isAnswerShowed() {
+        return isAnswerShowed;
+    }
+
+    public void setIsAnswerShowed(boolean isAnswerShowed) {
+        this.isAnswerShowed = isAnswerShowed;
     }
 
     public Color getColour() {

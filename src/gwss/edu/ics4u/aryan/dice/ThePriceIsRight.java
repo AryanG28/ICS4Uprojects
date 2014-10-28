@@ -136,12 +136,23 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
     @Override
     public void actionPerformed(ActionEvent e) {
         int row = 1;
-        if (turn - 1 < 0 || dice[0][turn - 1].isSelected || dice[2][turn - 1].isSelected) {
+        if (turn - 1 < 0 || (dice[0][turn - 1].isSelected || dice[2][turn - 1].isSelected) || dice[1][turn - 1].isAnswerShowed) {
             if (e.getSource() == roll) {
                 if (turn < 4) {
                     dice[row][turn].roll();
+                    int diceValue = dice[row][turn].getValue();
+                    if (diceValue == digit[turn + 1]) {
+                        dice[row][turn].setIsAnswerShowed(true);
+                        dice[0][turn].setValue(diceValue);
+                        dice[2][turn].setValue(diceValue);
+                        this.update(this.getGraphics());
+                        if (turn == 3) {
+                            roll.setText("DONE");
+                        }
+                    } else {
+                        roll.setEnabled(false);
+                    }
                     turn++;
-                    roll.setEnabled(false);
                 } else {
                     if (roll.getText() == "DONE") {
                         roll.setEnabled(false);
@@ -162,16 +173,18 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
         String name = e.getComponent().getName();
         int dieRow = Integer.parseInt(name.substring(0, 1));
         int dieCol = Integer.parseInt(name.substring(2, 3));
-        if (dieCol == (turn - 1) && dieRow != 1) {
-            dice[dieRow][dieCol].setIsSelected(true);
-            if (dieRow == 0) {
-                dice[2][dieCol].setIsSelected(false);
+        if (!dice[1][dieCol].isAnswerShowed()) {
+            if (dieCol == (turn - 1) && dieRow != 1) {
+                dice[dieRow][dieCol].setIsSelected(true);
+                if (dieRow == 0) {
+                    dice[2][dieCol].setIsSelected(false);
+                } else {
+                    dice[0][dieCol].setIsSelected(false);
+                }
+                roll.setEnabled(true);
             } else {
-                dice[0][dieCol].setIsSelected(false);
+                System.out.println("Invalid Click");
             }
-            roll.setEnabled(true);
-        } else {
-            System.out.println("Invalid Click");
         }
         if (dieCol == 3) {
             roll.setText("DONE");
