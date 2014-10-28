@@ -105,7 +105,7 @@ public class Die extends JPanel {
     public void setIsSelected(boolean isSelected) {
         this.isSelected = isSelected;
         if (isSelected) {
-            this.setColour(Color.RED);
+            this.setColour(Color.BLUE);
         } else {
             this.setColour(INITIAL_COLOUR);
         }

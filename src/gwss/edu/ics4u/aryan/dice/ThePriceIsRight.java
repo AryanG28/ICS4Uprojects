@@ -23,6 +23,10 @@ import javax.swing.SwingUtilities;
  */
 public class ThePriceIsRight extends JFrame implements ActionListener, MouseListener {
 
+    public static final int DICE_ROW_1 = 0;
+    public static final int DICE_ROW_2 = 1;
+    public static final int DICE_ROW_3 = 2;
+
     private JPanel middlePanel;
     private JPanel topDicePanel;
     private JPanel midDicePanel;
@@ -32,8 +36,10 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
     private JButton roll;
     private JButton showAnswer;
     private int turn;
+    private int answerTurns;
     private int[] digit;
     private JLabel firstDigit;
+    private boolean[] results[];
 
     public ThePriceIsRight() {
         init();
@@ -135,36 +141,59 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        int row = 1;
-        if (turn - 1 < 0 || (dice[0][turn - 1].isSelected || dice[2][turn - 1].isSelected) || dice[1][turn - 1].isAnswerShowed) {
-            if (e.getSource() == roll) {
-                if (turn < 4) {
-                    dice[row][turn].roll();
-                    int diceValue = dice[row][turn].getValue();
-                    if (diceValue == digit[turn + 1]) {
-                        dice[row][turn].setIsAnswerShowed(true);
-                        dice[0][turn].setValue(diceValue);
-                        dice[2][turn].setValue(diceValue);
-                        this.update(this.getGraphics());
-                        if (turn == 3) {
-                            roll.setText("DONE");
+        if (e.getSource() == roll) {
+            int row = 1;
+            if (turn - 1 < 0 || (dice[DICE_ROW_1][turn - 1].isSelected || dice[DICE_ROW_3][turn - 1].isSelected) || dice[1][turn - 1].isAnswerShowed) {
+                if (e.getSource() == roll) {
+                    if (turn < 4) {
+                        dice[row][turn].roll();
+                        int diceValue = dice[row][turn].getValue();
+                        if (diceValue == digit[turn + 1]) {
+                            dice[row][turn].setIsAnswerShowed(true);
+                            dice[DICE_ROW_1][turn].setValue(diceValue);
+                            dice[DICE_ROW_3][turn].setValue(diceValue);
+                            this.update(this.getGraphics());
+                            if (turn == 3) {
+                                roll.setText("DONE");
+                            }
+                        } else {
+                            roll.setEnabled(false);
                         }
+                        turn++;
                     } else {
-                        roll.setEnabled(false);
-                    }
-                    turn++;
-                } else {
-                    if (roll.getText() == "DONE") {
-                        roll.setEnabled(false);
-                        showAnswer.setEnabled(true);
-                    }
+                        if (roll.getText() == "DONE") {
+                            roll.setEnabled(false);
+                            showAnswer.setEnabled(true);
+                        }
 
+                    }
+                }
+            } else {
+                System.out.println("Must select higher or lower");
+            }
+        } else if (e.getSource() == showAnswer) {
+            int diceValue = dice[1][answerTurns].getValue();
+            int carValue = digit[answerTurns + 1];
+
+            if (dice[1][answerTurns].isAnswerShowed) {
+                answerTurns++;
+            } else {
+                if (diceValue > carValue) {
+                    if (dice[0][answerTurns].isSelected) {
+                        
+                    } else {
+
+                    }
+                } else if (diceValue < carValue) {
+                    if (dice[2][answerTurns].isSelected) {
+
+                    } else {
+
+                    }
                 }
             }
-        } else {
-            System.out.println("Must select higher or lower");
-        }
 
+        }
     }
 
     @Override
@@ -177,9 +206,9 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
             if (dieCol == (turn - 1) && dieRow != 1) {
                 dice[dieRow][dieCol].setIsSelected(true);
                 if (dieRow == 0) {
-                    dice[2][dieCol].setIsSelected(false);
+                    dice[DICE_ROW_3][dieCol].setIsSelected(false);
                 } else {
-                    dice[0][dieCol].setIsSelected(false);
+                    dice[DICE_ROW_1][dieCol].setIsSelected(false);
                 }
                 roll.setEnabled(true);
             } else {
