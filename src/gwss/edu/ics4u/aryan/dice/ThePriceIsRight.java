@@ -39,7 +39,8 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
     private int answerTurns;
     private int[] digit;
     private JLabel firstDigit;
-    private boolean[] results[];
+    private boolean[] results;
+    private JLabel message;
 
     public ThePriceIsRight() {
         init();
@@ -93,9 +94,11 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
         this.add(this.roll = new JButton("ROLL"), BorderLayout.LINE_START);
         this.add(this.showAnswer = new JButton("SHOW ANSWER"), BorderLayout.LINE_END);
         showAnswer.setEnabled(false);
-        this.add(new JLabel("PAGE_END"), BorderLayout.PAGE_END);
+        this.add(this.message = new JLabel("Click roll to start the game"), BorderLayout.PAGE_END);
         //this.pack();
         roll.addActionListener(this);
+        showAnswer.addActionListener(this);
+        results = new boolean[4];
 
     }
 
@@ -172,27 +175,41 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
                 System.out.println("Must select higher or lower");
             }
         } else if (e.getSource() == showAnswer) {
+
             int diceValue = dice[1][answerTurns].getValue();
             int carValue = digit[answerTurns + 1];
 
             if (dice[1][answerTurns].isAnswerShowed) {
-                answerTurns++;
+                
+                results[answerTurns] = true;
+
             } else {
                 if (diceValue > carValue) {
-                    if (dice[0][answerTurns].isSelected) {
-                        
+                    if (dice[2][answerTurns].isSelected) {
+                        results[answerTurns] = true;
+                        dice[2][answerTurns].setValue(carValue);
                     } else {
-
+                        results[answerTurns] = false;
+                        dice[2][answerTurns].setValue(carValue);
+                        dice[2][answerTurns].setColour(Color.RED);
                     }
                 } else if (diceValue < carValue) {
-                    if (dice[2][answerTurns].isSelected) {
-
+                    if (dice[0][answerTurns].isSelected) {
+                        results[answerTurns] = true;
+                        dice[0][answerTurns].setValue(carValue);
                     } else {
-
+                        results[answerTurns] = false;
+                        dice[0][answerTurns].setValue(carValue);
+                        dice[0][answerTurns].setColour(Color.RED);
                     }
                 }
-            }
 
+            }
+            if (answerTurns == 3) {
+                showAnswer.setEnabled(false);
+            }
+            answerTurns++;
+            this.update(this.getGraphics());
         }
     }
 
