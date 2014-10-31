@@ -5,23 +5,48 @@
  */
 package gwss.edu.ics4u.aryan.u4;
 
-import gwss.edu.ics4u.aryan.dice.ThePriceIsRight;
+import java.awt.Graphics;
 import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
+import javax.swing.JPanel;
 
 /**
  *
  * @author 1GHAHREMANZA
  */
-public class SierpinskiTriangle extends JFrame {
+public class SierpinskiTriangle extends JPanel {
+
+    public static int w;
+    public static int h;
+    
+    public SierpinskiTriangle() {
+        init();
+    }
+
+    @Override
+    protected void paintComponent(Graphics grphcs) {
+        super.paintComponent(grphcs); 
+        
+        drawTriangle(w,h, 10);
+        
+        
+    }
+    
+    public static void drawTriangle(int w, int h, int lineLength) {
+        
+    }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new ThePriceIsRight().setVisible(true);
-            }
-        }
-        );
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setTitle(null);
+        frame.setSize(800, 800);
+        w = frame.getWidth();
+        h = frame.getHeight();
+    }
+
+    public void init() {
+        
 
     }
+
 }

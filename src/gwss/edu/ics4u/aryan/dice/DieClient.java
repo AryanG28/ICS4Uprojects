@@ -22,5 +22,6 @@ public class DieClient extends JFrame { //implements actionListener
         dieGame.setVisible(true);
         dieGame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+    
 
 }

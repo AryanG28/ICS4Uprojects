@@ -8,6 +8,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import javax.print.attribute.standard.Media;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -28,6 +33,7 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
     private JPanel topDicePanel;
     private JPanel midDicePanel;
     private JPanel botDicePanel;
+    private JPanel titlePanel;
     private Die[][] dice;
     private JFrame[][] diceFrame;
     private JButton roll;
@@ -36,6 +42,7 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
     private int turn;
     private int answerTurns;
     private int[] digit;
+    private JLabel title;
     private JLabel firstDigit;
     private boolean[] results;
     private JLabel message;
@@ -64,12 +71,12 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
         this.topDicePanel.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 
         // BOT DICE; ROLLed
-        Font font1 = new Font("Arial", Font.BOLD, 45);
+        Font font1 = new Font("Arial", Font.BOLD, 20);
 
         this.midDicePanel = new JPanel();
         this.firstDigit = new JLabel();
         firstDigit.setText(Integer.toString(digit[0]));
-        firstDigit.setFont(font1);
+        firstDigit.setFont(new Font("Calibiri", Font.BOLD, 45));
         this.midDicePanel.add(firstDigit);
         this.midDicePanel.setBorder(BorderFactory.createLineBorder(Color.MAGENTA));
 
@@ -88,12 +95,23 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
 
         // ADD ITEMS TO middlePanel
         this.add(middlePanel, BorderLayout.CENTER);
-        this.add(new JLabel("PAGE_START"), BorderLayout.PAGE_START);
+
+        this.title = new JLabel("THE DICE GAME!");
+        this.title.setFont(font1);
+
+        this.titlePanel = new JPanel();
+        this.titlePanel.setAlignmentX(CENTER_ALIGNMENT);
+        this.titlePanel.add(title);
+        this.add(this.titlePanel, BorderLayout.PAGE_START);
+
         this.add(this.roll = new JButton("ROLL"), BorderLayout.LINE_START);
         this.add(this.showAnswer = new JButton("SHOW ANSWER"), BorderLayout.LINE_END);
         showAnswer.setEnabled(false);
         // startOver.setVisible(false);
-        this.add(this.message = new JLabel("Click roll to start the game"), BorderLayout.PAGE_END);
+        this.message = new JLabel("Click roll to start the game");
+        this.message.setFont(font1);
+
+        this.add(this.message, BorderLayout.PAGE_END);
         //this.pack();
         roll.addActionListener(this);
         showAnswer.addActionListener(this);
@@ -239,8 +257,11 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
                 }
                 if (outcome) {
                     message.setText("Congratualtions! You win a car! The car is worth $" + priceOfCar);
+                    playSound("The_Price_Is_Right_-_Game_of_the_Day_-_Dice_Game.wav");
+
                 } else {
                     message.setText("Sorry! You lose! The car price is $" + priceOfCar);
+                    playSound("Price_Is_Right_loser_clip.wav");
                 }
                 showAnswer.setVisible(false);
                 this.add(this.startOver = new JButton("START OVER"), BorderLayout.LINE_END);
@@ -276,12 +297,24 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
                 roll.setEnabled(true);
                 message.setText("Please, roll the next dice");
             } else {
-                message.setText("Invalid Click, please select higher or lower");
+                message.setText("Invalid Click");
             }
         }
         if (dieCol == 3) {
             roll.setText("DONE");
             message.setText("Press done to check answers");
+        }
+    }
+
+    public void playSound(String soundName) {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundName));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (Exception ex) {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace();
         }
     }
 
