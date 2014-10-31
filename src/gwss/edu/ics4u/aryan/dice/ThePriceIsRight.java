@@ -59,7 +59,7 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
 
         // WINDOW; Border Layout
         this.setLayout(new BorderLayout());
-        this.setSize(800, 400);
+        this.setSize(900, 500);
 
         // PARENT PANEL
         this.middlePanel = new JPanel();
@@ -70,13 +70,13 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
         this.topDicePanel = new JPanel();
         this.topDicePanel.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 
-        // BOT DICE; ROLLed
         Font font1 = new Font("Arial", Font.BOLD, 20);
 
-        this.midDicePanel = new JPanel();
         this.firstDigit = new JLabel();
         firstDigit.setText(Integer.toString(digit[0]));
         firstDigit.setFont(new Font("Calibiri", Font.BOLD, 45));
+
+        this.midDicePanel = new JPanel();
         this.midDicePanel.add(firstDigit);
         this.midDicePanel.setBorder(BorderFactory.createLineBorder(Color.MAGENTA));
 
@@ -107,12 +107,11 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
         this.add(this.roll = new JButton("ROLL"), BorderLayout.LINE_START);
         this.add(this.showAnswer = new JButton("SHOW ANSWER"), BorderLayout.LINE_END);
         showAnswer.setEnabled(false);
-        // startOver.setVisible(false);
+
         this.message = new JLabel("Click roll to start the game");
         this.message.setFont(font1);
-
         this.add(this.message, BorderLayout.PAGE_END);
-        //this.pack();
+
         roll.addActionListener(this);
         showAnswer.addActionListener(this);
         results = new boolean[4];
@@ -140,9 +139,9 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
                 }
 
                 this.dice[row][col] = die;
-                if (row == 0) {
+                if (row == DICE_ROW_1) {
                     this.topDicePanel.add(this.dice[row][col]);
-                } else if (row == 1) {
+                } else if (row == DICE_ROW_2) {
                     this.midDicePanel.add(this.dice[row][col]);
                 } else {
                     this.botDicePanel.add(this.dice[row][col]);
@@ -166,114 +165,127 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
         }
     }
 
+    private void showAnswerClicked() {
+
+        message.setText("Showing answer for die #" + (answerTurns + 1));
+
+        int diceValue = dice[DICE_ROW_2][answerTurns].getValue();
+        int carValue = digit[answerTurns + 1];
+
+        if (dice[1][answerTurns].isAnswerShowed) {
+
+            results[answerTurns] = true;
+
+        } else {
+            if (diceValue > carValue) {
+                if (dice[DICE_ROW_3][answerTurns].isSelected) {
+                    results[answerTurns] = true;
+                    dice[DICE_ROW_3][answerTurns].setValue(carValue);
+                } else {
+                    results[answerTurns] = false;
+                    dice[DICE_ROW_3][answerTurns].setValue(carValue);
+                    dice[DICE_ROW_3][answerTurns].setColour(Color.RED);
+                }
+            } else if (diceValue < carValue) {
+                if (dice[DICE_ROW_1][answerTurns].isSelected) {
+                    results[answerTurns] = true;
+                    dice[DICE_ROW_1][answerTurns].setValue(carValue);
+                } else {
+                    results[answerTurns] = false;
+                    dice[DICE_ROW_1][answerTurns].setValue(carValue);
+                    dice[DICE_ROW_1][answerTurns].setColour(Color.RED);
+                }
+            }
+
+        }
+        if (answerTurns == 3) {
+            showAnswer.setEnabled(false);
+            boolean outcome = true;
+            for (int i = 0; i < results.length; i++) {
+                if (!results[i]) {
+                    outcome = false;
+                    break;
+                }
+            }
+            String priceOfCar = "";
+            for (int i = 0; i < digit.length; i++) {
+                priceOfCar += digit[i];
+            }
+            if (outcome) {
+                message.setText("Congratualtions! You win a car! The car is worth $" + priceOfCar);
+                playSound("The_Price_Is_Right_-_Game_of_the_Day_-_Dice_Game.wav");
+
+            } else {
+                message.setText("Sorry! You lose! The car price is $" + priceOfCar);
+                playSound("Price_Is_Right_loser_clip.wav");
+            }
+            showAnswer.setVisible(false);
+            this.add(this.startOver = new JButton("START OVER"), BorderLayout.LINE_END);
+            startOver.addActionListener(this);
+
+        }
+        answerTurns++;
+
+    }
+
+    private void rollClicked() {
+
+        if (turn - 1 < 0 || (dice[DICE_ROW_1][turn - 1].isSelected || dice[DICE_ROW_3][turn - 1].isSelected) || dice[1][turn - 1].isAnswerShowed) {
+            if (roll.getText() == "DONE") {
+                message.setText("Click show answer to find out if you win");
+            } else {
+                message.setText("Select higher or lower.");
+            }
+
+            if (turn < 4) {
+
+                dice[DICE_ROW_2][turn].roll();
+                int diceValue = dice[DICE_ROW_2][turn].getValue();
+
+                if (diceValue == digit[turn + 1]) {
+                    dice[DICE_ROW_2][turn].setIsAnswerShowed(true);
+                    dice[DICE_ROW_1][turn].setValue(diceValue);
+                    dice[DICE_ROW_3][turn].setValue(diceValue);
+                    message.setText("Please, roll the next dice");
+                    setRollButtonTextToDone();
+
+                } else if (diceValue == 1) {
+                    dice[DICE_ROW_1][turn].setIsSelected(true);
+                    setRollButtonTextToDone();
+                    message.setText("Dice value is a 1, must be higher");
+                } else if (diceValue == 6) {
+                    dice[DICE_ROW_3][turn].setIsSelected(true);
+                    setRollButtonTextToDone();
+                    message.setText("Dice value is a 6, must be lower.");
+                } else {
+                    roll.setEnabled(false);
+                }
+
+                turn++;
+                this.update(this.getGraphics());
+            } else {
+                roll.setEnabled(false);
+                showAnswer.setEnabled(true);
+
+            }
+        } else {
+            message.setText("Select higher or lower.");;
+        }
+    }
+
+    private void startOverClicked() {
+        this.dispose();
+        new ThePriceIsRight().setVisible(true);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == roll) {
-
-            int row = 1;
-            if (turn - 1 < 0 || (dice[DICE_ROW_1][turn - 1].isSelected || dice[DICE_ROW_3][turn - 1].isSelected) || dice[1][turn - 1].isAnswerShowed) {
-                if (roll.getText() == "DONE") {
-                    message.setText("Click show answer to find out if you win");
-                } else {
-                    message.setText("Select higher or lower.");
-                }
-
-                if (turn < 4) {
-                    dice[row][turn].roll();
-                    int diceValue = dice[row][turn].getValue();
-                    if (diceValue == digit[turn + 1]) {
-                        dice[row][turn].setIsAnswerShowed(true);
-                        dice[DICE_ROW_1][turn].setValue(diceValue);
-                        dice[DICE_ROW_3][turn].setValue(diceValue);
-                        message.setText("Please, roll the next dice");
-                        setRollButtonTextToDone();
-
-                    } else if (diceValue == 1) {
-                        dice[DICE_ROW_1][turn].setIsSelected(true);
-                        setRollButtonTextToDone();
-                    } else if (diceValue == 6) {
-                        dice[DICE_ROW_3][turn].setIsSelected(true);
-                        setRollButtonTextToDone();
-                    } else {
-                        roll.setEnabled(false);
-                    }
-
-                    turn++;
-                    this.update(this.getGraphics());
-                } else {
-                    //if (roll.getText() == "DONE") {
-                    roll.setEnabled(false);
-                    showAnswer.setEnabled(true);
-                    // }
-
-                }
-            } else {
-                message.setText("Select higher or lower.");;
-            }
+            rollClicked();
         } else if (e.getSource() == showAnswer) {
-            message.setText("Showing answer for die #" + (answerTurns + 1));
-
-            int diceValue = dice[1][answerTurns].getValue();
-            int carValue = digit[answerTurns + 1];
-
-            if (dice[1][answerTurns].isAnswerShowed) {
-
-                results[answerTurns] = true;
-
-            } else {
-                if (diceValue > carValue) {
-                    if (dice[2][answerTurns].isSelected) {
-                        results[answerTurns] = true;
-                        dice[2][answerTurns].setValue(carValue);
-                    } else {
-                        results[answerTurns] = false;
-                        dice[2][answerTurns].setValue(carValue);
-                        dice[2][answerTurns].setColour(Color.RED);
-                    }
-                } else if (diceValue < carValue) {
-                    if (dice[0][answerTurns].isSelected) {
-                        results[answerTurns] = true;
-                        dice[0][answerTurns].setValue(carValue);
-                    } else {
-                        results[answerTurns] = false;
-                        dice[0][answerTurns].setValue(carValue);
-                        dice[0][answerTurns].setColour(Color.RED);
-                    }
-                }
-
-            }
-            if (answerTurns == 3) {
-                showAnswer.setEnabled(false);
-                boolean outcome = true;
-                for (int i = 0; i < results.length; i++) {
-                    if (!results[i]) {
-                        outcome = false;
-                        break;
-                    }
-                }
-                String priceOfCar = "";
-                for (int i = 0; i < digit.length; i++) {
-                    priceOfCar += digit[i];
-                }
-                if (outcome) {
-                    message.setText("Congratualtions! You win a car! The car is worth $" + priceOfCar);
-                    playSound("The_Price_Is_Right_-_Game_of_the_Day_-_Dice_Game.wav");
-
-                } else {
-                    message.setText("Sorry! You lose! The car price is $" + priceOfCar);
-                    playSound("Price_Is_Right_loser_clip.wav");
-                }
-                showAnswer.setVisible(false);
-                this.add(this.startOver = new JButton("START OVER"), BorderLayout.LINE_END);
-                startOver.addActionListener(this);
-
-            }
-            answerTurns++;
-
+            showAnswerClicked();
         } else if (e.getSource() == startOver) {
-            this.dispose();
-            new ThePriceIsRight().setVisible(true);
-
+            startOverClicked();
         }
         this.update(this.getGraphics());
     }
@@ -284,11 +296,11 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
         String name = e.getComponent().getName();
         int dieRow = Integer.parseInt(name.substring(0, 1));
         int dieCol = Integer.parseInt(name.substring(2, 3));
-        if (!dice[1][dieCol].isAnswerShowed()) {
-            if (dieCol == (turn - 1) && dieRow != 1) {
-                if (dice[1][dieCol].getValue() != 6 && dice[1][dieCol].getValue() != 1) {
+        if (!dice[DICE_ROW_2][dieCol].isAnswerShowed()) {
+            if (dieCol == (turn - 1) && dieRow != DICE_ROW_2) {
+                if (dice[DICE_ROW_2][dieCol].getValue() != 6 && dice[DICE_ROW_2][dieCol].getValue() != 1) {
                     dice[dieRow][dieCol].setIsSelected(true);
-                    if (dieRow == 0) {
+                    if (dieRow == DICE_ROW_1) {
                         dice[DICE_ROW_3][dieCol].setIsSelected(false);
                     } else {
                         dice[DICE_ROW_1][dieCol].setIsSelected(false);
