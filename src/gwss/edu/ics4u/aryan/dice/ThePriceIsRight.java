@@ -35,7 +35,6 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
     private JPanel botDicePanel;
     private JPanel titlePanel;
     private Die[][] dice;
-    private JFrame[][] diceFrame;
     private JButton roll;
     private JButton showAnswer;
     private JButton startOver;
@@ -167,16 +166,17 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
 
     private void showAnswerClicked() {
 
-        message.setText("Showing answer for die #" + (answerTurns + 1));
-
         int diceValue = dice[DICE_ROW_2][answerTurns].getValue();
         int carValue = digit[answerTurns + 1];
-
+        
+        message.setText("Showing answer for die #" + (answerTurns + 1));
+        
         if (dice[1][answerTurns].isAnswerShowed) {
 
             results[answerTurns] = true;
 
         } else {
+            
             if (diceValue > carValue) {
                 if (dice[DICE_ROW_3][answerTurns].isSelected) {
                     results[answerTurns] = true;
@@ -262,7 +262,7 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
                 }
 
                 turn++;
-                this.update(this.getGraphics());
+                
             } else {
                 roll.setEnabled(false);
                 showAnswer.setEnabled(true);
