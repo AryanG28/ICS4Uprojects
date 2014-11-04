@@ -17,19 +17,24 @@ public class PascalsTriangle {
         // TODO code application logic here
     }
     
-    public static int term(int n) {
+    public static int term( int row, int col ) {
         
+            return -1;
     }
     
-    public static int fibonacci(int n) {
-        if (n == 1 || n == 2) {
-            return 1;
-        }
-        if (n < 1) {
-            return -1;
-        }
-        return fibonacci(n - 1) + fibonacci(n - 2);
-
+    public static int row( int row ) {
+        return -1;
     }
+    
+//    public static int fibonacci(int n) {
+//        if (n == 1 || n == 2) {
+//            return 1;
+//        }
+//        if (n < 1) {
+//            return -1;
+//        }
+//        return fibonacci(n - 1) + fibonacci(n - 2);
+//
+//    }
 
 }
