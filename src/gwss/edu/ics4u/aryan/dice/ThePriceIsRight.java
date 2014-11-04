@@ -168,15 +168,15 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
 
         int diceValue = dice[DICE_ROW_2][answerTurns].getValue();
         int carValue = digit[answerTurns + 1];
-        
+
         message.setText("Showing answer for die #" + (answerTurns + 1));
-        
+
         if (dice[1][answerTurns].isAnswerShowed) {
 
             results[answerTurns] = true;
 
         } else {
-            
+
             if (diceValue > carValue) {
                 if (dice[DICE_ROW_3][answerTurns].isSelected) {
                     results[answerTurns] = true;
@@ -262,7 +262,7 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
                 }
 
                 turn++;
-                
+
             } else {
                 roll.setEnabled(false);
                 showAnswer.setEnabled(true);
