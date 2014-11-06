@@ -14,7 +14,7 @@ public class PascalsTriangle {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println(row(10));
+        System.out.println( row(10) );
 
     }
 
@@ -29,32 +29,16 @@ public class PascalsTriangle {
     }
 
     public static String row(int row) {
-
+        String s = "";
         if (row < 0) {
             return "";
        }
         for (int i = 0; i < row + 1; i++) {
-            System.out.print(term(row, i) + " ");
+            s = s + (term(row, i) + " ");
         }
-        System.out.println();
-        return row(row - 1);
-
+         s = s + "\n";
+        return row(row - 1) + s;
     }
 }
 
-//        int r=0;
-//        while(row> 0) {
-//            if (row==0) {
-//                return 1;
-//            }
-//            if (row >0) {
-//                for (int c= 0; c<= row ; c++) {
-//                    System.out.format("%-5d", term(row,c));
-//                    
-//                }
-//            }
-//            System.out.println(" ");
-//            row--;
-//        }
-//    return 1;
-//   }
+
