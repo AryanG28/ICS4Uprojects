@@ -29,6 +29,7 @@ public class PascalsTriangle {
     }
 
     public static String row(int row) {
+        String format = "                                               ";
         String s = "";
         if (row < 0) {
             return "";
@@ -36,7 +37,9 @@ public class PascalsTriangle {
         for (int i = 0; i < row + 1; i++) {
             s = s + (term(row, i) + " ");
         }
-         s = s + "\n";
+        
+        s = format.substring( 0, Math.abs(row - 10)) + s + "\n";
+        
         return row(row - 1) + s;
     }
 }

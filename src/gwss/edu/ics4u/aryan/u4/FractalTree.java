@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gwss.edu.ics4u.aryan.recursion;
+package gwss.edu.ics4u.aryan.u4;
 
 /**
  *
