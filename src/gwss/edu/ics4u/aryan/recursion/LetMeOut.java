@@ -1,7 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Name: Aryan Ghahremanzadeh 
+ * Date: November 10, 2014 
+ * Version: v0.1
+ * Teacher: Mr.Muir
+ * Description: This program finds  an exit point when given a starting point in a maze
+* (if there is one accessible from the given starting point). It shows the path to the exit once it has been found.
  */
 package gwss.edu.ics4u.aryan.recursion;
 
@@ -31,6 +34,7 @@ public class LetMeOut {
      * Display the current maze.
      */
     public boolean findExitFrom(int row, int col) {
+        // To keep the result of each call
         boolean successful = false;
 
         // if on exit, exit
@@ -38,24 +42,26 @@ public class LetMeOut {
             maze[row][col] = GOOD_PATH;
             return true;
         }
+        // Mark point as tried
         maze[row][col] = TRIED;
 
-        // looks for exit
+        // Checks to see if the right cell is Open or an exit, if it is, it moves there and calls findExitFrom at the new point
         if (maze[row][col + 1] == OPEN || maze[row][col + 1] == EXIT) {
             successful = findExitFrom(row, col + 1);
         }
+        // Checks to see if the last call is not successful and the left cell is Open or an exit, if so, it moves there and calls findExitFrom at the new point
         if (!successful && maze[row][col - 1] == OPEN || maze[row][col - 1] == EXIT) {
             successful = findExitFrom(row, col - 1);
-
         }
+      // Checks to see if the last call is not successful and the higher cell is Open or an exit, if so, it moves there and calls findExitFrom at the new point
         if (!successful && maze[row -1][col] == OPEN || maze[row -1][col] == EXIT) {
             successful = findExitFrom(row -1 , col);
-
         }
+       // Checks to see if the last call is not successful and the lower cell is Open or an exit, if so, it moves there and calls findExitFrom at the new point
         if (!successful && maze[row + 1][col] == OPEN || maze[row + 1][col] == EXIT) {
             successful = findExitFrom(row + 1, col);
         }
-        
+        // if last call is successful, marks the point as good path
         if (successful) {
             maze[row][col] = GOOD_PATH;
         }
