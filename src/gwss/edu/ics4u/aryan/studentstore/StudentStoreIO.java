@@ -16,6 +16,7 @@ public class StudentStoreIO {
 
     static Scanner input = new Scanner(System.in);
     static RandomAccessFile file;
+    final static int FILE_SIZE = 84;
 
     public static void main(String args[]) throws Exception {
 
@@ -25,21 +26,23 @@ public class StudentStoreIO {
         StudentRecord aryan = new StudentRecord();
 
         aryan.setFirstName("Aryan");
-        aryan.setLastName("Ghahremanzadeh");
+        aryan.setLastName("Ghahremanzadeh");     
+        aryan.setOEN(289345768);
         aryan.setFileRecordID(0);
-        aryan = witeStudentRecord(aryan);
-        
+        aryan = writeStudentRecord(aryan);
+
         System.out.println("RECORD SIZE: " + file.length());
 
-//        StudentRecord farjaad = new StudentRecord();
-//        farjaad.setFirstName("Fajaad");
-//        farjaad.setLastName("Rawasia");
-//        farjaad = witeStudentRecord(aryan);
-//        System.out.println("RECORD SIZE: " + file.length());
-        
-        
-        //closeStore();
+        StudentRecord farjaad = new StudentRecord();
+        farjaad.setFirstName("Farjaad");
+        farjaad.setLastName("Rawasia");
+        farjaad.setOEN(289345768);
+        farjaad.setFileRecordID(1);
+        farjaad = writeStudentRecord(farjaad);
+        System.out.println("RECORD SIZE: " + file.length());
 
+        displayRecord();
+        //closeStore();
     }
 
     public static void openStore() throws Exception {
@@ -48,25 +51,48 @@ public class StudentStoreIO {
         }
     }
 
-    public static StudentRecord witeStudentRecord(StudentRecord record) throws Exception {
-        
-        if( record.getFileRecordID() == -1 ) {
-            file.seek( file.length() );
-            record.setFileRecordID( file.length() / 80 );
+    public static StudentRecord writeStudentRecord(StudentRecord record) throws Exception {
+
+        if (record.getFileRecordID() == -1) {
+            file.seek(file.length());
+            record.setFileRecordID(file.length() / FILE_SIZE);
+        } else {
+            file.seek(record.getFileRecordID() * FILE_SIZE);
         }
-        else {
-            file.seek( record.getFileRecordID() * 80 );
-        }
-                
+
         file.writeChars(record.getFirstName());
         file.writeChars(record.getLastName());
-
+        file.writeInt(record.getOEN());
         return record;
     }
 
     public static void displayMenu() {
         System.out.println("Welcom to student Store");
-        System.out.println("Menu: 1- Write to File, 2- ");
+        System.out.println("Menu: Press 1 to write to file, Press 2 to read the file, Press 3 to quit  ");
         System.out.println();
+    }
+
+    public static void displayRecord() throws IOException {
+        long numRecords = file.length() / FILE_SIZE;
+        long recordNumber = input.nextLong();
+        if (recordNumber > 0 && recordNumber <= numRecords) {
+            long position = FILE_SIZE * (recordNumber - 1);
+            file.seek(position);
+
+        }
+        char firstName[] = new char[20];
+        for (int i = 0; i < 20; i++) {
+            firstName[i] = file.readChar();
+        }
+        
+        char lastName[] = new char[20];
+        for (int i = 0; i < 20; i++) {
+            lastName[i] = file.readChar();
+        }
+        
+        System.out.println(firstName);
+        System.out.println(lastName);
+        System.out.println(file.readInt());
+        
     }
 }
