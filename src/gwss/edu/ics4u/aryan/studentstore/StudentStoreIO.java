@@ -26,7 +26,7 @@ public class StudentStoreIO {
         StudentRecord aryan = new StudentRecord();
 
         aryan.setFirstName("Aryan");
-        aryan.setLastName("Ghahremanzadeh");     
+        aryan.setLastName("Ghahremanzadeh");
         aryan.setOEN(289345768);
         aryan.setFileRecordID(0);
         aryan = writeStudentRecord(aryan);
@@ -41,14 +41,17 @@ public class StudentStoreIO {
         farjaad = writeStudentRecord(farjaad);
         System.out.println("RECORD SIZE: " + file.length());
 
-        displayRecord();
-        //closeStore();
+        closeStore();
     }
 
     public static void openStore() throws Exception {
         if (file == null) {
             file = new RandomAccessFile("student_info.txt", "rw");
         }
+    }
+
+    public static void closeStore() throws Exception {
+        file.close();
     }
 
     public static StudentRecord writeStudentRecord(StudentRecord record) throws Exception {
@@ -72,9 +75,9 @@ public class StudentStoreIO {
         System.out.println();
     }
 
-    public static void displayRecord() throws IOException {
-        long numRecords = file.length() / FILE_SIZE;
+    public static StudentStore readRecord(int recordId) throws IOException {
         long recordNumber = input.nextLong();
+        long numRecords = file.length() / FILE_SIZE;
         if (recordNumber > 0 && recordNumber <= numRecords) {
             long position = FILE_SIZE * (recordNumber - 1);
             file.seek(position);
@@ -84,15 +87,26 @@ public class StudentStoreIO {
         for (int i = 0; i < 20; i++) {
             firstName[i] = file.readChar();
         }
-        
+
         char lastName[] = new char[20];
         for (int i = 0; i < 20; i++) {
             lastName[i] = file.readChar();
         }
-        
-        System.out.println(firstName);
-        System.out.println(lastName);
-        System.out.println(file.readInt());
+
+        System.out.println("First Name: " + firstName);
+        System.out.println("Last Name: " + lastName);
+        System.out.println("OEN: " + file.readInt());
+        return null;
+    }
+    
+    public static void displayRecord() throws IOException {
+        long numRecords = file.length() /FILE_SIZE;
+        StudentStore s;
+        for (int i = 0; i< numRecords; i++) {
+           // s = readRecord(i+1);
+            System.out.println(s.toString());
+        }
         
     }
+
 }
