@@ -104,7 +104,7 @@ public class StudentStoreIO {
         StudentStore s;
         for (int i = 0; i< numRecords; i++) {
            // s = readRecord(i+1);
-            System.out.println(s.toString());
+           // System.out.println(s.toString());
         }
         
     }
