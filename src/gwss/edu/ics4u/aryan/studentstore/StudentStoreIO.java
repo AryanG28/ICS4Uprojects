@@ -40,7 +40,13 @@ public class StudentStoreIO {
         farjaad.setFileRecordID(1);
         farjaad = writeStudentRecord(farjaad);
         System.out.println("RECORD SIZE: " + file.length());
+        
 
+        System.out.println("Enter record you want to read: ");
+      //  int recordNumber = input.nextInt();
+        writeStudentRecord(addStudent());
+        
+        displayRecord();
         closeStore();
     }
 
@@ -75,38 +81,70 @@ public class StudentStoreIO {
         System.out.println();
     }
 
-    public static StudentStore readRecord(int recordId) throws IOException {
-        long recordNumber = input.nextLong();
-        long numRecords = file.length() / FILE_SIZE;
-        if (recordNumber > 0 && recordNumber <= numRecords) {
-            long position = FILE_SIZE * (recordNumber - 1);
-            file.seek(position);
-
-        }
+    public static StudentRecord readRecord(int recordId) throws IOException {
+        file.seek((recordId - 1) * FILE_SIZE);
+        StudentRecord s = new StudentRecord();
+        
         char firstName[] = new char[20];
         for (int i = 0; i < 20; i++) {
             firstName[i] = file.readChar();
         }
-
+        
+        s.setFirstName(new String(firstName));
+        
         char lastName[] = new char[20];
         for (int i = 0; i < 20; i++) {
             lastName[i] = file.readChar();
         }
 
-        System.out.println("First Name: " + firstName);
-        System.out.println("Last Name: " + lastName);
-        System.out.println("OEN: " + file.readInt());
-        return null;
+        s.setLastName(new String(lastName));
+        s.setOEN(file.readInt());
+        
+//        System.out.println("First Name: " + s.getFirstName());
+//        System.out.println("Last Name: " + s.getLastName());
+//        System.out.println("OEN: " + s.getOEN());
+        
+        return s;
     }
     
     public static void displayRecord() throws IOException {
         long numRecords = file.length() /FILE_SIZE;
-        StudentStore s;
+        StudentRecord s;
         for (int i = 0; i< numRecords; i++) {
-           // s = readRecord(i+1);
-           // System.out.println(s.toString());
+            s = readRecord(i+1);
+            System.out.println(s.toString());
         }
         
+    }
+    
+    public static StudentRecord updateStudent( StudentRecord s ) throws Exception {
+        System.out.println("Enter new first name: [" + s.getFirstName() + "]" );
+        String firstName = input.nextLine();
+        s.setFirstName(firstName);
+        System.out.println("Enter last name: ");
+        String lastName = input.nextLine();
+        s.setLastName(lastName);
+        System.out.println("Enter OEN: ");
+        int OEN = input.nextInt();
+        s.setOEN(OEN);
+        return s;
+
+    }
+    
+    public static StudentRecord addStudent() throws Exception {
+        StudentRecord s = new StudentRecord();
+        System.out.println("Enter first name: ");
+        String firstName = input.nextLine();
+        s.setFirstName(firstName);
+        System.out.println("Enter last name: ");
+        String lastName = input.nextLine();
+        s.setLastName(lastName);
+        System.out.println("Enter OEN: ");
+        int OEN = input.nextInt();
+        s.setOEN(OEN);
+        s.setFileRecordID(-1);
+        return s;
+
     }
 
 }
