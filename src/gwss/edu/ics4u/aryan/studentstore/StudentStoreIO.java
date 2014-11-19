@@ -100,10 +100,7 @@ public class StudentStoreIO {
         s.setLastName(new String(lastName));
         s.setOEN(file.readInt());
         
-//        System.out.println("First Name: " + s.getFirstName());
-//        System.out.println("Last Name: " + s.getLastName());
-//        System.out.println("OEN: " + s.getOEN());
-        
+        System.out.println(s.toString());
         return s;
     }
     
@@ -111,22 +108,25 @@ public class StudentStoreIO {
         long numRecords = file.length() /FILE_SIZE;
         StudentRecord s;
         for (int i = 0; i< numRecords; i++) {
-            s = readRecord(i+1);
-            System.out.println(s.toString());
+            s = readRecord(i+1);          
         }
         
     }
     
     public static StudentRecord updateStudent( StudentRecord s ) throws Exception {
+       
         System.out.println("Enter new first name: [" + s.getFirstName() + "]" );
         String firstName = input.nextLine();
         s.setFirstName(firstName);
+        
         System.out.println("Enter last name: ");
         String lastName = input.nextLine();
         s.setLastName(lastName);
+        
         System.out.println("Enter OEN: ");
         int OEN = input.nextInt();
         s.setOEN(OEN);
+        
         return s;
 
     }
@@ -136,12 +136,15 @@ public class StudentStoreIO {
         System.out.println("Enter first name: ");
         String firstName = input.nextLine();
         s.setFirstName(firstName);
+        
         System.out.println("Enter last name: ");
         String lastName = input.nextLine();
         s.setLastName(lastName);
+        
         System.out.println("Enter OEN: ");
         int OEN = input.nextInt();
         s.setOEN(OEN);
+        
         s.setFileRecordID(-1);
         return s;
 
