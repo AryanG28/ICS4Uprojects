@@ -17,7 +17,7 @@ public class StudentStoreIO {
     static Scanner input = new Scanner(System.in);
     static RandomAccessFile file;
     static boolean closed;
-    final static int FILE_SIZE = 92;
+    final static int FILE_SIZE = 93;
 
     public static void main(String args[]) throws Exception {
 
@@ -31,6 +31,7 @@ public class StudentStoreIO {
         aryan.setOEN(289345768);
         aryan.setFileRecordID(0);
         aryan.setAverage(99);
+        aryan.setIEP(true);
         aryan = writeStudentRecord(aryan);
 
         System.out.println("RECORD SIZE: " + file.length());
@@ -42,6 +43,7 @@ public class StudentStoreIO {
         farjaad.setFileRecordID(1);
         farjaad = writeStudentRecord(farjaad);
         farjaad.setAverage(53);
+        farjaad.setIEP(false);
         System.out.println("RECORD SIZE: " + file.length());
 
         displayMenu();
@@ -106,7 +108,7 @@ public class StudentStoreIO {
                                         }
                                         break;
                                     case 2:
-                                        displayRecord();
+                                        displayAllRecord();
                                         break;
                                     default:
                                         System.out.println("Invalid choice.");
@@ -142,6 +144,10 @@ public class StudentStoreIO {
                 }
             } catch (NumberFormatException nfe) {
                 System.out.println("Please input an integer");
+            } catch (FileNotFoundException fnf) {
+                System.out.println("File could not be found");
+            } catch (Exception e) {
+                System.out.println("Error, please try again");
             }
         } while (!exitProgram);
     }
@@ -170,7 +176,7 @@ public class StudentStoreIO {
         return s;
     }
 
-    public static void displayRecord() throws IOException {
+    public static void displayAllRecord() throws IOException {
         long numRecords = file.length() / FILE_SIZE;
         StudentRecord s;
         for (int i = 0; i < numRecords; i++) {
@@ -186,10 +192,11 @@ public class StudentStoreIO {
         do {
             invalidChoice = false;
             try {
-                System.out.println("Enter OEN: ");
-                s.setOEN(Integer.parseInt(input.nextLine()));
-                System.out.println("Enter new first name: [" + s.getFirstName() + "]");
-                s.setFirstName(input.nextLine());
+                System.out.println("Enter new first name or [k]eep current first name: [" + s.getFirstName() + "]");
+                String firstName = input.nextLine();
+                if (!"k".equalsIgnoreCase(firstName)) {
+                    s.setLastName(firstName);
+                }
             } catch (NumberFormatException nfe) {
                 System.out.println("Please input an integer");
                 invalidChoice = true;
@@ -199,10 +206,11 @@ public class StudentStoreIO {
         do {
             invalidChoice = false;
             try {
-                System.out.println("Enter OEN: ");
-                s.setOEN(Integer.parseInt(input.nextLine()));
-                System.out.println("Enter new last name: [" + s.getLastName() + "]");
-                s.setLastName(input.nextLine());
+                System.out.println("Enter new last name or [k]eep current last name: [" + s.getLastName() + "]");
+                String lastName = input.nextLine();
+                if (!"k".equalsIgnoreCase(lastName)) {
+                    s.setLastName(lastName);
+                }
             } catch (NumberFormatException nfe) {
                 System.out.println("Please input an integer");
                 invalidChoice = true;
@@ -212,10 +220,11 @@ public class StudentStoreIO {
         do {
             invalidChoice = false;
             try {
-                System.out.println("Enter OEN: ");
-                s.setOEN(Integer.parseInt(input.nextLine()));
-                System.out.println("Enter new first name: [" + s.getOEN() + "]");
-                s.setOEN(Integer.parseInt(input.nextLine()));
+                System.out.println("Enter new OEN or [k]eep current OEN: [" + s.getOEN() + "] ");
+                String OEN = input.nextLine();
+                if (!"k".equalsIgnoreCase(OEN)) {
+                    s.setOEN(Integer.parseInt(OEN));
+                }
             } catch (NumberFormatException nfe) {
                 System.out.println("Please input an integer");
                 invalidChoice = true;
@@ -225,8 +234,11 @@ public class StudentStoreIO {
         do {
             invalidChoice = false;
             try {
-                System.out.println("Enter OEN: ");
-                s.setOEN(Integer.parseInt(input.nextLine()));
+                System.out.println("Enter new student average or [k]eep current average: [" + s.getAverage() + "]");
+                String average = input.nextLine();
+                if (!"k".equalsIgnoreCase(average)) {
+                    s.setAverage(Double.parseDouble(average));
+                }
             } catch (NumberFormatException nfe) {
                 System.out.println("Please input an integer");
                 invalidChoice = true;
@@ -236,12 +248,23 @@ public class StudentStoreIO {
         do {
             invalidChoice = false;
             try {
-                System.out.println("Enter new student average: " + s.getAverage() + "]");
-                s.setAverage(Double.parseDouble(input.nextLine()));
+                System.out.println("Enter if student has IEP (true or false) or [k]eep current: [" + s.isIEP() + "]");
+                String IEP = input.nextLine();
+                if (!"k".equalsIgnoreCase(IEP)) {
+                    if (IEP.equalsIgnoreCase("true")) {
+                        s.setIEP(true);
+                    } else if (IEP.equalsIgnoreCase("false")) {
+                        s.setIEP(false);
+                    } else {
+                        System.out.println("Please enter true or false");
+                        invalidChoice = true;
+                    }
+                }
             } catch (NumberFormatException nfe) {
-                System.out.println("Please input an integer");
+                System.out.println("Please enter true or false");
                 invalidChoice = true;
             }
+
         } while (invalidChoice);
 
         return s;
@@ -294,6 +317,25 @@ public class StudentStoreIO {
                 s.setAverage(Double.parseDouble(input.nextLine()));
             } catch (NumberFormatException nfe) {
                 System.out.println("Please input an integer");
+                invalidChoice = true;
+            }
+        } while (invalidChoice);
+
+        do {
+            invalidChoice = false;
+            try {
+                System.out.println("Enter if student has IEP (true or false): ");
+                String IEP = input.nextLine();
+                if (IEP.equalsIgnoreCase("true")) {
+                    s.setIEP(true);
+                } else if (IEP.equalsIgnoreCase("false")) {
+                    s.setIEP(false);
+                } else {
+                    System.out.println("Please enter true or false");
+                    invalidChoice = true;
+                }
+            } catch (NumberFormatException nfe) {
+                System.out.println("Please enter true or false");
                 invalidChoice = true;
             }
         } while (invalidChoice);

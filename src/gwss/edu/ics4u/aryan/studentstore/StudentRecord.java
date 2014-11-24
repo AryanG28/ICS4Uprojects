@@ -197,11 +197,11 @@ public class StudentRecord {
                 + "\n\t OEN= " + OEN
                 + "\n\t First Name= " + firstName
                 + "\n\t Last Name= " + lastName
-                + "\n\t Average= " + average;
+                + "\n\t Average= " + average
              //   + "\n\t External comments= " + secretComment
              //   + "\n\t Height= " + height
               //  + "\n\t Gender= " + getGenderName()
-              //  + "\n\t IEP= " + IEP
+                + "\n\t IEP= " + IEP;
               //  + "\n\t School= " + School;
     }
 
