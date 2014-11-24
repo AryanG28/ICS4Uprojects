@@ -73,6 +73,7 @@ public class StudentStoreIO {
         file.writeChars(record.getLastName());
         file.writeInt(record.getOEN());
         file.writeDouble(record.getAverage());
+        file.writeBoolean(record.getIEP());
         return record;
     }
 
@@ -171,6 +172,7 @@ public class StudentStoreIO {
         s.setLastName(new String(lastName));
         s.setOEN(file.readInt());
         s.setAverage(file.readDouble());
+        s.setIEP(file.readBoolean());
 
         System.out.println(s.toString());
         return s;
@@ -248,7 +250,7 @@ public class StudentStoreIO {
         do {
             invalidChoice = false;
             try {
-                System.out.println("Enter if student has IEP (true or false) or [k]eep current: [" + s.isIEP() + "]");
+                System.out.println("Enter if student has IEP (true or false) or [k]eep current: [" + s.getIEP() + "]");
                 String IEP = input.nextLine();
                 if (!"k".equalsIgnoreCase(IEP)) {
                     if (IEP.equalsIgnoreCase("true")) {

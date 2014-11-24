@@ -122,7 +122,7 @@ public class StudentRecord {
         }
     }
 
-    public boolean isIEP() {
+    public boolean getIEP() {
         return IEP;
     }
 
