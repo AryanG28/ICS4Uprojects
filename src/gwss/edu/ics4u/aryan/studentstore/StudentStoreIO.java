@@ -30,7 +30,7 @@ public class StudentStoreIO {
         aryan.setFirstName("Aryan");
         aryan.setLastName("Ghahremanzadeh");
         aryan.setOEN(289345768);
-        aryan.setFileRecordID(0);
+        aryan.setFileRecordID(1);
         aryan.setAverage(99);
         aryan.setIEP(true);
         aryan = writeStudentRecord(aryan);
@@ -41,7 +41,7 @@ public class StudentStoreIO {
         farjaad.setFirstName("Farjaad");
         farjaad.setLastName("Rawasia");
         farjaad.setOEN(289345768);
-        farjaad.setFileRecordID(1);       
+        farjaad.setFileRecordID(2);       
         farjaad.setAverage(53);
         farjaad.setIEP(false);
         farjaad = writeStudentRecord(farjaad);
@@ -68,9 +68,9 @@ public class StudentStoreIO {
 
         if (record.getFileRecordID() == -1) { //if file id is -1 it creates a file id at end of file
             file.seek(file.length());
-            record.setFileRecordID(file.length() / FILE_SIZE);
+            record.setFileRecordID(( file.length() / FILE_SIZE) + 1);
         } else { // if file id is not -1 it writes over the existing file id
-            file.seek(record.getFileRecordID() * FILE_SIZE);
+            file.seek(( record.getFileRecordID() - 1 ) * FILE_SIZE);
         }
         
         file.writeChars(record.getFirstName()); //writes the firstname
