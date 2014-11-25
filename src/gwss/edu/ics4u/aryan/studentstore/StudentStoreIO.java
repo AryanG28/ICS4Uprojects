@@ -9,7 +9,7 @@ import java.io.*;
 import java.util.Scanner;
 
 /**
- *
+ * Name: Aryan
  * @author 1GHAHREMANZA
  */
 public class StudentStoreIO {
