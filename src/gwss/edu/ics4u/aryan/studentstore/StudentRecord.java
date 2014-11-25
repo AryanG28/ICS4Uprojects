@@ -14,7 +14,7 @@ public class StudentRecord {
     public static final int GENDER_TYPE_MALE = 1;
     public static final int GENDER_TYPE_FEMALE = 2;
 
-    private long fileRecordID = -1;
+    private long fileRecordID;
     private int OEN;
     private String firstName;
     private String lastName;
@@ -25,7 +25,7 @@ public class StudentRecord {
     private double average;
 
     public StudentRecord() {
-
+      fileRecordID = -1;
     }
 
     public long getFileRecordID() {

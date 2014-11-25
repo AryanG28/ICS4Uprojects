@@ -41,10 +41,10 @@ public class StudentStoreIO {
         farjaad.setFirstName("Farjaad");
         farjaad.setLastName("Rawasia");
         farjaad.setOEN(289345768);
-        farjaad.setFileRecordID(1);
-        farjaad = writeStudentRecord(farjaad);
+        farjaad.setFileRecordID(1);       
         farjaad.setAverage(53);
         farjaad.setIEP(false);
+        farjaad = writeStudentRecord(farjaad);
         System.out.println("RECORD SIZE: " + file.length());
         //Calls display menu where choices are displayed
         displayMenu();
@@ -142,8 +142,9 @@ public class StudentStoreIO {
                                 System.out.println("Invalid file ID, try again");
                                 invalidChoice = true;
                             }
-                            break;
+                            
                         } while (invalidChoice);
+                        break;
                     case 4: //exits program
                         exitProgram = true;
                         break;
@@ -162,9 +163,11 @@ public class StudentStoreIO {
     }
 
     public static StudentRecord readRecord(int recordId) throws IOException {
-        file.seek((recordId - 1) * FILE_SIZE);//goes to start of record at position given
+        
         StudentRecord s = new StudentRecord();
-
+        s.setFileRecordID(recordId);
+        file.seek((recordId - 1) * FILE_SIZE);//goes to start of record at position given
+        
         char firstName[] = new char[20]; // reads characters in firstname string
         for (int i = 0; i < 20; i++) {
             firstName[i] = file.readChar();
@@ -178,6 +181,7 @@ public class StudentStoreIO {
         }
 
         s.setLastName(new String(lastName)); //sets the last name 
+        
         s.setOEN(file.readInt()); //sets the oen
         s.setAverage(file.readDouble()); //sets the average
         s.setIEP(file.readBoolean()); //sets the iep
@@ -202,7 +206,7 @@ public class StudentStoreIO {
                 System.out.println("Enter new first name or [k]eep current first name: [" + s.getFirstName() + "]");
                 String firstName = input.nextLine();
                 if (!"k".equalsIgnoreCase(firstName)) {
-                    s.setLastName(firstName);
+                    s.setFirstName(firstName);
                 }
 
                 System.out.println("Enter new last name or [k]eep current last name: [" + s.getLastName() + "]");
