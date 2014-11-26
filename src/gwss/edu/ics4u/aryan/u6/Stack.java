@@ -7,7 +7,7 @@ package gwss.edu.ics4u.aryan.u6;
 
 /**
  *
- * @author 1GHAHREMANZA
+ * @author snake
  */
 public class Stack implements StackInterface {
     
