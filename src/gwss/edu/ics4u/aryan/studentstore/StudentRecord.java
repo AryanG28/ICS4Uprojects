@@ -5,14 +5,18 @@ import gwss.edu.ics4u.school.*;
 /**
  *
  *
- * Name: Aryan Ghahremanzadeh Date: October 2, 2014 Version: v0.1 Teacher:
- * Mr.Muir Description: This creates the student object and its properties.
+ * Name: Aryan Ghahremanzadeh 
+ * Date: October 2, 2014 
+ * Version: v0.1 
+ * Teacher:Mr.Muir 
+ * Description: This creates the student object and its properties.
  */
 public class StudentRecord {
 
     public static final int GENDER_TYPE_UNKNOWN = 0;
     public static final int GENDER_TYPE_MALE = 1;
     public static final int GENDER_TYPE_FEMALE = 2;
+    public static final int NAME_FIELD = 20;
 
     private long fileRecordID;
     private int OEN;
@@ -63,7 +67,7 @@ public class StudentRecord {
         }
 
         // trucates or pads the string
-        temp.setLength(20);
+        temp.setLength(NAME_FIELD);
         this.firstName = temp.toString();
     }
 
@@ -81,7 +85,7 @@ public class StudentRecord {
         }
 
         // trucates or pads the string
-        temp.setLength(20);
+        temp.setLength(NAME_FIELD);
         this.lastName = temp.toString();
     }
 
