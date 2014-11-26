@@ -9,10 +9,8 @@ import java.io.*;
 import java.util.Scanner;
 
 /**
- * Name: Aryan Ghahremanzadeh 
- * Date: November 25, 2014 Version: v0.1
- * Teacher:Mr.Muir 
- * Description: This asks a user for input and creates and adds
+ * Name: Aryan Ghahremanzadeh Date: November 25, 2014 Version: v0.1
+ * Teacher:Mr.Muir Description: This asks a user for input and creates and adds
  * student records to a file. User is also able to update the file.
  */
 public class StudentStoreIO {
@@ -21,7 +19,7 @@ public class StudentStoreIO {
     public static Scanner input = new Scanner(System.in);
     public static RandomAccessFile file;
     public static boolean closed;
-    public static final int FILE_SIZE = 93;
+    public static final int FILE_SIZE = 97;
     public static final int NAME_FIELD = 20;
 
     public static void main(String args[]) throws Exception {
@@ -158,8 +156,10 @@ public class StudentStoreIO {
             file.writeChars(record.getFirstName()); //writes the firstname
             file.writeChars(record.getLastName()); //writes the lastname
             file.writeInt(record.getOEN()); //writes the oen
+            file.writeInt(record.getHeight());//writes the height
             file.writeDouble(record.getAverage()); //writes the average
             file.writeBoolean(record.getIEP()); //writes the boolean
+            
         } catch (IOException ex) {
             System.out.println("Error writing file");
         } catch (NullPointerException ex) { //sends message to user if file not found and attempts to open store
@@ -191,6 +191,7 @@ public class StudentStoreIO {
             student.setLastName(new String(lastName)); //sets the last name
 
             student.setOEN(file.readInt()); //sets the oen
+            student.setHeight(file.readInt()); //sets the height
             student.setAverage(file.readDouble()); //sets the average
             student.setIEP(file.readBoolean()); //sets the iep
 
@@ -248,6 +249,25 @@ public class StudentStoreIO {
                 }
             } catch (NumberFormatException nfe) { //if different data type is entered it asks for an integer
                 System.out.println("Please input an integer thats 9 digits long");
+                invalidChoice = true;
+            }
+        } while (invalidChoice);
+
+        do { //loops until a valid choice is entered
+            invalidChoice = false;
+            try {
+                System.out.println("Enter new height or [k]eep current height: [" + student.getOEN() + "] ");
+                String height = input.nextLine(); //gets user input
+                if (!"k".equalsIgnoreCase(height)) { //if value is k it does not set anything
+                    if (Integer.parseInt(height) > 30 && Integer.parseInt(height) < 300) { // sets OEN if valid
+                        student.setHeight(Integer.parseInt(height));
+                    } else { // if not a valid height it prints a error message and loops for height again
+                        System.out.println("Invalid height, make sure it is over 40cm and less than 300cm");
+                        invalidChoice = true;
+                    }
+                }
+            } catch (NumberFormatException nfe) { //if different data type is entered it asks for an integer
+                System.out.println("Please input an integer.");
                 invalidChoice = true;
             }
         } while (invalidChoice);
@@ -317,6 +337,23 @@ public class StudentStoreIO {
                 System.out.println("Invalid OEN, please input an integer that is 9 digits long");
                 invalidChoice = true;
             }
+        } while (invalidChoice);
+
+        do { //loops  if invalid choice is selected
+            invalidChoice = false;
+            try {
+                System.out.println("Enter students height in cm: ");
+                int height = Integer.parseInt(input.nextLine()); //gets oen from user
+                if (height > 30 && height < 300) { // sets OEN if 9 digits long
+                    student.setHeight(height);
+                } else { // if not a valid height it prints a error message and loops for height again
+                    System.out.println("Invalid height, make sure it is over 40cm and less than 300cm");
+                    invalidChoice = true;
+                }
+            } catch (NumberFormatException nfe) { //if string is entered it asks for an integer
+                System.out.println("Invalid height, please input an integer");
+                invalidChoice = true;
+            }
 
         } while (invalidChoice);
 
@@ -358,3 +395,4 @@ public class StudentStoreIO {
     }
 
 }
+

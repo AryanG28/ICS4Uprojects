@@ -202,7 +202,7 @@ public class StudentRecord {
                 + "\n\t Last Name= " + lastName
                 + "\n\t Average= " + average
              //   + "\n\t External comments= " + secretComment
-             //   + "\n\t Height= " + height
+                + "\n\t Height= " + height
               //  + "\n\t Gender= " + getGenderName()
                 + "\n\t IEP= " + IEP;
               //  + "\n\t School= " + School;
