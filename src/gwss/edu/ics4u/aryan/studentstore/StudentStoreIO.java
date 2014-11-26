@@ -9,8 +9,10 @@ import java.io.*;
 import java.util.Scanner;
 
 /**
- * Name: Aryan Ghahremanzadeh Date: November 25, 2014 Version: v0.1
- * Teacher:Mr.Muir Description: This asks a user for input and creates and adds
+ * Name: Aryan Ghahremanzadeh 
+ * Date: November 25, 2014 Version: v0.1
+ * Teacher:Mr.Muir 
+ * Description: This asks a user for input and creates and adds
  * student records to a file. User is also able to update the file.
  */
 public class StudentStoreIO {
