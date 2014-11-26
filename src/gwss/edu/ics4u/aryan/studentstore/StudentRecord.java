@@ -27,6 +27,7 @@ public class StudentRecord {
     private int gender;
     private boolean IEP;
     private double average;
+    private char learningSkill;
 
     public StudentRecord() {
       fileRecordID = -1;
@@ -89,6 +90,18 @@ public class StudentRecord {
         this.lastName = temp.toString();
     }
 
+    public void setLearningSkill (char learningSkill) {
+        if (learningSkill == 'e' || learningSkill == 'g' || learningSkill == 's' || learningSkill == 'E' || learningSkill == 'G' || learningSkill == 'S') {
+            this.learningSkill = learningSkill;
+        } else {
+            System.out.println("Invalid Char");
+        }
+    }
+    
+    public char getLearningSkill () {
+        return learningSkill;
+    }
+    
     public School getSchool() {
         return School;
     }
@@ -204,6 +217,7 @@ public class StudentRecord {
              //   + "\n\t External comments= " + secretComment
                 + "\n\t Height= " + height
               //  + "\n\t Gender= " + getGenderName()
+                + "\n\t Student Learning= " + learningSkill
                 + "\n\t IEP= " + IEP;
               //  + "\n\t School= " + School;
     }

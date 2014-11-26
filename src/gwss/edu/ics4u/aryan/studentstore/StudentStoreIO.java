@@ -19,7 +19,7 @@ public class StudentStoreIO {
     public static Scanner input = new Scanner(System.in);
     public static RandomAccessFile file;
     public static boolean closed;
-    public static final int FILE_SIZE = 97;
+    public static final int FILE_SIZE = 99;
     public static final int NAME_FIELD = 20;
 
     public static void main(String args[]) throws Exception {
@@ -159,7 +159,8 @@ public class StudentStoreIO {
             file.writeInt(record.getHeight());//writes the height
             file.writeDouble(record.getAverage()); //writes the average
             file.writeBoolean(record.getIEP()); //writes the boolean
-            
+            file.writeChar(record.getLearningSkill()); //writes a char
+
         } catch (IOException ex) {
             System.out.println("Error writing file");
         } catch (NullPointerException ex) { //sends message to user if file not found and attempts to open store
@@ -194,6 +195,7 @@ public class StudentStoreIO {
             student.setHeight(file.readInt()); //sets the height
             student.setAverage(file.readDouble()); //sets the average
             student.setIEP(file.readBoolean()); //sets the iep
+            student.setLearningSkill(file.readChar()); //
 
             System.out.println(student.toString()); //prints it out
 
@@ -256,7 +258,7 @@ public class StudentStoreIO {
         do { //loops until a valid choice is entered
             invalidChoice = false;
             try {
-                System.out.println("Enter new height or [k]eep current height: [" + student.getOEN() + "] ");
+                System.out.println("Enter new height or [k]eep current height: [" + student.getHeight() + "] ");
                 String height = input.nextLine(); //gets user input
                 if (!"k".equalsIgnoreCase(height)) { //if value is k it does not set anything
                     if (Integer.parseInt(height) > 30 && Integer.parseInt(height) < 300) { // sets OEN if valid
@@ -302,6 +304,24 @@ public class StudentStoreIO {
                     student.setIEP(false);
                 } else { // it asks user to enter true or false if text says anything else
                     System.out.println("Please enter true or false");
+                    invalidChoice = true;
+                }
+            }
+        } while (invalidChoice);
+
+        do { //loops until a valid choice is entered
+            invalidChoice = false;
+            System.out.println("Enter student learning skill (E-excellent, G-good, B-bad) or [k]eep current: [" + student.getLearningSkill() + "]");
+            String learningSkill = input.nextLine();
+            if (!"k".equalsIgnoreCase(learningSkill)) { //if value is k it does not set anything
+                if (learningSkill.equalsIgnoreCase("E")) { // if the text says E it sets learning skill to E
+                    student.setLearningSkill('E');
+                } else if (learningSkill.equalsIgnoreCase("G")) { //if the text says g it learning skill to g
+                    student.setLearningSkill('G');
+                } else if (learningSkill.equalsIgnoreCase("B")) { //if the text says b it learning skill to b
+                    student.setLearningSkill('B');
+                } else { // it asks user to enter true or false if text says anything else
+                    System.out.println("Please enter E, G or B");
                     invalidChoice = true;
                 }
             }
@@ -389,10 +409,25 @@ public class StudentStoreIO {
 
         } while (invalidChoice);
 
+        do { //loops until a valid choice is entered
+            invalidChoice = false;
+            System.out.println("Enter student learning skill (E-excellent, G-good, B-bad)");
+            String learningSkill = input.nextLine();
+            if (learningSkill.equalsIgnoreCase("E")) { // if the text says E it sets learning skill to E
+                student.setLearningSkill('E');
+            } else if (learningSkill.equalsIgnoreCase("G")) { //if the text says g it learning skill to g
+                student.setLearningSkill('G');
+            } else if (learningSkill.equalsIgnoreCase("B")) { //if the text says b it learning skill to b
+                student.setLearningSkill('B');
+            } else { // it asks user to enter true or false if text says anything else
+                System.out.println("Please enter E, G or B");
+                invalidChoice = true;
+            }
+        } while (invalidChoice);
+
         student.setFileRecordID(-1); //sets fileID to -1 so when writefile gets called it will add to end of file
         return student;
 
     }
 
 }
-
