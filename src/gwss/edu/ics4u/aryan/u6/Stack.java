@@ -10,7 +10,7 @@ package gwss.edu.ics4u.aryan.u6;
  * @author snake
  */
 public class Stack implements StackInterface {
-    
+
     int top;
     int data[];
 
@@ -21,38 +21,46 @@ public class Stack implements StackInterface {
 
     @Override
     public int top() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return data[top];
     }
 
     @Override
     public int pop() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return data[top--];
     }
 
     @Override
     public void push(int num) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (!isFull()) {
+            top++;
+            data[top] = num;
+            System.out.println("You pushed: " + data[top]);
+
+        } else {
+            System.out.println("stack is full");
+        }
     }
 
     @Override
     public int size() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int size = top + 1;
+        return size;
     }
 
     @Override
     public boolean isEmpty() {
-        if (top== -1)
+        if (top == -1) {
             return true;
-        else {
+        } else {
             return false;
         }
     }
 
     @Override
     public boolean isFull() {
-       if (top== data.length -1 )
+        if (top == data.length - 1) {
             return true;
-        else {
+        } else {
             return false;
         }
     }
@@ -61,5 +69,8 @@ public class Stack implements StackInterface {
     public void makeEmpty() {
         top = -1;
     }
-    
+
+    public static void main(String[] args) {
+
+    }
 }
