@@ -12,7 +12,7 @@ public class Node implements NodeInterface {
         this.data = newData;
         this.next = null;
     }
-
+// dont pass a node let link list handle it
     @Override
     public Node getNext() {
         throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
