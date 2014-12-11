@@ -14,8 +14,6 @@ import java.util.Arrays;
 public class Queue implements QueueInterface {
 
     int size;
-    int first;
-    int last;
     int[] data = new int[5];
 
     public Queue(int size) {
@@ -50,7 +48,6 @@ public class Queue implements QueueInterface {
                 data[j - 1] = temp;
                 data[j] = 0;
             }
-            //return i; 
         }
         return i;
     }

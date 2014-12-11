@@ -60,7 +60,7 @@ public class LinkList implements LinkListInterface {
 
     @Override
     public void remove(String str) {
-
+//if size==1
         Node current = this.head;
         if (current.getData().equalsIgnoreCase(str)) {
             this.head = current.getNext();
@@ -115,7 +115,7 @@ public class LinkList implements LinkListInterface {
         System.out.println(l.size());
         System.out.println(l.toString());
 //        System.out.println(l.size());
-//        l.remove("swagagagag");
+      l.remove("swagagagag");
 //        System.out.println(l.size());
 //        l.remove("FIRST");
 

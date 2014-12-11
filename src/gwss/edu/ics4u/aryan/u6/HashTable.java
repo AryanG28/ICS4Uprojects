@@ -66,7 +66,6 @@ public class HashTable implements HashTableInterface {
 
     @Override
     public void resize() {
-        numberOfCollisions = 0;
         int newCapacity = (int) (size() / 0.25);
         int temp[] = new int[capacity()];
         for (int i = 0; i < temp.length; i++) {
@@ -167,12 +166,12 @@ public class HashTable implements HashTableInterface {
 //        h.displayArray();
 //        System.out.println();
 
-        for (int i = 0; i < 19; i++) {
-            h.put((int) ((Math.random()) * -5));
+        for (int i = 0; i < 18; i++) {
+            h.put((int) ((Math.random()) * 10000));
         }
         // System.out.println("added only 10 numbers. halfway there");
         h.displayArray();
-        System.out.println("Size: " + h.size() + "  capacity: " + h.capacity() + "  Collisions: " + h.numberOfCollisions + "  Load Factor: " + h.loadFactor());
+        System.out.println("Size: " + h.size() + "  capacity: " + h.capacity() + "  Collisions: " + h.numberOfCollisions + "  Load Factor: " + h.loadFactor() + "%");
         System.out.println();
 //        for (int i = 0; i < 10; i++) {
 //            h.put((int) (Math.random() * 5));
