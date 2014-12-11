@@ -1,6 +1,6 @@
 /*
  * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template file, choose snakeeeTools | Templates
  * and open the template in the editor.
  */
 package gwss.edu.ics4u.aryan.u6;
@@ -35,11 +35,14 @@ public class LinkList implements LinkListInterface {
 
     @Override
     public void addAtFront(String str) {
-        Node newTail = new Node(str);
-        this.tail.setNext(newTail);
-        this.tail = newTail;
+        Node newHead = new Node(str);
         if (size() == 0) {
-            this.head = newTail;
+            this.head = newHead;
+            this.tail = newHead;
+        } else {
+            Node temp = this.head;
+            this.head = newHead;
+            this.head.setNext(temp);
         }
     }
 
@@ -48,9 +51,10 @@ public class LinkList implements LinkListInterface {
         Node newTail = new Node(str);
         if (size() == 0) {
             this.head = newTail;
-            this.tail =newTail;
-        }else  {
+            this.tail = newTail;
+        } else {
             this.tail.setNext(newTail);
+            this.tail = newTail;
         }
     }
 
@@ -58,35 +62,70 @@ public class LinkList implements LinkListInterface {
     public void remove(String str) {
 
         Node current = this.head;
-        boolean removed = false;
-
         if (current.getData().equalsIgnoreCase(str)) {
             this.head = current.getNext();
-            current.setNext(null);
         } else {
 
-            while (!current.getNext().getData().equalsIgnoreCase(str)) {
+            while (!current.getNext().getData().equalsIgnoreCase(str) && current.getNext() != null) {
                 current = current.getNext();
             }
-            current.setNext(current.getNext().getNext());
-            removed = true;
+            if (current.getNext() != null) {
+                current.setNext(current.getNext().getNext());
+            } else {
+                System.out.print("Could not find");
+            }
 
         }
 //abstract data type is performance task
     }
-    
-    public String toString( ) {
-        return "---------------------------------"
-                + "\n\t Head = " + head.getData()
-                + "\n\t Tail = " + tail.getData();
-              //  + "\n\t School= " + School;
+
+    public String toString() {
+        String s = "";
+
+        if (head != null) {
+            Node n = head;
+            do {
+                s += n.getData() + " ";
+                n = n.getNext();
+            } while (n != null);
+        }
+        return s;
     }
-    
-    public static void main(String[]args) {
+
+//    public static void main(String[] args) {
+//        LinkList l = new LinkList();
+//        l.addAtEnd("swag");
+//        l.addAtFront("no future");
+//        l.addAtEnd("snake");
+//        System.out.println(l.toString());
+//    }
+    public static void main(String[] args) {
+        // TODO code application logic here
+
         LinkList l = new LinkList();
-        l.addAtEnd("swag");
-        l.addAtEnd("no future");
-        l.addAtFront("snake");
+        l.addAtFront("first");
+        System.out.println(l.size());
+        l.addAtEnd("first1");
+         System.out.println(l.size());
+        l.addAtFront("wedf");
+        l.addAtFront("fjksdg");
+        l.addAtEnd("end");
+        l.addAtFront("sdgfsdg");
+        l.addAtEnd("real");
+        System.out.println(l.size());
+        System.out.println(l.toString());
+//        System.out.println(l.size());
+//        l.remove("swagagagag");
+//        System.out.println(l.size());
+//        l.remove("FIRST");
+
+//        System.out.println(l.size());
+//        l.makeEmpty();
+//        System.out.println(l.size());
+
+        // l.addAtEnd("end");
+        System.out.println(l.size());
         System.out.println(l.toString());
     }
+
 }

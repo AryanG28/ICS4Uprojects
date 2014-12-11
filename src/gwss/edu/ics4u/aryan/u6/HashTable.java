@@ -15,9 +15,13 @@ public class HashTable implements HashTableInterface {
     public int numberOfCollisions;
 
     public HashTable(int requestedInitialSize) {
-        int initialSize = findNextPrimeNumber(requestedInitialSize);
-        table = new int[initialSize];
-        makeEmpty();
+        if (requestedInitialSize < 0) {
+            System.out.println("Invalid initial size!");
+        } else {
+            int initialSize = findNextPrimeNumber(requestedInitialSize);
+            table = new int[initialSize];
+            makeEmpty();
+        }
 
     }
 
@@ -43,11 +47,17 @@ public class HashTable implements HashTableInterface {
         return (factors == 2);
     }
 
+    public void displayArray() {
+        for (int i = 0; i < table.length; i++) {
+            System.out.println(table[i]);
+        }
+    }
+
     @Override
     public int size() {
         int counter = 0;
         for (int i = 0; i < table.length; i++) {
-            if (table[i] == -1) {
+            if (table[i] != -1) {
                 counter++;
             }
         }
@@ -56,15 +66,21 @@ public class HashTable implements HashTableInterface {
 
     @Override
     public void resize() {
-      
+        numberOfCollisions = 0;
         int newCapacity = (int) (size() / 0.25);
         int temp[] = new int[capacity()];
+        for (int i = 0; i < temp.length; i++) {
+            temp[i] = -1;
+        }
         for (int i = 0; i < table.length; i++) {
             temp[i] = table[i];
         }
         table = new int[newCapacity];
+        this.makeEmpty();
         for (int i = 0; i < temp.length; i++) {
-            put(temp[i]);
+            if (temp[i] != -1) {
+                table[hash(temp[i])] = temp[i];
+            }
         }
     }
 
@@ -75,7 +91,7 @@ public class HashTable implements HashTableInterface {
 
     @Override
     public double loadFactor() {
-        return (size() / capacity());
+        return (100 * ((double) size() / (double) capacity()));
     }
 
     @Override
@@ -86,8 +102,8 @@ public class HashTable implements HashTableInterface {
     }
 
     @Override
-    public void isEmpty() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean isEmpty() {
+        return (size() == 0);
     }
 
     @Override
@@ -97,7 +113,7 @@ public class HashTable implements HashTableInterface {
 
     @Override
     public void put(int value) {
-        if (loadFactor() > 0.75 ) {
+        if (loadFactor() > 75) {
             resize();
         }
         table[hash(value)] = value;
@@ -110,12 +126,13 @@ public class HashTable implements HashTableInterface {
 
     @Override
     public int hash(int key) {
-        int initialIndex = key % capacity();
+        int initialIndex = Math.abs(key % capacity());
         int index = initialIndex;
         while (index < table.length) {
             if (table[index] == -1) {
                 return index;
             } else {
+                numberOfCollisions++;
                 index++;
             }
         }
@@ -125,10 +142,12 @@ public class HashTable implements HashTableInterface {
             if (table[index] == -1) {
                 return index;
             } else {
+                numberOfCollisions++;
                 index++;
             }
         }
         return -1;
+
 //
 //        index = initialIndex;
 //        while (index >= 0) {
@@ -138,7 +157,38 @@ public class HashTable implements HashTableInterface {
 //                index--;
 //            }
 //        }
+    }
 
+    public static void main(String[] args) {
+        HashTable h = new HashTable(20);
+//        System.out.println("Empty array: ");
+//        System.out.println("IsEmpty: " + h.isEmpty());
+//        System.out.println("Size: " + h.size() + "  capacity: " + h.capacity() + "  Collisions: " + h.numberOfCollisions + "  Load Factor: " + h.loadFactor());
+//        h.displayArray();
+//        System.out.println();
+
+        for (int i = 0; i < 19; i++) {
+            h.put((int) ((Math.random()) * -5));
+        }
+        // System.out.println("added only 10 numbers. halfway there");
+        h.displayArray();
+        System.out.println("Size: " + h.size() + "  capacity: " + h.capacity() + "  Collisions: " + h.numberOfCollisions + "  Load Factor: " + h.loadFactor());
+        System.out.println();
+//        for (int i = 0; i < 10; i++) {
+//            h.put((int) (Math.random() * 5));
+//        }
+//
+//        h.displayArray();
+//        System.out.println("Size: " + h.size() + "  capacity: " + h.capacity() + "  Collisions: " + h.numberOfCollisions + "  Load Factor: " + h.loadFactor());
+//
+//        System.out.println();
+//        System.out.println(h.get(55));
+//
+//        System.out.println("Making empty....");
+//        h.makeEmpty();
+//        System.out.println("Displaying array: ");
+//        h.displayArray();
+//        System.out.println("IsEmpty: " + h.isEmpty());
     }
 
 }

@@ -16,7 +16,7 @@ public interface HashTableInterface {
 
     public void makeEmpty();
 
-    public void isEmpty();
+    public boolean isEmpty();
 
     public int get( int key );
 

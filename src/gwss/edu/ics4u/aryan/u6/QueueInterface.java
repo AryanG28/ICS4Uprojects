@@ -5,7 +5,7 @@ package gwss.edu.ics4u.aryan.u6;
  */
 public interface QueueInterface {
     
-    public int enqueue();
+    public void enqueue( int value );
 
     public int dequeue();
 
