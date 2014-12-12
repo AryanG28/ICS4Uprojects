@@ -5,6 +5,8 @@
  */
 package gwss.edu.ics4u.aryan.u6;
 
+import edu.hdsb.gwss.muir.ics4u.u6.HashTableInterface;
+
 /**
  *
  * @author Aryan
@@ -189,5 +191,6 @@ public class HashTable implements HashTableInterface {
 //        h.displayArray();
 //        System.out.println("IsEmpty: " + h.isEmpty());
     }
+
 
 }

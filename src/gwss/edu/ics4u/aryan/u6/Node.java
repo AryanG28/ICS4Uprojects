@@ -1,14 +1,17 @@
 package gwss.edu.ics4u.aryan.u6;
 
+
+
 /**
  * Lesson: 6.03 - a Node
  */
-public class Node implements NodeInterface {
+public class Node extends edu.hdsb.gwss.muir.ics4u.u6.Node {
     //
     private String data;
     private Node next;
 
     public Node( String newData ) {
+        super(newData);
         this.data = newData;
         this.next = null;
     }
@@ -18,7 +21,6 @@ public class Node implements NodeInterface {
         return this.next;
     }
 
-    @Override
     public void setNext( Node newNode ) {
         this.next = newNode;
     }
@@ -27,5 +29,6 @@ public class Node implements NodeInterface {
     public String getData() {
         return this.data;
     }       
+
 
 }

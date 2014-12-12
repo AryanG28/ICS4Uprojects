@@ -5,6 +5,8 @@
  */
 package gwss.edu.ics4u.aryan.u6;
 
+import edu.hdsb.gwss.muir.ics4u.u6.LinkListInterface;
+
 /**
  *
  * @author Aryan
@@ -60,23 +62,27 @@ public class LinkList implements LinkListInterface {
 
     @Override
     public void remove(String str) {
-//if size==1
         Node current = this.head;
         if (current.getData().equalsIgnoreCase(str)) {
             this.head = current.getNext();
         } else {
 
-            while (!current.getNext().getData().equalsIgnoreCase(str) && current.getNext() != null) {
+            while (current.getNext() != null && !current.getNext().getData().equalsIgnoreCase(str)) {
                 current = current.getNext();
             }
             if (current.getNext() != null) {
                 current.setNext(current.getNext().getNext());
             } else {
-                System.out.print("Could not find");
+                System.out.println("Could not find");
             }
 
         }
 //abstract data type is performance task
+    }
+    
+        @Override
+    public boolean isEmpty() {
+        return (head==null && tail==null);
     }
 
     public String toString() {
@@ -127,5 +133,6 @@ public class LinkList implements LinkListInterface {
         System.out.println(l.size());
         System.out.println(l.toString());
     }
+
 
 }

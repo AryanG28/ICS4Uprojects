@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gwss.edu.ics4u.aryan.u6;
 
-import java.util.Arrays;
+
+package gwss.edu.ics4u.aryan.u6; 
+
+import edu.hdsb.gwss.muir.ics4u.u6.QueueInterface;
 
 /**
  *
@@ -13,93 +15,116 @@ import java.util.Arrays;
  */
 public class Queue implements QueueInterface {
 
-    int size;
-    int[] data = new int[5];
+    int[] data;
+    int tail;
+    int head;
 
     public Queue(int size) {
         this.data = new int[size];
+        this.head = -1;
+        this.tail = -1;
     }
 
     @Override
     public void enqueue(int value) {
         if (isEmpty()) {
             data[0] = value;
-            size++;
+            this.head = 0;
+            this.tail = 0;
         } else if (!isFull()) {
-            for (int i = 0; i < size; i++) {
-                int temp = data[i];
-                data[i + 1] = temp;
+            this.tail++;
+            if (this.tail >= data.length) {
+                this.tail = 0;
             }
-            data[0] = value;
-            size++;
+            data[this.tail] = value;
+        } else {
+            System.out.println("Queue is full!");
         }
+
     }
 
     @Override
     public int dequeue() {
-        int i;
+        int value;
         if (isEmpty()) {
-            i = -1;
+            System.out.println("Queue is Empty!");
+            //what to return??
+            value = -1;
+        } else if (head == tail) {
+            value = data[head];
+            makeEmpty();
         } else {
-            i = data[0];
-            size--;
-            for (int j = size; j > 0; j--) {
-                int temp = data[j];
-                data[j - 1] = temp;
-                data[j] = 0;
-            }
+            value = data[head];
+            this.head++;
+            if (this.head >= data.length) {
+                this.head = 0;
+            }          
         }
-        return i;
+        return value;
     }
 
     @Override
     public int size() {
-        return size;
+        if (isEmpty()) {
+            return 0;
+        }
+        if (head <= tail) {
+            return tail - head + 1;
+        } else {
+            return (data.length) - head + tail + 1;
+        }
     }
 
     @Override
     public boolean isEmpty() {
-        return (size == 0);
+        return (head == -1 && tail == -1);
     }
 
     @Override
     public boolean isFull() {
-        return (size == data.length);
+        return (size() == data.length);
     }
 
     @Override
     public void makeEmpty() {
-        for (int i = 0; i < size; i++) {
-            data[i] = 0;
-        }
-        size = 0;
+//        for (int i = 0; i < data.length; i++) {
+//            data[i] = 0;
+//        }
+        this.head = -1;
+        this.tail = -1;
 
     }
 
     public static void main(String[] args) {
-        // TODO code application logic here
         Queue q = new Queue(5);
-        // q.data = new int [5];
+
+        System.out.println("Adding to the queue...");
+        q.enqueue(1);
+        q.enqueue(2);
+        q.enqueue(3);
+        q.enqueue(4);
         q.enqueue(5);
-        q.enqueue(7);
-        System.out.println(Arrays.toString(q.data));
-        System.out.println(q.size());
-        q.dequeue();
-        System.out.println(Arrays.toString(q.data));
-        System.out.println(q.size());
-        q.makeEmpty();
-        System.out.println(q.size());
-        System.out.println(q.isEmpty());
-        System.out.println(Arrays.toString(q.data));
-        q.enqueue(5);
-        q.enqueue(5);
-        q.enqueue(5);
-        q.enqueue(5);
-        q.enqueue(5);
-        System.out.println(Arrays.toString(q.data));
-        System.out.println(q.isEmpty());
-        System.out.println(q.isFull());
-        q.enqueue(8);
+
+
+        for (int i = 0; i < 6; i++) {
+            System.out.println(q.dequeue());
+        }
+
+    }
+
+    @Override
+    public int front() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int back() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int capacity() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

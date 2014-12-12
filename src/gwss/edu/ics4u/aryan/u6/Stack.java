@@ -6,7 +6,7 @@
 package gwss.edu.ics4u.aryan.u6;
 
 import java.util.Arrays;
-
+import edu.hdsb.gwss.muir.ics4u.u6.StackInterface;
 /**
  *
  * @author snake
@@ -83,6 +83,12 @@ public class Stack implements StackInterface {
         }
 
     }
+    
+    
+    @Override
+    public int capacity() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     public static void main(String[] args) {
         // TODO code application logic here
@@ -101,6 +107,12 @@ public class Stack implements StackInterface {
         s.pop();
         System.out.println(Arrays.toString(s.data));
         System.out.println(s.pop());
+        System.out.println(s.pop());
+        System.out.println(s.pop());
+        System.out.println(s.pop());
+        System.out.println(s.pop());
+        System.out.println(s.pop());
+        
         System.out.println(Arrays.toString(s.data));
 
 //        System.out.println(s.top);
@@ -109,4 +121,5 @@ public class Stack implements StackInterface {
 //         System.out.println(Arrays.toString(s.data));
 //        
     }
+
 }
