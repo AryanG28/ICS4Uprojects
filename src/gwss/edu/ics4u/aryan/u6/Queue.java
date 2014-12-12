@@ -3,9 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
-package gwss.edu.ics4u.aryan.u6; 
+package gwss.edu.ics4u.aryan.u6;
 
 import edu.hdsb.gwss.muir.ics4u.u6.QueueInterface;
 
@@ -58,7 +56,7 @@ public class Queue implements QueueInterface {
             this.head++;
             if (this.head >= data.length) {
                 this.head = 0;
-            }          
+            }
         }
         return value;
     }
@@ -95,21 +93,24 @@ public class Queue implements QueueInterface {
 
     }
 
-    public static void main(String[] args) {
-        Queue q = new Queue(5);
 
-        System.out.println("Adding to the queue...");
-        q.enqueue(1);
-        q.enqueue(2);
-        q.enqueue(3);
-        q.enqueue(4);
-        q.enqueue(5);
-
-
-        for (int i = 0; i < 6; i++) {
-            System.out.println(q.dequeue());
+    public void displayQueue() {
+        for (int i = 0; i < data.length; i++) {
+            if (this.head == i && this.tail == i) {
+                System.out.format("%4s", "FB");
+            } else if (this.head == i) {
+                System.out.format("%4s", "F-");
+            } else if (this.tail == i) {
+                System.out.format("%4s", "B-");
+            } else {
+                System.out.format("%4s", "");
+            }
         }
-
+        System.out.println();
+        for (int i = 0; i < data.length; i++) {
+            System.out.format("%4s", data[i] + "-");
+        }
+        System.out.println();
     }
 
     @Override
@@ -127,4 +128,22 @@ public class Queue implements QueueInterface {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+        public static void main(String[] args) {
+        Queue q = new Queue(5);
+
+        System.out.println("Adding to the queue...");
+        q.enqueue(1);
+        q.enqueue(2);
+        q.enqueue(3);
+        q.enqueue(4);
+        q.enqueue(5);
+
+        for (int i = 0; i < 6; i++) {
+            System.out.println(q.dequeue());
+        }
+        q.displayQueue();
+
+    }
+
+        
 }

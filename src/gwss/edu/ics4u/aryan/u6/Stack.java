@@ -87,7 +87,7 @@ public class Stack implements StackInterface {
     
     @Override
     public int capacity() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return data.length;
     }
 
     public static void main(String[] args) {
