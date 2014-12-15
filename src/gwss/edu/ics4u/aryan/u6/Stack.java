@@ -30,7 +30,6 @@ public class Stack implements StackInterface {
     public int pop() {
         if (!this.isEmpty()) {
             int value = data[top];
-            data[top] =0;
             top--;
             return value;
         } else {
@@ -52,9 +51,7 @@ public class Stack implements StackInterface {
     @Override
     public int size() {
         if (!isEmpty()) {
-
-            int size = top + 1;
-            return size;
+            return (top + 1);
         } else {
             return 0;
         }
@@ -78,10 +75,6 @@ public class Stack implements StackInterface {
     @Override
     public void makeEmpty() {
         top = -1;
-        for (int i = 0; i < data.length; i++) {
-            data[i] = -1;
-        }
-
     }
     
     

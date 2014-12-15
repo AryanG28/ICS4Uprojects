@@ -69,18 +69,16 @@ public class HashTable implements HashTableInterface {
     @Override
     public void resize() {
         int newCapacity = (int) (size() / 0.25);
-        int temp[] = new int[capacity()];
-        for (int i = 0; i < temp.length; i++) {
-            temp[i] = -1;
-        }
-        for (int i = 0; i < table.length; i++) {
-            temp[i] = table[i];
-        }
-        table = new int[newCapacity];
-        this.makeEmpty();
-        for (int i = 0; i < temp.length; i++) {
-            if (temp[i] != -1) {
-                table[hash(temp[i])] = temp[i];
+        newCapacity = findNextPrimeNumber(newCapacity);
+
+        int[] old = this.table;
+
+        this.table = new int[newCapacity];
+        makeEmpty();
+
+        for (int i = 0; i < old.length; i++) {
+            if (old[i] != -1) {
+                put(old[i]);
             }
         }
     }
@@ -109,45 +107,132 @@ public class HashTable implements HashTableInterface {
 
     @Override
     public int get(int key) {
-        return table[hash(key)];
+        int initialIndex = hash(key);
+        int startIndex = initialIndex;
+        int endIndex = table.length;
+        boolean keepGoing = true;
+        while (true) {
+            while (startIndex < endIndex) {//use inserted, resize at end
+                if (table[startIndex] == key) {
+                    return table[startIndex];
+                }
+
+            }
+            if (!keepGoing) {
+                return -1;
+            }
+            startIndex = 0;
+            endIndex = initialIndex;
+            keepGoing = false;
+        }
+//        if (containsKey(key)) {
+//
+//            while (startIndex < table.length) {
+//                if (table[startIndex] == key) {
+//                    return table[startIndex];
+//                }
+//                startIndex++;
+//            }
+//
+//            startIndex = 0;
+//            while (startIndex < initialIndex) {
+//                if (table[startIndex] == key) {
+//                    return table[startIndex];
+//                }
+//                startIndex++;
+//            }
+//        }
+///////?
     }
 
     @Override
-    public void put(int value) {
+    public void put(int value) { /////??
+        int initialIndex = hash(value);
+        int index = initialIndex;
+        boolean inserted = false;
+
+        while (!inserted) {
+            while (!inserted && index < table.length) {//use inserted, resize at end
+                if (table[index] == -1) {
+                    table[index] = value;
+                    inserted = true;
+                } else {
+                    numberOfCollisions++;
+                    index++;
+                }
+            }
+            index = 0;
+        }
         if (loadFactor() > 75) {
             resize();
         }
-        table[hash(value)] = value;
     }
 
     @Override
     public boolean containsKey(int key) {
-        return (table[hash(key)] == key);
+        int index = hash(key);
+        while (true) {
+            for (int i = index; i < table.length; i++) {
+                if (table[i] == key) {
+                    return true;
+                }
+                if (table[i] == -1) {
+                    return false;
+                }
+            }
+            index = 0;
+        }
+
+        //return hash(key) != -1; //hash then go down until it equals value or negative one
+//        int initialIndex = hash(key);
+//        if (table[hash(key)] == -1) {
+//            return false;
+//        } else {
+//            int index = initialIndex;
+//            while (index < table.length) {
+//                if (table[index] == key) {
+//                    return true;
+//                } else {
+//                    index++;
+//                }
+//            }
+//
+//            index = 0;
+//            while (index < initialIndex) {
+//                if (table[index] == key) {
+//                    return true;
+//                } else {
+//                    index++;
+//                }
+//            }
+//            return false;
+//        }
+        //calls hash
     }
 
     @Override
-    public int hash(int key) {
-        int initialIndex = Math.abs(key % capacity());
-        int index = initialIndex;
-        while (index < table.length) {
-            if (table[index] == -1) {
-                return index;
-            } else {
-                numberOfCollisions++;
-                index++;
-            }
-        }
-
-        index = 0;
-        while (index < initialIndex) {
-            if (table[index] == -1) {
-                return index;
-            } else {
-                numberOfCollisions++;
-                index++;
-            }
-        }
-        return -1;
+    public int hash(int key) { //////??????
+        return key % capacity();
+//        int index = initialIndex;
+//        while (index < table.length) {
+//            if (table[index] == -1) {
+//                return index;
+//            } else {
+//                numberOfCollisions++;
+//                index++;
+//            }
+//        }
+//
+//        index = 0;
+//        while (index < initialIndex) {
+//            if (table[index] == -1) {
+//                return index;
+//            } else {
+//                numberOfCollisions++;
+//                index++;
+//            }
+//        }
+//        return -1;
 
 //
 //        index = initialIndex;
@@ -162,11 +247,15 @@ public class HashTable implements HashTableInterface {
 
     public static void main(String[] args) {
         HashTable h = new HashTable(20);
-//        System.out.println("Empty array: ");
-//        System.out.println("IsEmpty: " + h.isEmpty());
-//        System.out.println("Size: " + h.size() + "  capacity: " + h.capacity() + "  Collisions: " + h.numberOfCollisions + "  Load Factor: " + h.loadFactor());
-//        h.displayArray();
-//        System.out.println();
+        System.out.println(h.capacity());
+        h.put(2);
+        h.resize();
+        System.out.println(h.capacity());
+        System.out.println("Empty array: ");
+        System.out.println("IsEmpty: " + h.isEmpty());
+        System.out.println("Size: " + h.size() + "  capacity: " + h.capacity() + "  Collisions: " + h.numberOfCollisions + "  Load Factor: " + h.loadFactor());
+        h.displayArray();
+        System.out.println();
 
         for (int i = 0; i < 18; i++) {
             h.put((int) ((Math.random()) * 10000));
@@ -174,7 +263,7 @@ public class HashTable implements HashTableInterface {
         // System.out.println("added only 10 numbers. halfway there");
         h.displayArray();
         System.out.println("Size: " + h.size() + "  capacity: " + h.capacity() + "  Collisions: " + h.numberOfCollisions + "  Load Factor: " + h.loadFactor() + "%");
-        System.out.println();
+//        System.out.println();
 //        for (int i = 0; i < 10; i++) {
 //            h.put((int) (Math.random() * 5));
 //        }
@@ -191,6 +280,5 @@ public class HashTable implements HashTableInterface {
 //        h.displayArray();
 //        System.out.println("IsEmpty: " + h.isEmpty());
     }
-
 
 }

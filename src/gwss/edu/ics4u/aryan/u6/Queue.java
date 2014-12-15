@@ -14,27 +14,28 @@ import edu.hdsb.gwss.muir.ics4u.u6.QueueInterface;
 public class Queue implements QueueInterface {
 
     int[] data;
-    int tail;
-    int head;
+    int back;
+    int front;
 
     public Queue(int size) {
         this.data = new int[size];
-        this.head = -1;
-        this.tail = -1;
+        this.front = -1;
+        this.back = -1;
     }
 
     @Override
     public void enqueue(int value) {
         if (isEmpty()) {
             data[0] = value;
-            this.head = 0;
-            this.tail = 0;
+            this.front = 0;
+            this.back = 0;
         } else if (!isFull()) {
-            this.tail++;
-            if (this.tail >= data.length) {
-                this.tail = 0;
-            }
-            data[this.tail] = value;
+            back = (back +1) % data.length;
+//            this.back++;
+//            if (this.back >= data.length) {
+//                this.back = 0;
+//            }
+            data[this.back] = value;
         } else {
             System.out.println("Queue is full!");
         }
@@ -42,21 +43,17 @@ public class Queue implements QueueInterface {
     }
 
     @Override
-    public int dequeue() {
+    public int dequeue() { //more effcient
         int value;
         if (isEmpty()) {
             System.out.println("Queue is Empty!");
-            //what to return??
             value = -1;
-        } else if (head == tail) {
-            value = data[head];
+        } else if (front == back) {
+            value = data[front];
             makeEmpty();
         } else {
-            value = data[head];
-            this.head++;
-            if (this.head >= data.length) {
-                this.head = 0;
-            }
+            value = data[front];
+            front = (front +1) % data.length;
         }
         return value;
     }
@@ -66,16 +63,16 @@ public class Queue implements QueueInterface {
         if (isEmpty()) {
             return 0;
         }
-        if (head <= tail) {
-            return tail - head + 1;
+        if (front <= back) {
+            return back - front + 1;
         } else {
-            return (data.length) - head + tail + 1;
+            return (data.length) - front + back + 1;
         }
     }
 
     @Override
     public boolean isEmpty() {
-        return (head == -1 && tail == -1);
+        return (front == -1 && back == -1);
     }
 
     @Override
@@ -85,22 +82,20 @@ public class Queue implements QueueInterface {
 
     @Override
     public void makeEmpty() {
-//        for (int i = 0; i < data.length; i++) {
-//            data[i] = 0;
-//        }
-        this.head = -1;
-        this.tail = -1;
+
+        this.front = -1;
+        this.back = -1;
 
     }
 
 
     public void displayQueue() {
         for (int i = 0; i < data.length; i++) {
-            if (this.head == i && this.tail == i) {
+            if (this.front == i && this.back == i) {
                 System.out.format("%4s", "FB");
-            } else if (this.head == i) {
+            } else if (this.front == i) {
                 System.out.format("%4s", "F-");
-            } else if (this.tail == i) {
+            } else if (this.back == i) {
                 System.out.format("%4s", "B-");
             } else {
                 System.out.format("%4s", "");
@@ -115,17 +110,17 @@ public class Queue implements QueueInterface {
 
     @Override
     public int front() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return data[front];
     }
 
     @Override
     public int back() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return data[back];
     }
 
     @Override
     public int capacity() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return data.length;
     }
 
         public static void main(String[] args) {

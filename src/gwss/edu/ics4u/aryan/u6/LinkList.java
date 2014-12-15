@@ -16,6 +16,11 @@ public class LinkList implements LinkListInterface {
     private Node head;
     private Node tail;
 
+    public LinkList() { //Constructor???
+        this.head = null;
+        this.tail = null;
+    }
+
     @Override
     public int size() {
         int size = 0;
