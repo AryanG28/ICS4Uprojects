@@ -106,12 +106,23 @@ public class Queue implements QueueInterface {
 
     @Override
     public int front() {
-        return data[front];
+        if (isEmpty()) {
+            System.out.println("No front");
+            return -1;
+        } else {
+                return data[front];    
+        }
+
     }
 
     @Override
     public int back() {
-        return data[back];
+        if (isEmpty()) {
+            System.out.println("No back");
+            return -1;
+        } else {
+                return data[front];    
+        }
     }
 
     @Override
@@ -120,7 +131,7 @@ public class Queue implements QueueInterface {
     }
 
     public static void main(String[] args) {
-       Queue q = new Queue(5);
+        Queue q = new Queue(5);
 
         System.out.println("Adding to the queue...");
         q.enqueue(1);
@@ -139,11 +150,11 @@ public class Queue implements QueueInterface {
         q.enqueue(5);
         q.enqueue(5);
         q.dequeue();
-         q.enqueue(5);
+        q.enqueue(5);
         q.dequeue();
-         q.enqueue(5);
+        q.enqueue(5);
         q.dequeue();
-         q.enqueue(5);
+        q.enqueue(5);
         q.dequeue();
         q.enqueue(5);
         q.enqueue(6);
@@ -151,10 +162,6 @@ public class Queue implements QueueInterface {
         q.displayQueue();
         System.out.println(q.size());
 
-
-
-
     }
-
 
 }
