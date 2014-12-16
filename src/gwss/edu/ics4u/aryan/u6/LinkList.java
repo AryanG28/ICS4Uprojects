@@ -16,7 +16,7 @@ public class LinkList implements LinkListInterface {
     private Node head;
     private Node tail;
 
-    public LinkList() { //Constructor???
+    public LinkList() { 
         this.head = null;
         this.tail = null;
     }
@@ -111,33 +111,45 @@ public class LinkList implements LinkListInterface {
 //        System.out.println(l.toString());
 //    }
     public static void main(String[] args) {
-        // TODO code application logic here
-
         LinkList l = new LinkList();
         l.addAtFront("first");
         System.out.println(l.size());
-        l.addAtEnd("first1");
-         System.out.println(l.size());
-        l.addAtFront("wedf");
-        l.addAtFront("fjksdg");
+        l.addAtEnd("second");
+        System.out.println(l.toString());
+        System.out.println(l.size());
+        l.addAtFront("3rd");
+        System.out.println(l.toString());
+        l.addAtFront("4th");
+        System.out.println(l.toString());
+        l.addAtEnd("5th");
+        System.out.println(l.toString());
+        l.addAtFront("6th");
+
+        l.addAtEnd("seventh");
+                System.out.println(l.toString());
+        System.out.println(l.size());
+        System.out.println(l.toString());
+        l.remove("3rd");
+        System.out.println(l.toString());
+        l.remove("snaaaaaaaaaaaaaaake");
+        l.remove("second");
+        System.out.println(l.toString());
+        System.out.println(l.size());
+        l.remove("swagagagag");
+        System.out.println(l.size());
+        l.remove("FIRST");
+        System.out.println(l.size());
+        l.makeEmpty();
+        System.out.println(l.size());
+
         l.addAtEnd("end");
-        l.addAtFront("sdgfsdg");
-        l.addAtEnd("real");
         System.out.println(l.size());
-        System.out.println(l.toString());
-//        System.out.println(l.size());
-      l.remove("swagagagag");
-//        System.out.println(l.size());
-//        l.remove("FIRST");
 
-//        System.out.println(l.size());
-//        l.makeEmpty();
-//        System.out.println(l.size());
-
-        // l.addAtEnd("end");
-        System.out.println(l.size());
         System.out.println(l.toString());
+
     }
+
+
 
 
 }

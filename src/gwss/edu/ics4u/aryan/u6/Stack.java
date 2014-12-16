@@ -23,6 +23,10 @@ public class Stack implements StackInterface {
 
     @Override
     public int top() {
+        if (isEmpty()) {
+            System.out.println("Cannot return top");
+            return -1;
+        }
         return data[top];
     }
 
@@ -33,6 +37,7 @@ public class Stack implements StackInterface {
             top--;
             return value;
         } else {
+            System.out.println("Cannot pop");
             return -1;
         }
     }
@@ -84,34 +89,51 @@ public class Stack implements StackInterface {
     }
 
     public static void main(String[] args) {
-        // TODO code application logic here
-        Stack s = new Stack(5);
-        // System.out.println(s.isEmpty());
-        s.push(1);
-        s.push(2);
-        s.push(3);
-        // System.out.println(s.isFull());
-        //System.out.println(s.isEmpty());
-        s.push(4);
-        s.push(5);
-        // System.out.println(s.isFull());
-        System.out.println(Arrays.toString(s.data));
-        System.out.println(s.top());
-        s.pop();
-        System.out.println(Arrays.toString(s.data));
-        System.out.println(s.pop());
-        System.out.println(s.pop());
-        System.out.println(s.pop());
-        System.out.println(s.pop());
-        System.out.println(s.pop());
-        System.out.println(s.pop());
-        
-        System.out.println(Arrays.toString(s.data));
+ Stack s = new Stack(10);
 
-//        System.out.println(s.top);
-//        s.makeEmpty();
-//        System.out.println(s.isEmpty());
-//         System.out.println(Arrays.toString(s.data));
+        assert (s.top() == -1);
+        assert (s.size() == 0);
+        assert (s.isEmpty() == true);
+        assert (s.isFull() == false);
+        assert (s.pop() == -1);
+
+        for (int i = 0; i < s.capacity(); i++) {
+            assert (s.isFull() == false);
+            s.push(i);
+            assert (s.isEmpty() == false);
+            assert (s.top() == 1);
+            assert (s.size() == i + 1);
+        }
+
+        assert (s.isFull() == true);
+
+        int value;
+
+        for (int i = s.capacity() - 1; i >= 0; i--) {
+            assert (s.top() == 1);
+            value = s.pop();
+            assert (value == i);
+            if (i != 0) {
+                assert (s.top() == i - 1);
+            }
+        }
+
+        assert (s.top() == -1);
+        assert (s.pop() == -1);
+        assert (s.size() == 0);
+        assert (s.isEmpty() == true);
+        assert (s.isFull() == false);
+
+        for (int i = 0; i < s.capacity(); i++) {
+            s.push((int) (Math.random() * 100));
+        }
+
+        assert (s.isFull() == true);
+        s.makeEmpty();
+        assert (s.isEmpty() == true);
+        assert (s.size() == 0);
+        assert (s.top() == -1);
+
 //        
     }
 

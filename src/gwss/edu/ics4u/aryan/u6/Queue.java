@@ -30,7 +30,7 @@ public class Queue implements QueueInterface {
             this.front = 0;
             this.back = 0;
         } else if (!isFull()) {
-            back = (back +1) % data.length;
+            back = (back + 1) % data.length;
 //            this.back++;
 //            if (this.back >= data.length) {
 //                this.back = 0;
@@ -53,7 +53,7 @@ public class Queue implements QueueInterface {
             makeEmpty();
         } else {
             value = data[front];
-            front = (front +1) % data.length;
+            front = (front + 1) % data.length;
         }
         return value;
     }
@@ -87,7 +87,6 @@ public class Queue implements QueueInterface {
         this.back = -1;
 
     }
-
 
     public void displayQueue() {
         for (int i = 0; i < data.length; i++) {
@@ -123,8 +122,8 @@ public class Queue implements QueueInterface {
         return data.length;
     }
 
-        public static void main(String[] args) {
-        Queue q = new Queue(5);
+    public static void main(String[] args) {
+       Queue q = new Queue(5);
 
         System.out.println("Adding to the queue...");
         q.enqueue(1);
@@ -133,12 +132,32 @@ public class Queue implements QueueInterface {
         q.enqueue(4);
         q.enqueue(5);
 
-        for (int i = 0; i < 6; i++) {
+        q.displayQueue();
+        System.out.println(q.size());
+        for (int i = 0; i < 5; i++) {
             System.out.println(q.dequeue());
         }
+        q.dequeue();
+        q.enqueue(5);
+        q.enqueue(5);
+        q.enqueue(5);
+        q.dequeue();
+         q.enqueue(5);
+        q.dequeue();
+         q.enqueue(5);
+        q.dequeue();
+         q.enqueue(5);
+        q.dequeue();
+        q.enqueue(5);
+        q.enqueue(6);
+
         q.displayQueue();
+        System.out.println(q.size());
+
+
+
 
     }
 
-        
+
 }

@@ -257,7 +257,7 @@ public class HashTable implements HashTableInterface {
         h.displayArray();
         System.out.println();
 
-        for (int i = 0; i < 18; i++) {
+        for (int i = 0; i < 50; i++) {
             h.put((int) ((Math.random()) * 10000));
         }
         // System.out.println("added only 10 numbers. halfway there");
@@ -274,11 +274,11 @@ public class HashTable implements HashTableInterface {
 //        System.out.println();
 //        System.out.println(h.get(55));
 //
-//        System.out.println("Making empty....");
-//        h.makeEmpty();
-//        System.out.println("Displaying array: ");
-//        h.displayArray();
-//        System.out.println("IsEmpty: " + h.isEmpty());
+        System.out.println("Making empty....");
+        h.makeEmpty();
+        System.out.println("Displaying array: ");
+        h.displayArray();
+        System.out.println("IsEmpty: " + h.isEmpty());
     }
 
 }
