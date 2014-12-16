@@ -67,9 +67,16 @@ public class LinkList implements LinkListInterface {
 
     @Override
     public void remove(String str) {
+        if (this.head == null) {
+            System.out.println("Link list is empty");
+            return;
+        } 
         Node current = this.head;
         if (current.getData().equalsIgnoreCase(str)) {
             this.head = current.getNext();
+            if (this.head == null) {
+                this.tail = null;
+            }
         } else {
 
             while (current.getNext() != null && !current.getNext().getData().equalsIgnoreCase(str)) {
@@ -123,8 +130,11 @@ public class LinkList implements LinkListInterface {
         System.out.println(l.toString());
         l.addAtEnd("5th");
         System.out.println(l.toString());
+        l.remove("5th");
         l.addAtFront("6th");
-
+        System.out.println(l.toString());
+        l.remove("6th");
+        System.out.println(l.toString());
         l.addAtEnd("seventh");
                 System.out.println(l.toString());
         System.out.println(l.size());
@@ -132,7 +142,7 @@ public class LinkList implements LinkListInterface {
         l.remove("3rd");
         System.out.println(l.toString());
         l.remove("snaaaaaaaaaaaaaaake");
-        l.remove("second");
+        l.remove("6th");
         System.out.println(l.toString());
         System.out.println(l.size());
         l.remove("swagagagag");
@@ -144,7 +154,10 @@ public class LinkList implements LinkListInterface {
 
         l.addAtEnd("end");
         System.out.println(l.size());
-
+        l.remove("end");
+        l.remove("end");
+        l.remove("end");
+        
         System.out.println(l.toString());
 
     }
