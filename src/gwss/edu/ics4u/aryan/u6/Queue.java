@@ -31,10 +31,7 @@ public class Queue implements QueueInterface {
             this.back = 0;
         } else if (!isFull()) {
             back = (back + 1) % data.length;
-//            this.back++;
-//            if (this.back >= data.length) {
-//                this.back = 0;
-//            }
+
             data[this.back] = value;
         } else {
             System.out.println("Queue is full!");

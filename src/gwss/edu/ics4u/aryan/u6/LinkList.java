@@ -89,7 +89,6 @@ public class LinkList implements LinkListInterface {
             }
 
         }
-//abstract data type is performance task
     }
     
         @Override

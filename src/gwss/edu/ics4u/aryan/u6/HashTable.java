@@ -125,31 +125,16 @@ public class HashTable implements HashTableInterface {
             endIndex = initialIndex;
             keepGoing = false;
         }
-//        if (containsKey(key)) {
-//
-//            while (startIndex < table.length) {
-//                if (table[startIndex] == key) {
-//                    return table[startIndex];
-//                }
-//                startIndex++;
-//            }
-//
-//            startIndex = 0;
-//            while (startIndex < initialIndex) {
-//                if (table[startIndex] == key) {
-//                    return table[startIndex];
-//                }
-//                startIndex++;
-//            }
-//        }
-///////?
+
     }
 
     @Override
-    public void put(int value) { /////??
+    public void put(int value) {
         int initialIndex = hash(value);
         int index = initialIndex;
         boolean inserted = false;
+
+        System.out.println( "Collisions: " + numberOfCollisions + "  Load Factor: " + loadFactor() + "%");
 
         while (!inserted) {
             while (!inserted && index < table.length) {//use inserted, resize at end
@@ -183,66 +168,12 @@ public class HashTable implements HashTableInterface {
             index = 0;
         }
 
-        //return hash(key) != -1; //hash then go down until it equals value or negative one
-//        int initialIndex = hash(key);
-//        if (table[hash(key)] == -1) {
-//            return false;
-//        } else {
-//            int index = initialIndex;
-//            while (index < table.length) {
-//                if (table[index] == key) {
-//                    return true;
-//                } else {
-//                    index++;
-//                }
-//            }
-//
-//            index = 0;
-//            while (index < initialIndex) {
-//                if (table[index] == key) {
-//                    return true;
-//                } else {
-//                    index++;
-//                }
-//            }
-//            return false;
-//        }
-        //calls hash
     }
 
     @Override
-    public int hash(int key) { //////??????
+    public int hash(int key) { 
         return key % capacity();
-//        int index = initialIndex;
-//        while (index < table.length) {
-//            if (table[index] == -1) {
-//                return index;
-//            } else {
-//                numberOfCollisions++;
-//                index++;
-//            }
-//        }
-//
-//        index = 0;
-//        while (index < initialIndex) {
-//            if (table[index] == -1) {
-//                return index;
-//            } else {
-//                numberOfCollisions++;
-//                index++;
-//            }
-//        }
-//        return -1;
 
-//
-//        index = initialIndex;
-//        while (index >= 0) {
-//            if (table[index] == -1) {
-//                return index;
-//            } else {
-//                index--;
-//            }
-//        }
     }
 
     public static void main(String[] args) {
