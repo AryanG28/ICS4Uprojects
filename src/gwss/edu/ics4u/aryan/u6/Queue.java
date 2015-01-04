@@ -121,7 +121,7 @@ public class Queue implements QueueInterface {
             System.out.println("No back");
             return -1;
         } else {
-                return data[front];    
+                return data[back];    
         }
     }
 
