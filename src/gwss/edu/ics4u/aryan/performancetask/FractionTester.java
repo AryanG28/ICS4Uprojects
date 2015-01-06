@@ -36,7 +36,7 @@ public class FractionTester {
         System.out.println(improper.times(fraction));
         
         System.out.println("Test Case #6: Hash");
-        System.out.println(proper.hash(1));
+        System.out.println(proper.hashCode());
         
         System.out.println("Test Case #7: ");
 
