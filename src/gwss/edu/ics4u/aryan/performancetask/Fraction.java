@@ -14,6 +14,7 @@ public class Fraction implements FractionInterface {
     public int numerator;
     public int denominator;
     public int numberOfFractions;
+    public int wholeNumber;
 
     public Fraction() {
         this(1,2);
@@ -110,9 +111,26 @@ public class Fraction implements FractionInterface {
         }
     }
 
-    public int hash(int key) {
-        return key % numberOfFractions;
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 43 * hash + this.numerator;
+        hash = 43 * hash + this.denominator;
+        return hash;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Fraction other = (Fraction) obj;
+        return true;
+    }
+
 
     @Override
     public String toString() {
@@ -131,5 +149,6 @@ public class Fraction implements FractionInterface {
         }
         return this;
     }
+
 }
 

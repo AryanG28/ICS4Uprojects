@@ -11,8 +11,6 @@ package gwss.edu.ics4u.aryan.performancetask;
  */
 public class MixedFraction extends Fraction {
 
-    int wholeNumber;
-
     public MixedFraction() {
         this(2,1,2);
     }
@@ -30,6 +28,8 @@ public class MixedFraction extends Fraction {
         }
         return f;
     }
+    
+    
 
     @Override
     public String toString() {
