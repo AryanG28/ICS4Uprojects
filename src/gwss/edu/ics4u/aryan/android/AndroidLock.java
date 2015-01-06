@@ -7,6 +7,122 @@
 package gwss.edu.ics4u.aryan.android;
 
 /**
+ * objects - "locks"
+Class vs object
+	-Why?
+- one variable/reference
+		- use it anywhere!
+		- pass ONE thing
+          		- pass the data
+          		- pass the behaviours
+
+Class Definition; Properties vs Methods
+-age, height, canGraduate, primitive data types
+- data structures, 1..1, 1..N; relations to other objects!
+-methods; getters/setters, calculateXX, displayXX
+
+static vs. non-static
+	-static: 
+all objects SHARE the same properties (numberOfSides= traingle)
+-CLASS method
+-Triangle.calculateArea(2,5)
+-calculateData() (int base, int height) (no need for its own cuz u pass info)
+math functions are all static
+	-non-static: 
+- objects that need their OWN data (lengthOfSides = traingle)
+Triangle t = new Triangle (2, 5)
+calculateArea()
+t.calculateArea()	
+
+
+Encapsulation: 
+-data protection
+-private /public(anything) / protected
+-when to use
+- properties: PRIVATE!
+	public width;
+		t.width = -23; //PUBLIC!(want to force them to use getters/setters)
+private width;
+t.setWidth(-23);
+METHODS:
+private int getPinNumber();
+
+
+
+
+Constructor
+special method; its called ONCE at the creation 
+Triangle t = new Triangle();
+Triangle t = new Triangle (3,4,5);
+Triangle t =new Triangle (3,4)
+call other constructors
+this(), this(3,4), this (3,4,5)
+-allow to use SETTERS and GETTERS
+
+Clients:
+code that USES your objects
+
+Inheritance 
+use super(
+	Vehicle: BEFORE:
+numberOfWheels
+numberOfSeats
+numberOfDoors
+operational
+-poweredBy
+topSpeed
+on  
+numberOfCylinders
+---------------------------------------- (behaviours)
+setters/getters
+-turnOn
+move
+speedUp
+slowDown
+break
+-fillUp
+changeOil
+
+Vehicle: AFTER::
+numberOfWheels
+numberOfSeats
+numberOfDoors (move to Car sub-class)
+operational
+-poweredBy
+topSpeed
+on (move to Car sub-class)
+numberOfCylinders
+---------------------------------------- (behaviours)
+setters/getters
+-turnOn
+move
+speedUp
+slowDown
+break
+-fillUp
+changeOil
+
+
+
+
+Polymorphism
+	Car: move
+		-press gas pedal
+	Bike: move 
+		-pedal or go down incline
+		-super!
+Abstract Class(es)
+abtract objects can NOT exist!
+abstract methods need to be implemented in sub-class
+Class: Polygon     Method: abstract calculateArea(..)
+Class: Triangle	Method:CalculateArea
+Interface()
+method signature
+any class that implements the interace must have all the methods implemented
+
+
+
+
  */
 public class AndroidLock {
 
