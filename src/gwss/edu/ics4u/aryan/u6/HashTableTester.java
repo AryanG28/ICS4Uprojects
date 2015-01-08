@@ -39,64 +39,64 @@ public class HashTableTester  {
         assert ( ht.size() == 1 );
         assert ( ht.containsKey( 0 ) );
         assert ( ht.get( 0 ) == 0 );
-        assert ( ht.loadFactor() == ( 1.0 / (double) ht.capacity() ) );
+        assert ( ht.loadFactor() == ( 100 / (double) ht.capacity() ) );
+
+
+
+        // PUT; SAME HASH VALUE
+        ht.put( ht.capacity() );
+        valuesAdded[nextSpot] = ht.capacity();
+        nextSpot++;
+        assert ( !ht.isEmpty() );
+        assert ( ht.size() == 2 );
+        assert ( ht.containsKey( ht.capacity() ) );
+        assert ( ht.get( ht.capacity() ) == ht.capacity() );
+        assert ( ht.loadFactor() == ( 200 / (double) ht.capacity() ) );
+
+        // FILL WITH RANDOM NUMBERS TILL LOAD FACTOR REACHED
+        int size = 2;
+        for ( ; size < 17; size++ ) {
+            int value = (int) ( Math.random() * 100 );
+            ht.put( value );
+            valuesAdded[nextSpot] = value;
+            nextSpot++;
+            assert ( ht.size() == size + 1 );
+            assert ( ht.containsKey( value ) );
+            assert ( ht.get( value ) == value );
+            System.out.println( "Load Factor: " + ht.loadFactor() );
+        }
+
+        // BEFORE RESIZE: 17/23 == Load Factor > 0.74
+        assert ( ht.size() == 17 );
+        assert ( ht.loadFactor() < 75 );
+        assert ( ht.capacity() == 23 );
+
+        // BEFORE RESIZE: 18/23 --> New Size: 18 / 0.25
+        System.out.println( "RESIZED" );
+        ht.put( 666 );
+        valuesAdded[nextSpot] = 666;
+        nextSpot++;
+        assert ( ht.capacity() == 73 );
+        assert ( ht.loadFactor() < 25 );
+        
+        // MAKE SURE RESIZE WORKED; ALL VALUES ADDED CORRECTLY
+        nextSpot = 0;
+        int value;
+        while( valuesAdded[nextSpot] > -1 ) {
+            value = valuesAdded[nextSpot];
+            assert ( ht.containsKey( value ) );
+            assert ( ht.get( value ) == value );
+            nextSpot++;
+        }
+        
+        // MAKE EMPTY
+        ht.makeEmpty();
+        // EMPTY
+        assert ( ht.size() == 0 );
+        assert ( ht.isEmpty() );
+        assert ( ht.capacity() == 73 );
+        assert ( ht.loadFactor() == 0.0 );
+
     }
-}
-//
-//        // PUT; SAME HASH VALUE
-//        ht.put( ht.capacity() );
-//        valuesAdded[nextSpot] = ht.capacity();
-//        nextSpot++;
-//        assert ( !ht.isEmpty() );
-//        assert ( ht.size() == 2 );
-//        assert ( ht.containsKey( ht.capacity() ) );
-//        assert ( ht.get( ht.capacity() ) == ht.capacity() );
-//        assert ( ht.loadFactor() == ( 2.0 / (double) ht.capacity() ) );
-//
-//        // FILL WITH RANDOM NUMBERS TILL LOAD FACTOR REACHED
-//        int size = 2;
-//        for ( ; size < 17; size++ ) {
-//            int value = (int) ( Math.random() * 100 );
-//            ht.put( value );
-//            valuesAdded[nextSpot] = value;
-//            nextSpot++;
-//            assert ( ht.size() == size + 1 );
-//            assert ( ht.containsKey( value ) );
-//            assert ( ht.get( value ) == value );
-//            System.out.println( "Load Factor: " + ht.loadFactor() );
-//        }
-//
-//        // BEFORE RESIZE: 17/23 == Load Factor > 0.74
-//        assert ( ht.size() == 17 );
-//        assert ( ht.loadFactor() < 0.75 );
-//        assert ( ht.capacity() == 23 );
-//
-//        // BEFORE RESIZE: 18/23 --> New Size: 18 / 0.25
-//        System.out.println( "RESIZED" );
-//        ht.put( 666 );
-//        valuesAdded[nextSpot] = 666;
-//        nextSpot++;
-//        assert ( ht.capacity() == 73 );
-//        assert ( ht.loadFactor() < 0.25 );
-//        
-//        // MAKE SURE RESIZE WORKED; ALL VALUES ADDED CORRECTLY
-//        nextSpot = 0;
-//        int value;
-//        while( valuesAdded[nextSpot] > -1 ) {
-//            value = valuesAdded[nextSpot];
-//            assert ( ht.containsKey( value ) );
-//            assert ( ht.get( value ) == value );
-//            nextSpot++;
-//        }
-//        
-//        // MAKE EMPTY
-//        ht.makeEmpty();
-//        // EMPTY
-//        assert ( ht.size() == 0 );
-//        assert ( ht.isEmpty() );
-//        assert ( ht.capacity() == 73 );
-//        assert ( ht.loadFactor() == 0.0 );
-//
-//    }
 
 }

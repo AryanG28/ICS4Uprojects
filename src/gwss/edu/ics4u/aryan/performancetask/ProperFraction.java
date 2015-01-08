@@ -18,6 +18,15 @@ public class ProperFraction extends Fraction {
     public ProperFraction(int numerator, int denominator) {
         super(numerator, denominator);
     }
+    
+    public Fraction toMixed() {
+        ImproperFraction f = new ImproperFraction();
+        if (Math.abs(wholeNumber) > 0) {
+            f.setNumerator(this.wholeNumber * getDenominator() + this.numerator);
+
+        }
+        return f;
+    }
 
 
 }
