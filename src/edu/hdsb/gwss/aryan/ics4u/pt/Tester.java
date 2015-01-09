@@ -90,6 +90,7 @@ public class Tester {
         System.out.println( ht.toString() );
         System.out.println("----------makeempty---------------------");
         ht.makeEmpty();
+        System.out.println(ht.isEmpty());
         System.out.println( ht.toString() );
         System.out.println(" OPEN HASH TABLE PASSES TEST");
         
