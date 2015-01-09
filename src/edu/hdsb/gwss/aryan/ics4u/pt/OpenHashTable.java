@@ -91,12 +91,15 @@ public class OpenHashTable {
      */
     public boolean containsKey(int key) {
         int index = hash(key);
+        if(data[index] != null) {
+         
         if (data[index].get(key) == null) {
             return false;
         }
         if (data[index].get(key).getKey() == key) {
             return true;
         }
+        } 
 
         return false;
     }
