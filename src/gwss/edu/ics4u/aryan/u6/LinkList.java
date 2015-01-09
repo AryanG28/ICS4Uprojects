@@ -13,8 +13,8 @@ import edu.hdsb.gwss.muir.ics4u.u6.LinkListInterface;
  */
 public class LinkList implements LinkListInterface {
 
-    private Node head;
-    private Node tail;
+    private NodeObject head;
+    private NodeObject tail;
 
     public LinkList() { 
         this.head = null;
@@ -25,7 +25,7 @@ public class LinkList implements LinkListInterface {
     public int size() {
         int size = 0;
         if (head != null) {
-            Node n = head;
+            NodeObject n = head;
             do {
                 size++;
                 n = n.getNext();
@@ -42,12 +42,12 @@ public class LinkList implements LinkListInterface {
 
     @Override
     public void addAtFront(String str) {
-        Node newHead = new Node(str);
+        NodeObject newHead = new NodeObject(str);
         if (size() == 0) {
             this.head = newHead;
             this.tail = newHead;
         } else {
-            Node temp = this.head;
+            NodeObject temp = this.head;
             this.head = newHead;
             this.head.setNext(temp);
         }
@@ -55,7 +55,7 @@ public class LinkList implements LinkListInterface {
 
     @Override
     public void addAtEnd(String str) {
-        Node newTail = new Node(str);
+        NodeObject newTail = new NodeObject(str);
         if (size() == 0) {
             this.head = newTail;
             this.tail = newTail;
@@ -71,7 +71,7 @@ public class LinkList implements LinkListInterface {
             System.out.println("Link list is empty");
             return;
         } 
-        Node current = this.head;
+        NodeObject current = this.head;
         if (current.getData().equalsIgnoreCase(str)) {
             this.head = current.getNext();
             if (this.head == null) {
@@ -100,7 +100,7 @@ public class LinkList implements LinkListInterface {
         String s = "";
 
         if (head != null) {
-            Node n = head;
+            NodeObject n = head;
             do {
                 s += n.getData() + " ";
                 n = n.getNext();

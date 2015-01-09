@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gwss.edu.ics4u.aryan.practice;
+package gwss.edu.ics4u.aryan.pacman;
 
 /**
  *
  * @author Aryan
  */
 
+import gwss.edu.ics4u.aryan.practice.*;
 import java.util.Objects;
 
 public class Chair {

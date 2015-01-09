@@ -5,23 +5,23 @@ package gwss.edu.ics4u.aryan.u6;
 /**
  * Lesson: 6.03 - a Node
  */
-public class Node extends edu.hdsb.gwss.muir.ics4u.u6.Node {
+public class NodeObject extends edu.hdsb.gwss.muir.ics4u.u6.Node {
     //
     private String data;
-    private Node next;
+    private NodeObject next;
 
-    public Node( String newData ) {
+    public NodeObject( String newData ) {
         super(newData);
         this.data = newData;
         this.next = null;
     }
 
     @Override
-    public Node getNext() {
+    public NodeObject getNext() {
         return this.next;
     }
 
-    public void setNext( Node newNode ) {
+    public void setNext( NodeObject newNode ) {
         this.next = newNode;
     }
 

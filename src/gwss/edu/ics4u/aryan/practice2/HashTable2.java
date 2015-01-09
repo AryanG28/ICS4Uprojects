@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gwss.edu.ics4u.aryan.practice;
+package gwss.edu.ics4u.aryan.practice2;
 
+import gwss.edu.ics4u.aryan.practice.*;
 import gwss.edu.ics4u.aryan.u6.*;
 import edu.hdsb.gwss.muir.ics4u.u6.HashTableInterface;
 
@@ -12,12 +13,12 @@ import edu.hdsb.gwss.muir.ics4u.u6.HashTableInterface;
  *
  * @author Aryan
  */
-public class HashTableObject {
+public class HashTable2 {
 
     public Student[] table;
     public int numberOfCollisions;
 
-    public HashTableObject(int requestedInitialSize) {
+    public HashTable2(int requestedInitialSize) {
         if (requestedInitialSize < 0) {
             System.out.println("Invalid initial size!");
         } else {
@@ -54,8 +55,7 @@ public class HashTableObject {
 //        for (int i = 0; i < table.length; i++) {
 //            System.out.println(table[Chair]);
 //        }
-   // }
-
+    // }
     //@Override
     public int size() {
         int counter = 0;
@@ -67,7 +67,7 @@ public class HashTableObject {
         return counter;
     }
 
-   // @Override
+    // @Override
     public void resize() {
         int newCapacity = (int) (size() / 0.25);
         newCapacity = findNextPrimeNumber(newCapacity);
@@ -101,7 +101,7 @@ public class HashTableObject {
         }
     }
 
-   // @Override
+    // @Override
     public boolean isEmpty() {
         return (size() == 0);
     }
@@ -114,7 +114,7 @@ public class HashTableObject {
         boolean keepGoing = true;
         while (true) {
             while (startIndex < endIndex) {//use inserted, resize at end
-                if (table[startIndex].getSerialNumber() == key) {
+                if (table[startIndex].getStudentId() == key) {
                     return table[startIndex];
                 }
                 startIndex = (startIndex + 1) % capacity();
@@ -129,28 +129,26 @@ public class HashTableObject {
 
     }
 
-   // @Override
-    public void put(Student c) {
-        int initialIndex = hash(c.hashCode());
+    // @Override
+    public void put(Student s) {
+        int initialIndex = hash(student.getKey());
         int index = initialIndex;
         boolean inserted = false;
 
-        System.out.println( "Collisions: " + numberOfCollisions + "  Load Factor: " + loadFactor() + "%");
 
         while (!inserted) {
-            while (!inserted && index < table.length) {//use inserted, resize at end
-                if (table[index] == null) {
-                    table[index] = c;
+            while (!inserted && index < data.length) {//use inserted, resize at end
+                if (data[index] == null) {
+                    LinkedListPT newLinkedList = new LinkedListPT();
+                    data[index] = newLinkedList;
+                    newLinkedList.addAtEnd(student);                  
                     inserted = true;
                 } else {
-                    numberOfCollisions++;
+                   // numberOfCollisions++;
                     index++;
                 }
             }
             index = 0;
-        }
-        if (loadFactor() > 75) {
-            resize();
         }
     }
 
@@ -158,11 +156,12 @@ public class HashTableObject {
         int index = hash(key);
         while (true) {
             for (int i = index; i < table.length; i++) {
-                if (table[i].getSerialNumber() == key) {
-                    return true;
-                }
                 if (table[i] == null) {
                     return false;
+                }
+                
+                if (table[i].getStudentId() == key) {
+                    return true;
                 }
             }
             index = 0;
@@ -171,19 +170,19 @@ public class HashTableObject {
     }
 
     //@Override
-    public int hash(int key) { 
+    public int hash(int key) {
         return key % capacity();
 
     }
 
-    public static void main( String[] args ) {
-   Student[] valuesAdded = new Student[100];
+    public static void main(String[] args) {
+        Student[] valuesAdded = new Student[100];
         int nextSpot = 0;
         for (int i = 0; i < valuesAdded.length; i++) {
             valuesAdded[i] = null;
         }
 
-        HashTableObject ht = new HashTableObject(20);
+        HashTable2 ht = new HashTable2(20);
 
         // EMPTY
         assert (ht.size() == 0);
@@ -204,8 +203,8 @@ public class HashTableObject {
         nextSpot++;
         assert (!ht.isEmpty());
         assert (ht.size() == 1);
-        assert (ht.containsKey(0));
-        assert (ht.get(0) == c);
+        assert (ht.containsKey(0)== false);
+        assert (ht.get(1000) == c);
         assert (ht.loadFactor() == (100.0 / (double) ht.capacity()));
 
         Student c1 = new Student();
@@ -214,14 +213,14 @@ public class HashTableObject {
         nextSpot++;
         assert (!ht.isEmpty());
         assert (ht.size() == 2);
-        assert (ht.containsKey(1));
-        assert (ht.get(1) == c1);
+        assert (ht.containsKey(1001));
+        assert (ht.get(1001) == c1);
         assert (ht.loadFactor() == (200.0 / (double) ht.capacity()));
 
         int size = 2;
         // for (; size < 17; size++) {
         Student c2 = new Student();
-        int value = 2;
+        int value = 1002;
 
         ht.put(c2);
         valuesAdded[nextSpot] = c2;
@@ -272,8 +271,8 @@ public class HashTableObject {
         nextSpot++;
         assert (ht.capacity() == 73);
         assert (ht.loadFactor() < 25);
-        
-                // MAKE SURE RESIZE WORKED; ALL VALUES ADDED CORRECTLY
+
+        // MAKE SURE RESIZE WORKED; ALL VALUES ADDED CORRECTLY
         nextSpot = 0;
         Student value2;
         while (valuesAdded[nextSpot] != null) {
@@ -283,15 +282,12 @@ public class HashTableObject {
             nextSpot++;
         }
         // MAKE EMPTY
-                System.out.println(ht.size());
         ht.makeEmpty();
         // EMPTY
         assert (ht.size() == 0);
         assert (ht.isEmpty());
         assert (ht.capacity() == 73);
         assert (ht.loadFactor() == 0.0);
-        System.out.println(ht.size());
-
 
     }
 
